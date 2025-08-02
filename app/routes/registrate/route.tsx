@@ -3,6 +3,8 @@ import {LoaderFunctionArgs} from "@remix-run/cloudflare";
 import {getSupabaseCreds} from "~/services/envUtils";
 import { useLoaderData } from "@remix-run/react";
 import {createBrowserClient} from "@supabase/ssr";
+import {Input} from "~/components/ui/input";
+import {Button} from "~/components/ui/button";
 
 type FormValues = {
     email: string
@@ -39,15 +41,19 @@ export default function Registro() {
     }
 
     return (
-        <div>
-            <div>Registro</div>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+        <div className="p-5 flex flex-col space-y-5">
+
+            <div className="text-2xl">
+                Registrate
+            </div>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-2">
 
                 <div className="flex flex-col">
                     <div>
-                        Email:
+                        e-mail:
                     </div>
-                    <input
+                    <Input
                         type="text"
                         {...register("email")}
                     />
@@ -55,17 +61,17 @@ export default function Registro() {
 
                 <div className="flex flex-col">
                     <div>
-                        Password:
+                        contraseña (de al menos 6 caracteres):
                     </div>
-                    <input
+                    <Input
                         type="password"
                         {...register("password")}
                     />
                 </div>
 
-                <button type="submit">
+                <Button type="submit">
                     Registrate
-                </button>
+                </Button>
 
             </form>
         </div>
