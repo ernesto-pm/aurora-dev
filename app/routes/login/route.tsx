@@ -76,7 +76,7 @@ export default function Login() {
                 </div>
 
                 <Button type="submit">
-                    Registrate
+                    Inicia Sesion
                 </Button>
 
             </form>
