@@ -34,7 +34,12 @@ export default function Registro() {
     async function onSubmit(values: FormValues) {
         const user = await supabase.auth.signUp({
             email: values.email,
-            password: values.password
+            password: values.password,
+            options: {
+                data: {
+                    product: 'aurora-dev'
+                }
+            }
         })
 
         console.log(user)

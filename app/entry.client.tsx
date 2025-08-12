@@ -7,6 +7,14 @@
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
+import {client as auroraClient} from "~/services/aurora/client.gen";
+
+if (process.env.NODE_ENV === "development") {
+    auroraClient.setConfig({baseURL: 'http://127.0.0.1:8000/aurora'})
+} else {
+    auroraClient.setConfig({baseURL: 'https://animus-backend-enuz8.ondigitalocean.app/aurora'})
+}
+
 
 startTransition(() => {
   hydrateRoot(
