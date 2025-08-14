@@ -6,7 +6,7 @@ import AssociateAssistantAndMemoryBlocks from "~/routes/admin/AssociateAssistant
 export default function Admin() {
     return (
         <div className="w-full">
-            <Tabs defaultValue="create-memory-block-template">
+            <Tabs defaultValue="associate-assistant-and-memory-blocks">
 
                 <TabsList>
                     <TabsTrigger value="create-memory-block-template">
