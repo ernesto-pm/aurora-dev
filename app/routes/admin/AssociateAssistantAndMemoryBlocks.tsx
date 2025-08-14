@@ -126,7 +126,7 @@ function AssistantCard(props: AssistantCardProptypes) {
 
 
     return (
-        <div className="p-3 bg-zinc-200 max-w-[450px] rounded-lg">
+        <div className="p-3 bg-slate-200 max-w-[450px] rounded-lg">
 
             <div className="font-semibold text-center mb-2">
                 {label}
