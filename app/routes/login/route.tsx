@@ -5,6 +5,7 @@ import { useLoaderData, useNavigate } from "@remix-run/react";
 import {createBrowserClient} from "@supabase/ssr";
 import {Input} from "~/components/ui/input";
 import {Button} from "~/components/ui/button";
+import {useState} from "react";
 
 type FormValues = {
     email: string
@@ -26,6 +27,7 @@ export default function Login() {
     const {env} = useLoaderData<typeof loader>()
     const supabase = createBrowserClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY)
     const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false)
 
     const {
         register,
@@ -75,7 +77,10 @@ export default function Login() {
                     />
                 </div>
 
-                <Button type="submit">
+                <Button
+                    type="submit"
+                    disabled={isLoading}
+                >
                     Inicia Sesion
                 </Button>
 

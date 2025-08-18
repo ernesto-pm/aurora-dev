@@ -142,9 +142,6 @@ function AssistantCard(props: AssistantCardProptypes) {
                 <div>
                     <span className="font-semibold">Id:</span> {props.assistant.id}
                 </div>
-                <div>
-                    <span className="font-semibold">System Prompt:</span> {props.assistant.system_prompt}
-                </div>
             </div>
 
             <div className="my-2 text-sm">

@@ -1117,6 +1117,20 @@ export type GetBusinessesForUserResponses = {
 
 export type GetBusinessesForUserResponse = GetBusinessesForUserResponses[keyof GetBusinessesForUserResponses];
 
+export type GetBusinessesForSupabaseUserData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/businesses/for-supabase-user';
+};
+
+export type GetBusinessesForSupabaseUserResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
 export type InsertExternalCustomerData = {
     body: InsertExternalBusinessCostumerParams;
     path?: never;
