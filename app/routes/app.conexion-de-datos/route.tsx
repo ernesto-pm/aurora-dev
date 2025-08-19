@@ -55,7 +55,7 @@ function DataConnectionList() {
                         <CardHeader>
                             <CardTitle>{dataSourceConnection.data_source_display_name}</CardTitle>
                             <CardDescription className="tex-sm">
-                                {dataSourceConnection.business_name}
+                                Conectado con: {dataSourceConnection.business_name}
                             </CardDescription>
                         </CardHeader>
                     </Card>
