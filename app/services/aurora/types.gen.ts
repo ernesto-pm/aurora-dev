@@ -770,6 +770,10 @@ export type GetBusinessDataSourceConnectionsForSupabaseUserRow = {
      * Data Source Id
      */
     data_source_id: string | null;
+    /**
+     * Is Data Source Active
+     */
+    is_data_source_active: boolean | null;
 };
 
 /**

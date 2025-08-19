@@ -1,4 +1,4 @@
-import {Bot, Cable, ChevronUp, Circle, LayoutDashboard, NotebookPen, NotebookTabs, User2} from "lucide-react"
+import {Bot, Cable, ChevronUp, Circle, LayoutDashboard, LogOut, NotebookPen, NotebookTabs, User2} from "lucide-react"
 import {
     Sidebar,
     SidebarContent, SidebarFooter,
@@ -132,6 +132,7 @@ export function AppSidebar(props: PropTypes) {
                                 className="w-[--radix-popper-anchor-width]"
                             >
                                 <DropdownMenuItem onClick={handleSignOut}>
+                                    <LogOut/>
                                     <span>Cerrar Sesión</span>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>

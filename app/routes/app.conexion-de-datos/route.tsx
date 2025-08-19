@@ -12,7 +12,7 @@ import {Card, CardDescription, CardHeader, CardTitle} from "~/components/ui/card
 
 export const meta: MetaFunction = () => {
     return [
-        { title: "Aurora | Preguntale a Aurora" }
+        { title: "Aurora | Conexiónes de datos" }
     ];
 };
 
@@ -55,7 +55,13 @@ function DataConnectionList() {
                         <CardHeader>
                             <CardTitle>{dataSourceConnection.data_source_display_name}</CardTitle>
                             <CardDescription className="tex-sm">
-                                Conectado con: {dataSourceConnection.business_name}
+                                <div>
+                                    Conectado con: {dataSourceConnection.business_name}
+                                </div>
+                                <div>
+                                    Estatus: {dataSourceConnection.is_data_source_active && "activo"} {!dataSourceConnection.is_data_source_active && "desactivado"}
+                                </div>
+
                             </CardDescription>
                         </CardHeader>
                     </Card>
