@@ -4,10 +4,8 @@ import {createBrowserClient, createServerClient, parseCookieHeader, serializeCoo
 import {Outlet, useLoaderData, useLocation, useRevalidator} from "@remix-run/react";
 import {useEffect, useState} from "react";
 import { Database } from "~/services/supabase/database.types";
-import {SidebarInset, SidebarProvider, SidebarTrigger} from "~/components/ui/sidebar";
+import {SidebarProvider} from "~/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
-import {Separator} from "~/components/ui/separator";
-import AppHeader from "~/routes/app/AppHeader";
 import AppIndex from "~/routes/app/AppIndex";
 
 export async function loader({request, context}: LoaderFunctionArgs) {
@@ -17,8 +15,8 @@ export async function loader({request, context}: LoaderFunctionArgs) {
 
     const response = new Response()
     const supabase = createServerClient(
-        process.env.SUPABASE_URL!,
-        process.env.SUPABASE_ANON_KEY!,
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY,
         {
             cookies: {
                 //@ts-expect-error Error weird api ?
