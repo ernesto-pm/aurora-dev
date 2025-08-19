@@ -36,12 +36,12 @@ const businessMenuMapping = [
 const auroraMenuMapping = [
     {
         title: "Centro de control",
-        url: "/app/registro-negocio",
+        url: "/app/dashboard",
         icon: LayoutDashboard,
     },
     {
-        title: "Platica con tú asistente",
-        url: "/app/registro-negocio",
+        title: "Preguntale a Aurora",
+        url: "/app/chat",
         icon: Bot,
     },
 ]
