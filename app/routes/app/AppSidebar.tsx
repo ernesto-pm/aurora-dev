@@ -17,12 +17,12 @@ import {Database} from "~/services/supabase/database.types";
 // Menu items.
 const businessMenuMapping = [
     {
-        title: "Registra tú negocio",
+        title: "Registra tu negocio",
         url: "/app/registro-negocio",
         icon: NotebookPen,
     },
     {
-        title: "Tús negocios",
+        title: "Tus negocios",
         url: "/app/negocios-registrados",
         icon: NotebookTabs,
     },
@@ -40,7 +40,7 @@ const auroraMenuMapping = [
         icon: LayoutDashboard,
     },
     {
-        title: "Preguntale a Aurora",
+        title: "Pregúntale a Aurora",
         url: "/app/chat",
         icon: Bot,
     },
@@ -81,7 +81,7 @@ export function AppSidebar(props: PropTypes) {
             <SidebarContent>
 
                 <SidebarGroup>
-                    <SidebarGroupLabel>Tú negocio</SidebarGroupLabel>
+                    <SidebarGroupLabel>Tu negocio</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {businessMenuMapping.map((item) => (
