@@ -105,7 +105,9 @@ function BusinessListCard(props: BusinessListCardProptypes) {
         <Card className="min-w-[300px]">
             <CardHeader>
                 <CardTitle>{props.business.name}</CardTitle>
-                <CardDescription>{props.business.created_at}</CardDescription>
+                <CardDescription className="tex-sm">
+                    Creado el {new Date(props.business.created_at).toLocaleString()}
+                </CardDescription>
             </CardHeader>
             <CardFooter>
                 <Dialog>
