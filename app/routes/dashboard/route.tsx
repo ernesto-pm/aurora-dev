@@ -14,7 +14,7 @@ export async function loader({request, context}: LoaderFunctionArgs) {
     const response = new Response()
     const supabase = createServerClient(
         SUPABASE_URL,
-        UPABASE_ANON_KEY,
+        SUPABASE_ANON_KEY,
         {
             cookies: {
                 //@ts-expect-error Error weird api ?
