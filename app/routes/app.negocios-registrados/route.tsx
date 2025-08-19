@@ -24,6 +24,7 @@ import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {AuroraBusiness, grantAccessForSupabaseUserEmail} from "~/services/aurora";
 
 export const meta: MetaFunction = () => {
     return [
@@ -44,19 +45,9 @@ export default function NegociosRegistrados() {
     )
 }
 
-
-const GrantAccessFormSchema = z.object({
-    email: z.email("Por favor introduce un email valido").nonempty("Campo requerido")
-})
-
 function BusinessList() {
     const {accessToken} = useOutletContext<{accessToken: string}>()
-    const form = useForm<z.infer<typeof GrantAccessFormSchema>>({
-        resolver: zodResolver(GrantAccessFormSchema),
-        defaultValues: {
-            email: ""
-        },
-    })
+
     const {data, isLoading, isError, error} = useQuery({
         ...getBusinessesForSupabaseUserOptions({
             headers: {
@@ -70,66 +61,93 @@ function BusinessList() {
     if (isError) return <div className="flex flex-row py-4 px-6 space-x-2">{error.message}</div>
     if (!data || data.length === 0) return <div className="flex flex-row py-4 px-6 space-x-2">No cuentas con ningún negocio agregado aún.</div>
 
-    async function onSubmit(values: z.infer<typeof GrantAccessFormSchema>) {
-        console.log(values)
-    }
-
-
     return (
         <div className="flex flex-row py-4 px-6 gap-x-2 gap-y-5 flex-wrap justify-around">
             {
-                data.map((business) => {
-                    return (
-                        <Card key={business.id} className="min-w-[300px]">
-                            <CardHeader>
-                                <CardTitle>{business.name}</CardTitle>
-                                <CardDescription>{business.created_at}</CardDescription>
-                            </CardHeader>
-                            <CardFooter>
-                                <Dialog>
-                                    <DialogTrigger>
-                                        <Button>
-                                            Otorgar acceso a Usuario
-                                        </Button>
-                                    </DialogTrigger>
-                                    <DialogContent>
-                                        <DialogHeader>
-                                            <DialogTitle>Otorgar Acceso</DialogTitle>
-                                            <DialogDescription>
-                                                Introduce el e-mail de la persona a la cual deseas otorgarle acceso a tu negocio.
-                                            </DialogDescription>
-                                        </DialogHeader>
-                                        <Form {...form}>
-                                            <form onSubmit={form.handleSubmit(onSubmit)}>
-                                                {/* Email */}
-                                                <div className="grid gap-2">
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="email"
-                                                        render={({ field }) => (
-                                                            <FormItem>
-                                                                <FormLabel>e-mail:</FormLabel>
-                                                                <FormControl>
-                                                                    <Input placeholder="e-mail del usuario..." {...field} />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )}
-                                                    />
-
-                                                    <Button disabled={form.formState.isSubmitting}>
-                                                        Otorgar Acceso
-                                                    </Button>
-                                                </div>
-                                            </form>
-                                        </Form>
-                                    </DialogContent>
-                                </Dialog>
-                            </CardFooter>
-                        </Card>
-                    )
-                })
+                data.map((business) => <BusinessListCard key={business.id} business={business} />)
             }
         </div>
+    )
+}
+
+const GrantAccessFormSchema = z.object({
+    email: z.email("Por favor introduce un email valido").nonempty("Campo requerido")
+})
+interface BusinessListCardProptypes {
+    business: AuroraBusiness
+}
+function BusinessListCard(props: BusinessListCardProptypes) {
+    const form = useForm<z.infer<typeof GrantAccessFormSchema>>({
+        resolver: zodResolver(GrantAccessFormSchema),
+        defaultValues: {
+            email: ""
+        },
+    })
+
+    async function onSubmit(values: z.infer<typeof GrantAccessFormSchema>) {
+        const {data, error} = await grantAccessForSupabaseUserEmail({
+            body: {
+                businessId: props.business.id,
+                supabaseUserEmail: values.email
+            }
+        })
+
+        if (error || !data) {
+            alert("Ha ocurrido un error al otorgar acceso")
+            return
+        }
+
+        alert("Exito!")
+        form.reset()
+    }
+
+    return (
+        <Card className="min-w-[300px]">
+            <CardHeader>
+                <CardTitle>{props.business.name}</CardTitle>
+                <CardDescription>{props.business.created_at}</CardDescription>
+            </CardHeader>
+            <CardFooter>
+                <Dialog>
+                    <DialogTrigger>
+                        <Button>
+                            Otorgar acceso a Usuario
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Otorgar Acceso</DialogTitle>
+                            <DialogDescription>
+                                Introduce el e-mail de la persona a la cual deseas otorgarle acceso a tu negocio.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)}>
+                                {/* Email */}
+                                <div className="grid gap-2">
+                                    <FormField
+                                        control={form.control}
+                                        name="email"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>e-mail:</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="e-mail del usuario..." {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    <Button disabled={form.formState.isSubmitting}>
+                                        Otorgar Acceso
+                                    </Button>
+                                </div>
+                            </form>
+                        </Form>
+                    </DialogContent>
+                </Dialog>
+            </CardFooter>
+        </Card>
     )
 }

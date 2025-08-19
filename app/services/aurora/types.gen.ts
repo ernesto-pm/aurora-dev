@@ -753,6 +753,20 @@ export type GetBusinessesForUserBody = {
 };
 
 /**
+ * GrantAccessForSupabaseUserEmail
+ */
+export type GrantAccessForSupabaseUserEmail = {
+    /**
+     * Businessid
+     */
+    businessId: string;
+    /**
+     * Supabaseuseremail
+     */
+    supabaseUserEmail: string;
+};
+
+/**
  * GrantAccessToBusinessForUserBody
  */
 export type GrantAccessToBusinessForUserBody = {
@@ -1212,6 +1226,31 @@ export type GrantAccessForUserResponses = {
 };
 
 export type GrantAccessForUserResponse = GrantAccessForUserResponses[keyof GrantAccessForUserResponses];
+
+export type GrantAccessForSupabaseUserEmailData = {
+    body: GrantAccessForSupabaseUserEmail;
+    path?: never;
+    query?: never;
+    url: '/businesses/grant-access-for-supabase-user-email';
+};
+
+export type GrantAccessForSupabaseUserEmailErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GrantAccessForSupabaseUserEmailError = GrantAccessForSupabaseUserEmailErrors[keyof GrantAccessForSupabaseUserEmailErrors];
+
+export type GrantAccessForSupabaseUserEmailResponses = {
+    /**
+     * Successful Response
+     */
+    200: AuroraUsersBusinessesAccess;
+};
+
+export type GrantAccessForSupabaseUserEmailResponse = GrantAccessForSupabaseUserEmailResponses[keyof GrantAccessForSupabaseUserEmailResponses];
 
 export type FindBusinessWithEncodedNameData = {
     body?: never;
