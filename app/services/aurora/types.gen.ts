@@ -743,6 +743,36 @@ export type GetAllMemoryBlocksForAssistantTemplate = {
 };
 
 /**
+ * GetBusinessDataSourceConnectionsForSupabaseUserRow
+ */
+export type GetBusinessDataSourceConnectionsForSupabaseUserRow = {
+    /**
+     * Business Id
+     */
+    business_id: string;
+    /**
+     * Business Name
+     */
+    business_name: string;
+    /**
+     * Data Source Display Name
+     */
+    data_source_display_name: string | null;
+    /**
+     * Data Source Name
+     */
+    data_source_name: string | null;
+    /**
+     * Connection Id
+     */
+    connection_id: string | null;
+    /**
+     * Data Source Id
+     */
+    data_source_id: string | null;
+};
+
+/**
  * GetBusinessesForUserBody
  */
 export type GetBusinessesForUserBody = {
@@ -1281,6 +1311,23 @@ export type FindBusinessWithEncodedNameResponses = {
 };
 
 export type FindBusinessWithEncodedNameResponse = FindBusinessWithEncodedNameResponses[keyof FindBusinessWithEncodedNameResponses];
+
+export type GetBusinessesDataConnectionsForSupabaseUserData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/businesses/business-data-connections-for-supabase-user';
+};
+
+export type GetBusinessesDataConnectionsForSupabaseUserResponses = {
+    /**
+     * Response Get Businesses Data Connections For Supabase User
+     * Successful Response
+     */
+    200: Array<GetBusinessDataSourceConnectionsForSupabaseUserRow>;
+};
+
+export type GetBusinessesDataConnectionsForSupabaseUserResponse = GetBusinessesDataConnectionsForSupabaseUserResponses[keyof GetBusinessesDataConnectionsForSupabaseUserResponses];
 
 export type GetLogoGenerationChatsForBusinessData = {
     body?: never;

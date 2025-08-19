@@ -62,7 +62,7 @@ function BusinessList() {
     if (!data || data.length === 0) return <div className="flex flex-row py-4 px-6 space-x-2">No cuentas con ningún negocio agregado aún.</div>
 
     return (
-        <div className="flex flex-row py-4 px-6 gap-x-2 gap-y-5 flex-wrap justify-around">
+        <div className="flex flex-row py-4 px-6 gap-x-2 gap-y-5 flex-wrap">
             {
                 data.map((business) => <BusinessListCard key={business.id} business={business} />)
             }
