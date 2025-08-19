@@ -121,6 +121,7 @@ function BusinessListCard(props: BusinessListCardProptypes) {
                             <DialogTitle>Otorgar Acceso</DialogTitle>
                             <DialogDescription>
                                 Introduce el e-mail de la persona a la cual deseas otorgarle acceso a tu negocio.
+                                Antes de otorgar el acceso, asegurate que el e-mail tiene una cuenta creada en Aurora.
                             </DialogDescription>
                         </DialogHeader>
                         <Form {...form}>
