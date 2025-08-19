@@ -89,7 +89,7 @@ export default function App() {
 
     return (
         <SidebarProvider>
-            <AppSidebar />
+            <AppSidebar user={user} supabase={supabase} />
             {
                 isAppIndex && <AppIndex/>
             }

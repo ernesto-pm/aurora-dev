@@ -1,15 +1,18 @@
-import {Bot, Cable, Circle, LayoutDashboard, NotebookPen, NotebookTabs} from "lucide-react"
+import {Bot, Cable, ChevronUp, Circle, LayoutDashboard, NotebookPen, NotebookTabs, User2} from "lucide-react"
 import {
     Sidebar,
-    SidebarContent,
+    SidebarContent, SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel, SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem,
+    SidebarMenuItem
 } from "~/components/ui/sidebar"
 import {Link} from "@remix-run/react";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
+import {SupabaseClient, User} from "@supabase/supabase-js"
+import {Database} from "~/services/supabase/database.types";
 
 // Menu items.
 const businessMenuMapping = [
@@ -32,18 +35,29 @@ const businessMenuMapping = [
 
 const auroraMenuMapping = [
     {
+        title: "Centro de control",
+        url: "/app/registro-negocio",
+        icon: LayoutDashboard,
+    },
+    {
         title: "Platica con tú asistente",
         url: "/app/registro-negocio",
         icon: Bot,
     },
-    {
-        title: "Consulta tu dashboard",
-        url: "/app/registro-negocio",
-        icon: LayoutDashboard,
-    },
 ]
 
-export function AppSidebar() {
+interface PropTypes {
+    user: User
+    supabase: SupabaseClient<Database>
+}
+
+export function AppSidebar(props: PropTypes) {
+
+    async function handleSignOut() {
+        const {error} = await props.supabase.auth.signOut()
+        console.error(error)
+    }
+
     return (
 
         <Sidebar variant="inset">
@@ -102,6 +116,29 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
+
+            <SidebarFooter>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <SidebarMenuButton>
+                                    <User2 /> {props.user.email}
+                                    <ChevronUp className="ml-auto" />
+                                </SidebarMenuButton>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                                side="top"
+                                className="w-[--radix-popper-anchor-width]"
+                            >
+                                <DropdownMenuItem onClick={handleSignOut}>
+                                    <span>Cerrar Sesión</span>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarFooter>
         </Sidebar>
     )
 }
