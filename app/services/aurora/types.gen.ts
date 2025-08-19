@@ -355,7 +355,7 @@ export type AuroraUsersBusinessesAccess = {
     /**
      * User Id
      */
-    user_id: string;
+    user_id: string | null;
     /**
      * Supabase User Id
      */
@@ -558,45 +558,45 @@ export type BodyLoadShopifyProducts = {
  */
 export type CreateBusinessBody = {
     /**
-     * Name
+     * Businessname
      */
-    name: string;
-    /**
-     * Type
-     */
-    type: string | null;
+    businessName: string;
     /**
      * Industry
      */
-    industry: string | null;
-    /**
-     * Category
-     */
-    category: string | null;
-    /**
-     * Business Description
-     */
-    business_description: string | null;
-    /**
-     * Business Goals
-     */
-    business_goals: string | null;
+    industry: string;
     /**
      * Country
      */
-    country: string | null;
+    country: string;
+    /**
+     * Businessdescription
+     */
+    businessDescription: string;
+    /**
+     * Businessgoals
+     */
+    businessGoals: string;
     /**
      * City
      */
-    city: string | null;
+    city?: string | null;
     /**
      * Address
      */
-    address: string | null;
+    address?: string | null;
     /**
-     * Location Type
+     * Type
      */
-    location_type: string | null;
+    type?: string | null;
+    /**
+     * Category
+     */
+    category?: string | null;
+    /**
+     * Locationtype
+     */
+    locationType?: string | null;
 };
 
 /**
@@ -604,7 +604,8 @@ export type CreateBusinessBody = {
  */
 export type CreateBusinessResponse = {
     business: AuroraBusiness;
-    businessDetails?: AuroraBusinessDetail | null;
+    businessDetails: AuroraBusinessDetail;
+    businessAccess: AuroraUsersBusinessesAccess;
 };
 
 /**

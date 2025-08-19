@@ -10,6 +10,18 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/c
 import {Textarea} from "~/components/ui/textarea";
 import {CheckCircle} from "lucide-react";
 import type {MetaFunction} from "@remix-run/cloudflare";
+import {createBusiness} from "~/services/aurora";
+import {useOutletContext} from "@remix-run/react";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle
+} from "~/components/ui/alert-dialog";
+import {useAlert} from "~/hooks/useAlert";
 
 export const meta: MetaFunction = () => {
     return [
@@ -28,6 +40,8 @@ const FormSchema = z.object({
 })
 
 export default function RegistroDeNegocio() {
+    const {accessToken} = useOutletContext<{accessToken: string}>()
+    const alert = useAlert()
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -42,7 +56,37 @@ export default function RegistroDeNegocio() {
     })
 
     async function handleSubmit(values: z.infer<typeof FormSchema>) {
-        console.log(values)
+        const response = await createBusiness({
+            body: {
+                businessName: values.businessName,
+                industry: values.industry,
+                country: values.country,
+                city: values.city,
+                address: values.city,
+                businessDescription: values.businessDescription,
+                businessGoals: values.businessGoals
+            },
+            headers: {
+                'Authorization': `bearer ${accessToken}`
+            }
+        })
+
+        if (response.error) {
+            alert.error(
+                'Error',
+                'Ocurrió un error al registrar tu negocio.',
+                'Continuar'
+            )
+            return
+        }
+
+        console.log(response.data)
+        alert.success(
+            'Éxito',
+            'Tu negocio ha sido registrado en Aurora.',
+            'Continuar'
+        )
+        form.reset()
     }
 
     return (
@@ -204,14 +248,17 @@ export default function RegistroDeNegocio() {
 
 
                                 <div>
-                                    <Button type="submit" className="bg-indigo-500 hover:bg-indigo-600 text-white">
+                                    <Button
+                                        type="submit"
+                                        className="bg-indigo-500 hover:bg-indigo-600 text-white"
+                                        disabled={form.formState.isSubmitting}
+                                    >
                                         <CheckCircle/> Registra tú negocio
                                     </Button>
                                 </div>
 
                             </form>
                         </Form>
-
                     </div>
                 </div>
             </div>

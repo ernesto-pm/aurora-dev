@@ -35,6 +35,12 @@ export const getAllBusinesses = <ThrowOnError extends boolean = false>(options?:
 export const createBusiness = <ThrowOnError extends boolean = false>(options: Options<CreateBusinessData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateBusinessResponses, CreateBusinessErrors, ThrowOnError>({
         responseType: 'json',
+        security: [
+            {
+                scheme: 'bearer',
+                type: 'http'
+            }
+        ],
         url: '/businesses/',
         ...options,
         headers: {

@@ -46,13 +46,16 @@ const queryClient = new QueryClient()
 export default function App() {
   return (
       <QueryClientProvider client={queryClient}>
-          <Outlet/>
+          <AlertDialogProvider>
+              <Outlet/>
+          </AlertDialogProvider>
       </QueryClientProvider>
   )
 }
 
 
 import { ErrorBoundary as CustomErrorBoundary } from "~/components/ErrorBoundary";
+import {AlertDialogProvider} from "~/contexts/AlertDialogContext";
 
 export function ErrorBoundary() {
     return <CustomErrorBoundary />;
