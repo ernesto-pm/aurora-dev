@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import {LoaderFunctionArgs, type MetaFunction} from "@remix-run/cloudflare";
 import {getSupabaseCreds} from "~/services/envUtils";
-import { useLoaderData, useNavigate } from "@remix-run/react";
+import {Link, useLoaderData, useNavigate} from "@remix-run/react";
 import {createBrowserClient} from "@supabase/ssr";
 import {Input} from "~/components/ui/input";
 import {Button} from "~/components/ui/button";
@@ -75,7 +75,7 @@ export default function Login() {
                         <CardHeader>
                             <CardTitle className="text-2xl">Inicia Sesión</CardTitle>
                             <CardDescription>
-                                Inicia sesión con tus credenciales
+                                Inicia sesión con tus credenciales. Si no tienes una cuenta aún, registrate <Link to={"/registrate"} className="text-blue-600 underline">aquí</Link>
                             </CardDescription>
                         </CardHeader>
                         <CardContent>

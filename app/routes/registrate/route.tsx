@@ -86,7 +86,7 @@ export default function Registro() {
                         <CardHeader>
                             <CardTitle className="text-2xl">Registrate</CardTitle>
                             <CardDescription>
-                                Registrate para empezar a usar Aurora.
+                                Registrate para empezar a usar Aurora. Si ya tienes una cuenta, inicia sesión <Link to={"/login"} className="text-blue-600 underline">aquí</Link>
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
