@@ -4,7 +4,7 @@ import {SidebarInset} from "~/components/ui/sidebar";
 export default function AppIndex() {
     return (
         <SidebarInset>
-            <AppHeader headerTitle="Bienvenido/a a Aurora."/>
+            <AppHeader headerTitle="Bienvenido/a a Aurora"/>
 
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div className="@container/main flex flex-1 flex-col gap-2">

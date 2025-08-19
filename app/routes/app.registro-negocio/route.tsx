@@ -7,12 +7,17 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import {z} from "zod"
 import {Button} from "~/components/ui/button";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
+import {Textarea} from "~/components/ui/textarea";
+import {CheckCircle} from "lucide-react";
 
 const FormSchema = z.object({
     businessName: z.string().nonempty({error: "Campo requerido"}),
     industry: z.string().nonempty({error: "Campo requerido"}),
     country: z.string().nonempty({error: "Campo requerido"}),
-    city: z.string().nonempty({error: "Campo requerido"})
+    city: z.string().optional(),
+    address: z.string().optional(),
+    businessDescription: z.string().nonempty({error: "Campo requerido"}),
+    businessGoals: z.string().nonempty({error: "Campo requerido"})
 })
 
 export default function RegistroDeNegocio() {
@@ -22,14 +27,16 @@ export default function RegistroDeNegocio() {
             businessName: "",
             industry: "",
             country: "",
-            city: ""
+            city: "",
+            address: "",
+            businessDescription: "",
+            businessGoals: ""
         }
     })
 
     async function handleSubmit(values: z.infer<typeof FormSchema>) {
         console.log(values)
     }
-
 
     return (
         <SidebarInset>
@@ -64,6 +71,48 @@ export default function RegistroDeNegocio() {
                                             </FormControl>
                                             <FormDescription>
                                                 Este es el nombre de tú negocio.
+                                            </FormDescription>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+
+                                <FormField
+                                    control={form.control}
+                                    name="businessDescription"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Describe tu negocio:</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    rows={3}
+                                                    className="resize-none"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormDescription>
+                                                Describe tu negocio de la mejor manera que puedas, entre mas información proporciones, Aurora funcionará mejor.
+                                            </FormDescription>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+
+                                <FormField
+                                    control={form.control}
+                                    name="businessGoals"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Objetivos de negocio:</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    rows={3}
+                                                    className="resize-none"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormDescription>
+                                                Describe cuales son los objetivos que quieres que Aurora te ayude a lograr en el próximo año, por ejemplo "Me gustaria incrementar mis ventas un 5%".
                                             </FormDescription>
                                             <FormMessage />
                                         </FormItem>
@@ -117,7 +166,7 @@ export default function RegistroDeNegocio() {
                                     name="city"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Ciudad:</FormLabel>
+                                            <FormLabel>Ciudad (Opcional):</FormLabel>
                                             <FormControl>
                                                 <Input {...field} />
                                             </FormControl>
@@ -129,9 +178,30 @@ export default function RegistroDeNegocio() {
                                     )}
                                 />
 
-                                <Button type="submit">
-                                    Submit
-                                </Button>
+                                <FormField
+                                    control={form.control}
+                                    name="address"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Dirección (Opcional):</FormLabel>
+                                            <FormControl>
+                                                <Input {...field} />
+                                            </FormControl>
+                                            <FormDescription>
+                                                Si tu negocio tiene una locación física, proporcionala aquí.
+                                            </FormDescription>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+
+
+                                <div>
+                                    <Button type="submit" className="bg-indigo-500 hover:bg-indigo-600 text-white">
+                                        <CheckCircle/> Registra tú negocio
+                                    </Button>
+                                </div>
+
                             </form>
                         </Form>
 
