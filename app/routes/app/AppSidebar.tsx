@@ -19,7 +19,7 @@ const businessMenuMapping = [
         icon: NotebookPen,
     },
     {
-        title: "Tús negocios registrados",
+        title: "Tús negocios",
         url: "/app/negocios-registrados",
         icon: NotebookTabs,
     },
@@ -55,7 +55,7 @@ export function AppSidebar() {
                             className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
                             <Link to="/app">
-                                <Circle className="!size-5" />
+                                <img src="/auroraLogo.png" className="h-7"/>
                                 <span className="text-base font-semibold">Aurora A.I.</span>
                                 <span className="text-xs text-muted-foreground">alpha</span>
                             </Link>

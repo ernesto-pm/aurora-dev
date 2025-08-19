@@ -50,3 +50,10 @@ export default function App() {
       </QueryClientProvider>
   )
 }
+
+
+import { ErrorBoundary as CustomErrorBoundary } from "~/components/ErrorBoundary";
+
+export function ErrorBoundary() {
+    return <CustomErrorBoundary />;
+}
