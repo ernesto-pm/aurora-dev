@@ -25,7 +25,7 @@ const businessMenuMapping = [
     },
     {
         title: "Conecta tus datos",
-        url: "/app/registro-negocio",
+        url: "/app/conexion-de-datos",
         icon: Cable,
     }
 ]

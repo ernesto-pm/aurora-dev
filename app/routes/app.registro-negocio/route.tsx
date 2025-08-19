@@ -9,6 +9,13 @@ import {Button} from "~/components/ui/button";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
 import {Textarea} from "~/components/ui/textarea";
 import {CheckCircle} from "lucide-react";
+import type {MetaFunction} from "@remix-run/cloudflare";
+
+export const meta: MetaFunction = () => {
+    return [
+        { title: "Aurora | Registro de negocio" }
+    ];
+};
 
 const FormSchema = z.object({
     businessName: z.string().nonempty({error: "Campo requerido"}),

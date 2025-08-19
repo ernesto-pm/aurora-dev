@@ -1126,10 +1126,13 @@ export type GetBusinessesForSupabaseUserData = {
 
 export type GetBusinessesForSupabaseUserResponses = {
     /**
+     * Response Get Businesses For Supabase User
      * Successful Response
      */
-    200: unknown;
+    200: Array<AuroraBusiness>;
 };
+
+export type GetBusinessesForSupabaseUserResponse = GetBusinessesForSupabaseUserResponses[keyof GetBusinessesForSupabaseUserResponses];
 
 export type InsertExternalCustomerData = {
     body: InsertExternalBusinessCostumerParams;

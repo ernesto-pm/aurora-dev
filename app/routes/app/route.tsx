@@ -1,4 +1,4 @@
-import {json, LoaderFunctionArgs, redirect} from "@remix-run/cloudflare"
+import {json, LoaderFunctionArgs, type MetaFunction, redirect} from "@remix-run/cloudflare"
 import {getSupabaseCreds} from "~/services/envUtils";
 import {createBrowserClient, createServerClient, parseCookieHeader, serializeCookieHeader} from "@supabase/ssr";
 import {Outlet, useLoaderData, useLocation, useRevalidator} from "@remix-run/react";
@@ -7,6 +7,12 @@ import { Database } from "~/services/supabase/database.types";
 import {SidebarProvider} from "~/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import AppIndex from "~/routes/app/AppIndex";
+
+export const meta: MetaFunction = () => {
+    return [
+        { title: "Aurora | App" }
+    ];
+};
 
 export async function loader({request, context}: LoaderFunctionArgs) {
     const {SUPABASE_URL, SUPABASE_ANON_KEY} = getSupabaseCreds(context)
@@ -56,7 +62,7 @@ function checkIsAppIndex(location: Location) {
     return lastPartOfUrl == "app"
 }
 
-export default function Dashboard() {
+export default function App() {
     const {env, accessToken, user} = useLoaderData<typeof loader>()
     const [supabase] = useState(() => createBrowserClient<Database>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY))
     const { revalidate } = useRevalidator()
@@ -88,7 +94,7 @@ export default function Dashboard() {
                 isAppIndex && <AppIndex/>
             }
             {
-                !isAppIndex && <Outlet context={{user}}/>
+                !isAppIndex && <Outlet context={{user, accessToken}}/>
             }
         </SidebarProvider>
     )
