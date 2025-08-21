@@ -2,6 +2,7 @@ import { SidebarInset } from "~/components/ui/sidebar";
 import AppHeader from "~/routes/app/AppHeader";
 import type { MetaFunction } from "@remix-run/cloudflare";
 import {ArrowUp, TrendingUp} from "lucide-react";
+import CustomLineChart from "~/components/widgets/CustomLineChart";
 
 export const meta: MetaFunction = () => {
     return [
@@ -38,6 +39,16 @@ export default function Dashboard() {
                                 </div>
                                 <div className="text-lg flex-1 text-center">
                                     2800
+                                </div>
+                            </div>
+
+
+                            <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2">
+                                <div className="text-lg font-semibold text-center">
+                                    Productos registrados
+                                </div>
+                                <div className="flex-1">
+                                    <CustomLineChart />
                                 </div>
                             </div>
 
