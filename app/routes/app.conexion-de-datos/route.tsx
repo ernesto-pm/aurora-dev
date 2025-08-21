@@ -7,7 +7,7 @@ import {
     getBusinessesDataConnectionsForSupabaseUserOptions
 } from "~/services/aurora/@tanstack/react-query.gen";
 
-import {Card, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
+import {Card, CardDescription, CardFooter, CardHeader, CardTitle} from "~/components/ui/card";
 
 
 export const meta: MetaFunction = () => {
@@ -19,7 +19,6 @@ export const meta: MetaFunction = () => {
 export default function DataConnection() {
     return (
         <SidebarInset>
-
             <AppHeader headerTitle="Conexiónes de datos"/>
 
             <div className="flex flex-1 flex-col gap-4 p-4">
