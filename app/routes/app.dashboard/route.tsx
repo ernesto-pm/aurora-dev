@@ -2,7 +2,7 @@ import { SidebarInset } from "~/components/ui/sidebar";
 import AppHeader from "~/routes/app/AppHeader";
 import type { MetaFunction } from "@remix-run/cloudflare";
 import {ArrowUp, TrendingUp} from "lucide-react";
-import CustomLineChart from "~/components/widgets/CustomLineChart";
+import LineChart from "~/components/widgets/LineChart";
 
 export const meta: MetaFunction = () => {
     return [
@@ -19,7 +19,25 @@ export default function Dashboard() {
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div className="@container/main flex flex-1 flex-col gap-2">
                     <div className="py-4 px-6">
-                        <div className="grid grid-cols-5 gap-4">
+                        <div className="grid lg:grid-cols-10 gap-4">
+
+                            <div className="col-span-3 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
+                                <div className="font-semibold text-center p-3">
+                                    Total de ventas por mes
+                                </div>
+                                <div className="flex-1 p-2">
+                                    <LineChart />
+                                </div>
+                            </div>
+
+                            <div className="col-span-3 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
+                                <div className="font-semibold text-center p-3">
+                                    Ingresos por mes
+                                </div>
+                                <div className="flex-1 p-2">
+                                    <LineChart />
+                                </div>
+                            </div>
 
                             <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2">
                                 <div className="text-md font-bold text-center">
@@ -41,17 +59,6 @@ export default function Dashboard() {
                                     2800
                                 </div>
                             </div>
-
-
-                            <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2">
-                                <div className="text-lg font-semibold text-center">
-                                    Productos registrados
-                                </div>
-                                <div className="flex-1">
-                                    <CustomLineChart />
-                                </div>
-                            </div>
-
 
                         </div>
                     </div>
