@@ -7,7 +7,7 @@ function getOption() {
         grid: { // Add this to remove extra padding
             left: '2%',
             right: '2%',
-            bottom: '0',
+            bottom: 0,
             top: '5%',
             containLabel: true
         },
@@ -96,7 +96,25 @@ function getOption() {
                 </div>
             `;
             }
-        }
+        },
+        /*
+        dataZoom: [
+            {
+                type: 'slider',
+                xAxisIndex: 'all',
+                left: '10%',
+                right: '10%',
+                bottom: 0,
+                height: 30,
+                throttle: 120
+            },
+            {
+                type: 'inside',
+                xAxisIndex: 'all',
+                throttle: 120
+            }
+        ]
+         */
     }
 }
 

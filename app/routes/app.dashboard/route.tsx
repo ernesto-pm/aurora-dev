@@ -22,7 +22,7 @@ export default function Dashboard() {
                         <div className="grid lg:grid-cols-10 gap-4">
 
                             <div className="col-span-3 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
-                                <div className="font-semibold text-center p-3">
+                                <div className="font-semibold p-3">
                                     Total de ventas por mes
                                 </div>
                                 <div className="flex-1 p-2">
