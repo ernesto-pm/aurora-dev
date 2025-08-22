@@ -1,8 +1,9 @@
 import { SidebarInset } from "~/components/ui/sidebar";
 import AppHeader from "~/routes/app/AppHeader";
 import type { MetaFunction } from "@remix-run/cloudflare";
-import {ArrowUp, TrendingUp} from "lucide-react";
+import {Bot, Brain, BrainCircuit, Cog, MessageCircleMore, Settings, TrendingUp} from "lucide-react";
 import LineChart from "~/components/widgets/LineChart";
+import {Message} from "@letta-ai/letta-client/serialization";
 
 export const meta: MetaFunction = () => {
     return [
@@ -21,21 +22,44 @@ export default function Dashboard() {
                     <div className="py-4 px-6">
                         <div className="grid lg:grid-cols-10 gap-4">
 
-                            <div className="col-span-3 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
-                                <div className="font-semibold p-3">
-                                    Total de ventas por mes
+                            <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
+
+                                <div className="px-4 py-2 bg-sidebar-accent rounded-t-lg flex flex-row">
+                                    <div className="flex-1 text-sm font-semibold">
+                                        Total de ventas por mes
+                                    </div>
+                                    <div className="flex flex-row gap-2 items-center">
+                                        <Settings className="h-5 text-gray-500 cursor-pointer"/>
+                                    </div>
                                 </div>
+
                                 <div className="flex-1 p-2">
-                                    <LineChart />
+                                    <LineChart
+                                        horizontalAxisValues={['Jan', 'Feb', 'March', 'June', 'July']}
+                                        horizontalAxisLabel="Mes"
+                                        horizontalAxisType="category"
+                                        verticalAxisValues={[100, 120, 233, 150, 180]}
+                                        verticalAxisLabel="Ventas"
+                                        verticalAxisType="value"
+                                    />
                                 </div>
                             </div>
 
-                            <div className="col-span-3 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
-                                <div className="font-semibold text-center p-3">
-                                    Ingresos por mes
+
+
+                            <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
+                                <div className="font-semibold p-3">
+                                    Total de ingresos por mes
                                 </div>
                                 <div className="flex-1 p-2">
-                                    <LineChart />
+                                    <LineChart
+                                        horizontalAxisValues={['Jan', 'Feb', 'March', 'June', 'July']}
+                                        horizontalAxisLabel="Mes"
+                                        horizontalAxisType="category"
+                                        verticalAxisValues={[140000, 122000, 220000, 70000, 123000]}
+                                        verticalAxisLabel="Ventas"
+                                        verticalAxisType="value"
+                                    />
                                 </div>
                             </div>
 
