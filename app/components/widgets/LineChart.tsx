@@ -42,9 +42,6 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
                 verticalAxisLabel: verticalAxisValues[i]
             })
         }
-
-        console.log(source)
-
         return source
     }
 

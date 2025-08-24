@@ -695,6 +695,32 @@ export type GeoCodeAddressesBody = {
 };
 
 /**
+ * GetAllDashboardsForSupabaseUserIdRow
+ */
+export type GetAllDashboardsForSupabaseUserIdRow = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Business Data Source Id
+     */
+    business_data_source_id: string;
+    /**
+     * Created At
+     */
+    created_at: string;
+    /**
+     * Business Name
+     */
+    business_name: string;
+    /**
+     * Data Source Display Name
+     */
+    data_source_display_name: string;
+};
+
+/**
  * GetAllExtendedMaOrdersRow
  */
 export type GetAllExtendedMaOrdersRow = {
@@ -784,6 +810,16 @@ export type GetBusinessesForUserBody = {
      * Userid
      */
     userId: string;
+};
+
+/**
+ * GetOrderWidgetsDataBody
+ */
+export type GetOrderWidgetsDataBody = {
+    /**
+     * Business Data Source Id
+     */
+    business_data_source_id: string;
 };
 
 /**
@@ -2167,6 +2203,46 @@ export type DeleteAssistantTemplateErrors = {
 export type DeleteAssistantTemplateError = DeleteAssistantTemplateErrors[keyof DeleteAssistantTemplateErrors];
 
 export type DeleteAssistantTemplateResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type GetDashboardsForSupabaseUserData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/dashboards/for-supabase-user';
+};
+
+export type GetDashboardsForSupabaseUserResponses = {
+    /**
+     * Response Get Dashboards For Supabase User
+     * Successful Response
+     */
+    200: Array<GetAllDashboardsForSupabaseUserIdRow>;
+};
+
+export type GetDashboardsForSupabaseUserResponse = GetDashboardsForSupabaseUserResponses[keyof GetDashboardsForSupabaseUserResponses];
+
+export type GetOrderWidgetsDataData = {
+    body: GetOrderWidgetsDataBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/get-order-widgets-data';
+};
+
+export type GetOrderWidgetsDataErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetOrderWidgetsDataError = GetOrderWidgetsDataErrors[keyof GetOrderWidgetsDataErrors];
+
+export type GetOrderWidgetsDataResponses = {
     /**
      * Successful Response
      */
