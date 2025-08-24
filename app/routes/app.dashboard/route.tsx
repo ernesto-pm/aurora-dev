@@ -29,7 +29,7 @@ export default function Dashboard() {
                                         Total de ventas por mes
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <Settings className="h-5 text-gray-500 cursor-pointer"/>
+                                        <Settings className="h-4 text-gray-500 cursor-pointer"/>
                                     </div>
                                 </div>
 
