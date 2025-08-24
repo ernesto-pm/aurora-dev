@@ -80,7 +80,7 @@ export default function RegistroDeNegocio() {
             return
         }
 
-        console.log(response.data)
+        // console.log(response.data)
         alert.success(
             'Éxito',
             'Tu negocio ha sido registrado en Aurora.',

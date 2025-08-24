@@ -1,4 +1,15 @@
-import {Bot, Cable, ChevronUp, Circle, LayoutDashboard, LogOut, NotebookPen, NotebookTabs, User2} from "lucide-react"
+import {
+    Bot,
+    Cable,
+    ChevronUp,
+    Circle,
+    LayoutDashboard,
+    LogOut,
+    NotebookPen,
+    NotebookTabs, PiggyBank, SquareUser,
+    User2,
+    WalletCards, WalletMinimal
+} from "lucide-react"
 import {
     Sidebar,
     SidebarContent, SidebarFooter,
@@ -46,6 +57,19 @@ const auroraMenuMapping = [
     },
 ]
 
+const userMenuMapping = [
+    {
+        title: "Tu Suscripción",
+        url: "/app/wallet",
+        icon: WalletMinimal,
+    },
+    {
+        title: "Tu Perfil",
+        url: "/app/profile",
+        icon: SquareUser,
+    },
+]
+
 interface PropTypes {
     user: User
     supabase: SupabaseClient<Database>
@@ -69,7 +93,7 @@ export function AppSidebar(props: PropTypes) {
                             className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
                             <Link to="/app">
-                                <img src="/auroraLogo.png" className="h-7"/>
+                                <img src="/auroraLogo.png" className="h-7" alt="aurora-logo"/>
                                 <span className="text-base font-semibold">Aurora A.I.</span>
                                 <span className="text-xs text-muted-foreground">alpha</span>
                             </Link>
@@ -103,6 +127,25 @@ export function AppSidebar(props: PropTypes) {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {auroraMenuMapping.map((item) => (
+                                <SidebarMenuItem key={item.title}>
+                                    <SidebarMenuButton asChild>
+                                        <a href={item.url}>
+                                            <item.icon />
+                                            <span>{item.title}</span>
+                                        </a>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+
+
+                <SidebarGroup>
+                    <SidebarGroupLabel>Usuario</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {userMenuMapping.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <a href={item.url}>

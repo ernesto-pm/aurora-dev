@@ -13,7 +13,7 @@ export default function Dashboard() {
     return (
         <SidebarInset>
             <AppHeader headerTitle="Centro de Control"/>
-            <div className="flex flex-1 flex-col gap-4 p-4">
+            <div className="flex flex-1 flex-col gap-4 px-4 py-2">
                 <div className="@container/main flex flex-1 flex-col gap-2">
                     <div className="py-4 px-6 flex flex-col gap-5">
                         <DashboardGrid/>

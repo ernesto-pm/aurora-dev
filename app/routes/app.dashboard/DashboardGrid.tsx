@@ -29,7 +29,7 @@ export default function DashboardGrid() {
     if (!data || data.length === 0) return <div>No cuentas con ningúna conexión de datos disponible para usar el centro de control.</div>
 
     return (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-7">
 
             <div className="flex flex-col gap-3">
                 <Label>
