@@ -1,10 +1,9 @@
-import AppHeader from "~/routes/app/AppHeader";
-import {SidebarInset} from "~/components/ui/sidebar";
+import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
 
 export default function AppIndex() {
     return (
-        <SidebarInset>
-            <AppHeader headerTitle="Bienvenido/a a Aurora"/>
+        <div>
+            <AppNavigationHeader headerTitle="Bienvenido/a a Aurora"/>
 
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div className="@container/main flex flex-1 flex-col gap-2">
@@ -18,6 +17,6 @@ export default function AppIndex() {
                     </div>
                 </div>
             </div>
-        </SidebarInset>
+        </div>
     )
 }

@@ -4,7 +4,7 @@ import {createBrowserClient, createServerClient, parseCookieHeader, serializeCoo
 import {Outlet, useLoaderData, useLocation, useRevalidator} from "@remix-run/react";
 import {useEffect, useState} from "react";
 import { Database } from "~/services/supabase/database.types";
-import {SidebarProvider} from "~/components/ui/sidebar";
+import {SidebarInset, SidebarProvider} from "~/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import AppIndex from "~/routes/app/AppIndex";
 
@@ -90,12 +90,14 @@ export default function App() {
     return (
         <SidebarProvider>
             <AppSidebar user={user} supabase={supabase} />
-            {
-                isAppIndex && <AppIndex/>
-            }
-            {
-                !isAppIndex && <Outlet context={{user, accessToken}}/>
-            }
+            <SidebarInset>
+                {
+                    isAppIndex && <AppIndex/>
+                }
+                {
+                    !isAppIndex && <Outlet context={{user, accessToken}}/>
+                }
+            </SidebarInset>
         </SidebarProvider>
     )
 }

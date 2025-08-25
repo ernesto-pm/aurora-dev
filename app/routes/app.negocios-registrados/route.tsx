@@ -1,5 +1,5 @@
 import { SidebarInset } from "~/components/ui/sidebar";
-import AppHeader from "~/routes/app/AppHeader";
+import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
 import {
     Card,
     CardDescription, CardFooter,
@@ -34,14 +34,14 @@ export const meta: MetaFunction = () => {
 
 export default function NegociosRegistrados() {
     return (
-        <SidebarInset>
-            <AppHeader headerTitle="Negocios Registrados"/>
+        <div>
+            <AppNavigationHeader headerTitle="Negocios Registrados"/>
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div className="@container/main flex flex-1 flex-col gap-2">
                     <BusinessList/>
                 </div>
             </div>
-        </SidebarInset>
+        </div>
     )
 }
 

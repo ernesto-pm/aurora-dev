@@ -18,11 +18,6 @@ export const meta: MetaFunction = () => {
     ];
 };
 
-type FormValues = {
-    email: string
-    password: string
-}
-
 export async function loader({context}: LoaderFunctionArgs) {
     const creds = getSupabaseCreds(context)
 
@@ -55,14 +50,15 @@ export default function Registro() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [success, setSuccess] = useState(false)
 
-    async function onSubmit(values: FormValues) {
+    async function onSubmit(values: z.infer<typeof FormSchema>) {
         setLoading(true)
         const {data, error} = await supabase.auth.signUp({
             email: values.email,
             password: values.password,
             options: {
                 data: {
-                    product: 'aurora-dev'
+                    product: 'aurora-dev',
+                    name: values.displayName
                 }
             }
         })

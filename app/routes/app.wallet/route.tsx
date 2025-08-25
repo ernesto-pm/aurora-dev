@@ -1,10 +1,10 @@
 import { SidebarInset } from "~/components/ui/sidebar";
-import AppHeader from "~/routes/app/AppHeader";
+import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
 
 export default function Wallet() {
     return (
-        <SidebarInset>
-            <AppHeader headerTitle="Maneja tu suscripción"/>
+        <div>
+            <AppNavigationHeader headerTitle="Maneja tu suscripción"/>
 
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div className="@container/main flex flex-1 flex-col gap-2">
@@ -16,6 +16,6 @@ export default function Wallet() {
                     </div>
                 </div>
             </div>
-        </SidebarInset>
+        </div>
     )
 }

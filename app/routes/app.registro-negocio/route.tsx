@@ -1,5 +1,5 @@
 import {SidebarInset} from "~/components/ui/sidebar";
-import AppHeader from "~/routes/app/AppHeader";
+import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
 import {Input} from "~/components/ui/input";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -90,8 +90,8 @@ export default function RegistroDeNegocio() {
     }
 
     return (
-        <SidebarInset>
-            <AppHeader headerTitle="Registro de negocio"/>
+        <div>
+            <AppNavigationHeader headerTitle="Registro de negocio"/>
 
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div className="@container/main flex flex-1 flex-col gap-2">
@@ -262,6 +262,6 @@ export default function RegistroDeNegocio() {
                     </div>
                 </div>
             </div>
-        </SidebarInset>
+        </div>
     )
 }
