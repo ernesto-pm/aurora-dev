@@ -7,21 +7,23 @@ import {CallbackDataParams} from "echarts/types/dist/shared";
 interface LineChartPropTypes {
     horizontalAxisValues: string[] | number[]
     horizontalAxisLabel: string
-    horizontalAxisType: 'value' | 'category'
+    horizontalAxisType: 'value' | 'category' | 'time'
     verticalAxisValues: string[] | number[]
     verticalAxisLabel: string
-    verticalAxisType: 'value' | 'category'
+    verticalAxisType: 'value' | 'category' | 'time'
 }
 
 export default function LineChart({horizontalAxisValues, verticalAxisValues, horizontalAxisLabel, verticalAxisLabel, horizontalAxisType, verticalAxisType}: LineChartPropTypes) {
+    /*
     const [isMounted, setIsMounted] = useState(false)
     useEffect(() => {
         setTimeout(() => {
             setIsMounted(true)
-        }, 300)
+        }, 0)
     }, [])
 
-    if (!isMounted) return <div>Loading...</div>
+    if (!isMounted) return <div>Cargando...</div>
+     */
 
     function shapeData() {
         /* Transforms the data into this:  source: [
@@ -38,8 +40,8 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
         const source = []
         for (let i= 0; i < horizontalAxisValues.length; i++) {
             source.push({
-                horizontalAxisLabel: horizontalAxisValues[i],
-                verticalAxisLabel: verticalAxisValues[i]
+                [horizontalAxisLabel]: horizontalAxisValues[i],
+                [verticalAxisLabel]: verticalAxisValues[i]
             })
         }
         return source
@@ -49,7 +51,7 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
         return {
             grid: { // Add this to remove extra padding
                 left: '2%',
-                right: '2%',
+                right: '1%',
                 bottom: 0,
                 top: '5%',
                 containLabel: true
@@ -109,7 +111,7 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
                     type: 'line',
                     encode: {
                         x: horizontalAxisLabel,
-                        y: horizontalAxisLabel,
+                        y: verticalAxisLabel,
                         //x: 'month',
                         //y: 'value'
                     },
@@ -151,6 +153,14 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
                             symbolSize: 12
                         }
                     },
+                    markLine: {
+                        data: [
+                            {
+                                type: 'average',
+                                name: 'promedio'
+                            }
+                        ]
+                    }
                 }
             ],
             tooltip: {
@@ -162,16 +172,16 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
                     color: '#1e293b'
                 },
                 formatter: function (params: CallbackDataParams[]) {
+                    console.log(params[0])
                     return `
-                <div style="font-weight: bold; margin-bottom: 4px;">${
-                        // @ts-expect-error axisValue collides with type definitions
-                        params[0].axisValue
-                    }</div>
-                <div>
-                    <span style="display: inline-block; width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; margin-right: 8px;"></span>
-                    Valor: ${JSON.stringify(params[0].value)}
-                </div>
-            `;
+                        <div style="font-weight: bold; margin-bottom: 4px;">
+                            ${horizontalAxisLabel}: ${params[0].axisValueLabel || 'N/A'}
+                        </div>
+                        <div>
+                            <span style="display: inline-block; width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; margin-right: 8px;"></span>
+                            ${verticalAxisLabel}: ${params[0].value[verticalAxisLabel] || 'N/A'}
+                        </div>
+                    `
                 }
             },
             /*
