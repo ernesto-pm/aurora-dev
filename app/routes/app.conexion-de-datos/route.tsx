@@ -21,11 +21,10 @@ export default function DataConnection() {
         <div>
             <AppNavigationHeader headerTitle="Conexiónes de datos"/>
 
-            <div className="flex flex-1 flex-col gap-4 p-4">
-                <div className="@container/main flex flex-1 flex-col gap-2">
-                    <DataConnectionList />
-                </div>
+            <div className="flex-1 py-2 p-4">
+                <DataConnectionList />
             </div>
+
         </div>
     )
 }
@@ -47,7 +46,7 @@ function DataConnectionList() {
     if (!data || data.length === 0) return <div className="flex flex-row py-4 px-6 space-x-2">No cuentas con ningúna conexión de datos aun.</div>
 
     return (
-        <div className="flex flex-row py-4 px-6 gap-x-2 gap-y-5 flex-wrap">
+        <div className="flex flex-row justify-evenly py-4 px-6 gap-x-2 gap-y-5 flex-wrap">
             {
                 data.map((dataSourceConnection) => (
                     <Card key={dataSourceConnection.connection_id} className="min-w-[300px]">

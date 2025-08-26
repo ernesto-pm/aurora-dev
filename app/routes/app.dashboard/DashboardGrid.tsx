@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import {useEffect, useState} from "react"
 import {Settings, TrendingUp} from "lucide-react";
 import LineChart from "~/components/widgets/LineChart";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
@@ -55,7 +55,7 @@ export default function DashboardGrid() {
             <div className="grid lg:grid-cols-10 gap-4">
 
                 {/* Total de ventas por mes */}
-                <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
+                <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2 shadow-md">
                     <div className="px-4 py-2 bg-sidebar-accent rounded-t-lg flex flex-row">
                         <div className="flex-1 text-sm font-semibold">
                             Total de ventas por mes
@@ -79,7 +79,7 @@ export default function DashboardGrid() {
 
 
 
-                <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2">
+                <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2 shadow-md">
                     <div className="font-semibold p-3">
                         Total de ingresos por mes
                     </div>
@@ -95,7 +95,7 @@ export default function DashboardGrid() {
                     </div>
                 </div>
 
-                <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2">
+                <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2 shadow-md">
                     <div className="text-md font-bold text-center">
                         Ventas en promedio este mes
                     </div>
@@ -107,7 +107,7 @@ export default function DashboardGrid() {
                     </div>
                 </div>
 
-                <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2">
+                <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2 shadow-md">
                     <div className="text-lg font-semibold text-center">
                         Productos registrados
                     </div>

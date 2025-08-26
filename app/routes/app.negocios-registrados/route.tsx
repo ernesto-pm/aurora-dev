@@ -36,10 +36,9 @@ export default function NegociosRegistrados() {
     return (
         <div>
             <AppNavigationHeader headerTitle="Negocios Registrados"/>
-            <div className="flex flex-1 flex-col gap-4 p-4">
-                <div className="@container/main flex flex-1 flex-col gap-2">
-                    <BusinessList/>
-                </div>
+
+            <div className="flex-1 py-2 p-4">
+                <BusinessList/>
             </div>
         </div>
     )
@@ -62,7 +61,7 @@ function BusinessList() {
     if (!data || data.length === 0) return <div className="flex flex-row py-4 px-6 space-x-2">No cuentas con ningún negocio agregado aún.</div>
 
     return (
-        <div className="flex flex-row py-4 px-6 gap-x-2 gap-y-5 flex-wrap">
+        <div className="flex flex-row py-4 px-6 gap-x-2 gap-y-5 flex-wrap justify-evenly">
             {
                 data.map((business) => <BusinessListCard key={business.id} business={business} />)
             }
