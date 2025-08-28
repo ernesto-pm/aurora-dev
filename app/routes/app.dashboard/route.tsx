@@ -1,6 +1,5 @@
-import { SidebarInset } from "~/components/ui/sidebar";
 import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
-import type {LoaderFunctionArgs, MetaFunction} from "@remix-run/cloudflare";
+import type {MetaFunction} from "@remix-run/cloudflare";
 import DashboardGrid from "~/routes/app.dashboard/DashboardGrid";
 
 export const meta: MetaFunction = () => {
