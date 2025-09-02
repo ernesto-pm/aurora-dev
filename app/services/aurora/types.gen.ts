@@ -499,6 +499,39 @@ export type BodyLoadProducts = {
 };
 
 /**
+ * Body_load_raw_line_items
+ */
+export type BodyLoadRawLineItems = {
+    /**
+     * File
+     * CSV file with line items
+     */
+    file: Blob | File;
+};
+
+/**
+ * Body_load_raw_orders
+ */
+export type BodyLoadRawOrders = {
+    /**
+     * File
+     * CSV file with orders
+     */
+    file: Blob | File;
+};
+
+/**
+ * Body_load_raw_products
+ */
+export type BodyLoadRawProducts = {
+    /**
+     * File
+     * CSV file with products
+     */
+    file: Blob | File;
+};
+
+/**
  * Body_load_shopify_addresses
  */
 export type BodyLoadShopifyAddresses = {
@@ -707,6 +740,10 @@ export type GetAllDashboardsForSupabaseUserIdRow = {
      */
     business_data_source_id: string;
     /**
+     * Display Name
+     */
+    display_name: string | null;
+    /**
      * Created At
      */
     created_at: string;
@@ -759,6 +796,16 @@ export type GetAllExtendedMaOrdersRow = {
 };
 
 /**
+ * GetAllLineItemsBody
+ */
+export type GetAllLineItemsBody = {
+    /**
+     * Afterdate
+     */
+    afterDate?: string | null;
+};
+
+/**
  * GetAllMemoryBlocksForAssistantTemplate
  */
 export type GetAllMemoryBlocksForAssistantTemplate = {
@@ -766,6 +813,16 @@ export type GetAllMemoryBlocksForAssistantTemplate = {
      * Assistantid
      */
     assistantId: string;
+};
+
+/**
+ * GetAllOrdersBody
+ */
+export type GetAllOrdersBody = {
+    /**
+     * Afterdate
+     */
+    afterDate?: string | null;
 };
 
 /**
@@ -813,13 +870,29 @@ export type GetBusinessesForUserBody = {
 };
 
 /**
- * GetOrderWidgetsDataBody
+ * GetSalesPerMonthWidgetDataBody
  */
-export type GetOrderWidgetsDataBody = {
+export type GetSalesPerMonthWidgetDataBody = {
     /**
-     * Business Data Source Id
+     * Dashboardid
      */
-    business_data_source_id: string;
+    dashboardId: string;
+};
+
+/**
+ * GetSalesPerMonthWidgetDataResponse
+ */
+export type GetSalesPerMonthWidgetDataResponse = {
+    /**
+     * Horizontalaxisvalues
+     */
+    horizontalAxisValues: Array<string>;
+    /**
+     * Verticalaxisvalues
+     */
+    verticalAxisValues: Array<number>;
+    horizontalAxisType: WidgetAxisTypeEnum;
+    verticalAxisType: WidgetAxisTypeEnum;
 };
 
 /**
@@ -1043,6 +1116,100 @@ export type MaSale = {
 };
 
 /**
+ * MA_GetAllLineItemsRow
+ */
+export type MaGetAllLineItemsRow = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Business Id
+     */
+    business_id: string;
+    /**
+     * Ma Product Id
+     */
+    ma_product_id: string;
+    /**
+     * Order Id
+     */
+    order_id: string;
+    /**
+     * Date Order
+     */
+    date_order: string;
+    /**
+     * Quantity
+     */
+    quantity: string;
+    /**
+     * Price Unit
+     */
+    price_unit: string | null;
+    /**
+     * Line Subtotal
+     */
+    line_subtotal: number;
+};
+
+/**
+ * MA_GetAllOrdersRow
+ */
+export type MaGetAllOrdersRow = {
+    /**
+     * Order Id
+     */
+    order_id: string;
+    /**
+     * Date Order
+     */
+    date_order: string;
+    /**
+     * Business Id
+     */
+    business_id: string;
+    /**
+     * Total Items
+     */
+    total_items: number;
+    /**
+     * Order Amount Total
+     */
+    order_amount_total: number;
+};
+
+/**
+ * MA_GetAllProductsRow
+ */
+export type MaGetAllProductsRow = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Business Id
+     */
+    business_id: string;
+    /**
+     * Product Name
+     */
+    product_name: string | null;
+    /**
+     * Unit Type
+     */
+    unit_type: string | null;
+    /**
+     * Presentation
+     */
+    presentation: string | null;
+    /**
+     * Price
+     */
+    price: string | null;
+};
+
+/**
  * NewConversationBody
  */
 export type NewConversationBody = {
@@ -1133,6 +1300,11 @@ export type ValidationError = {
      */
     type: string;
 };
+
+/**
+ * WidgetAxisTypeEnum
+ */
+export type WidgetAxisTypeEnum = 'category' | 'value' | 'time';
 
 export type GetAllBusinessesData = {
     body?: never;
@@ -1703,6 +1875,75 @@ export type CalculateMetricAnalysisResponses = {
 
 export type CalculateMetricAnalysisResponse = CalculateMetricAnalysisResponses[keyof CalculateMetricAnalysisResponses];
 
+export type GetMaOrdersData = {
+    body: GetAllOrdersBody;
+    path?: never;
+    query?: never;
+    url: '/mercadito-alternativo/get-all-orders';
+};
+
+export type GetMaOrdersErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetMaOrdersError = GetMaOrdersErrors[keyof GetMaOrdersErrors];
+
+export type GetMaOrdersResponses = {
+    /**
+     * Response Get Ma Orders
+     * Successful Response
+     */
+    200: Array<MaGetAllOrdersRow>;
+};
+
+export type GetMaOrdersResponse = GetMaOrdersResponses[keyof GetMaOrdersResponses];
+
+export type GetMaProductsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/mercadito-alternativo/get-all-products';
+};
+
+export type GetMaProductsResponses = {
+    /**
+     * Response Get Ma Products
+     * Successful Response
+     */
+    200: Array<MaGetAllProductsRow>;
+};
+
+export type GetMaProductsResponse = GetMaProductsResponses[keyof GetMaProductsResponses];
+
+export type GetLineItemsData = {
+    body: GetAllLineItemsBody;
+    path?: never;
+    query?: never;
+    url: '/mercadito-alternativo/get-all-line-items';
+};
+
+export type GetLineItemsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetLineItemsError = GetLineItemsErrors[keyof GetLineItemsErrors];
+
+export type GetLineItemsResponses = {
+    /**
+     * Response Get Line Items
+     * Successful Response
+     */
+    200: Array<MaGetAllLineItemsRow>;
+};
+
+export type GetLineItemsResponse = GetLineItemsResponses[keyof GetLineItemsResponses];
+
 export type NewConversationData = {
     body: NewConversationBody;
     path?: never;
@@ -2226,23 +2467,94 @@ export type GetDashboardsForSupabaseUserResponses = {
 
 export type GetDashboardsForSupabaseUserResponse = GetDashboardsForSupabaseUserResponses[keyof GetDashboardsForSupabaseUserResponses];
 
-export type GetOrderWidgetsDataData = {
-    body: GetOrderWidgetsDataBody;
+export type GetSalesPerMonthWidgetDataData = {
+    body: GetSalesPerMonthWidgetDataBody;
     path?: never;
     query?: never;
-    url: '/dashboards/get-order-widgets-data';
+    url: '/dashboards/get-sales-per-month-widget-data';
 };
 
-export type GetOrderWidgetsDataErrors = {
+export type GetSalesPerMonthWidgetDataErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type GetOrderWidgetsDataError = GetOrderWidgetsDataErrors[keyof GetOrderWidgetsDataErrors];
+export type GetSalesPerMonthWidgetDataError = GetSalesPerMonthWidgetDataErrors[keyof GetSalesPerMonthWidgetDataErrors];
 
-export type GetOrderWidgetsDataResponses = {
+export type GetSalesPerMonthWidgetDataResponses = {
+    /**
+     * Successful Response
+     */
+    200: GetSalesPerMonthWidgetDataResponse;
+};
+
+export type GetSalesPerMonthWidgetDataResponse2 = GetSalesPerMonthWidgetDataResponses[keyof GetSalesPerMonthWidgetDataResponses];
+
+export type LoadRawOrdersData = {
+    body: BodyLoadRawOrders;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-raw-orders';
+};
+
+export type LoadRawOrdersErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadRawOrdersError = LoadRawOrdersErrors[keyof LoadRawOrdersErrors];
+
+export type LoadRawOrdersResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type LoadRawLineItemsData = {
+    body: BodyLoadRawLineItems;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-raw-line-items';
+};
+
+export type LoadRawLineItemsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadRawLineItemsError = LoadRawLineItemsErrors[keyof LoadRawLineItemsErrors];
+
+export type LoadRawLineItemsResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type LoadRawProductsData = {
+    body: BodyLoadRawProducts;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-raw-products';
+};
+
+export type LoadRawProductsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadRawProductsError = LoadRawProductsErrors[keyof LoadRawProductsErrors];
+
+export type LoadRawProductsResponses = {
     /**
      * Successful Response
      */

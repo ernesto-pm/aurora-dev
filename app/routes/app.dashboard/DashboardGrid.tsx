@@ -6,6 +6,7 @@ import {useQuery} from "@tanstack/react-query";
 import {getDashboardsForSupabaseUserOptions} from "~/services/aurora/@tanstack/react-query.gen";
 import { useOutletContext } from "@remix-run/react";
 import {Label} from "~/components/ui/label";
+import TotalSalesPerMonthWidget from "~/routes/app.dashboard/widgets/TotalSalesPerMonthWidget";
 
 export default function DashboardGrid() {
     const {accessToken} = useOutletContext<{accessToken: string}>()
@@ -24,6 +25,11 @@ export default function DashboardGrid() {
         if (data.length > 0) setSelectedDashboardId(data[0].id)
     }, [data])
 
+    function handleDashboardSelectChange(dashboardId: string) {
+        setSelectedDashboardId(dashboardId)
+    }
+
+
     if (isLoading || data === undefined) return <div>Cargando, un momento por favor...</div>
     if (isError) return <div>{error.message}</div>
     if (!data || data.length === 0) return <div>No cuentas con ningúna conexión de datos disponible para usar el centro de control.</div>
@@ -35,7 +41,7 @@ export default function DashboardGrid() {
                 <Label>
                     Selecciona el origen de los datos:
                 </Label>
-                <Select value={selectedDashboardId ?? ""} onValueChange={(value) => setSelectedDashboardId(value)}>
+                <Select value={selectedDashboardId ?? ""} onValueChange={handleDashboardSelectChange}>
                     <SelectTrigger className="w-[300px] text-sm">
                         <SelectValue placeholder="Selecciona una conexión de datos" />
                     </SelectTrigger>
@@ -54,29 +60,13 @@ export default function DashboardGrid() {
 
             <div className="grid lg:grid-cols-10 gap-4">
 
-                {/* Total de ventas por mes */}
-                <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2 shadow-md">
-                    <div className="px-4 py-2 bg-sidebar-accent rounded-t-lg flex flex-row">
-                        <div className="flex-1 text-sm font-semibold">
-                            Total de ventas por mes
-                        </div>
-                        <div className="flex flex-row gap-2 items-center">
-                            <Settings className="h-4 text-gray-500 cursor-pointer"/>
-                        </div>
-                    </div>
-
-                    <div className="flex-1 p-2">
-                        <LineChart
-                            horizontalAxisValues={['Jan', 'Feb', 'March', 'June', 'July']}
-                            horizontalAxisLabel="Mes"
-                            horizontalAxisType="category"
-                            verticalAxisValues={[100, 120, 233, 150, 180]}
-                            verticalAxisLabel="Ventas"
-                            verticalAxisType="value"
-                        />
-                    </div>
-                </div>
-
+                {
+                    selectedDashboardId
+                    &&
+                    <TotalSalesPerMonthWidget
+                        dashboardId={selectedDashboardId}
+                    />
+                }
 
 
                 <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2 shadow-md">

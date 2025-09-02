@@ -172,7 +172,7 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
                     color: '#1e293b'
                 },
                 formatter: function (params: CallbackDataParams[]) {
-                    console.log(params[0])
+                    // console.log(params[0])
                     return `
                         <div style="font-weight: bold; margin-bottom: 4px;">
                             ${horizontalAxisLabel}: ${params[0].axisValueLabel || 'N/A'}
