@@ -6,7 +6,8 @@ import {useQuery} from "@tanstack/react-query";
 import {getDashboardsForSupabaseUserOptions} from "~/services/aurora/@tanstack/react-query.gen";
 import { useOutletContext } from "@remix-run/react";
 import {Label} from "~/components/ui/label";
-import TotalSalesPerMonthWidget from "~/routes/app.dashboard/widgets/TotalSalesPerMonthWidget";
+import SalesPerMonthWidget from "~/routes/app.dashboard/widgets/SalesPerMonthWidget";
+import OrderRevenuePerMonthWidget from "~/routes/app.dashboard/widgets/OrderRevenuePerMonthWidget";
 
 export default function DashboardGrid() {
     const {accessToken} = useOutletContext<{accessToken: string}>()
@@ -63,29 +64,27 @@ export default function DashboardGrid() {
                 {
                     selectedDashboardId
                     &&
-                    <TotalSalesPerMonthWidget
+                    <SalesPerMonthWidget
                         dashboardId={selectedDashboardId}
                     />
                 }
 
+                {
+                    selectedDashboardId
+                    &&
+                    <OrderRevenuePerMonthWidget
+                        dashboardId={selectedDashboardId}
+                    />
+                }
 
-                <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2 shadow-md">
-                    <div className="font-semibold p-3">
-                        Total de ingresos por mes
-                    </div>
-                    <div className="flex-1 p-2">
-                        <LineChart
-                            horizontalAxisValues={['Jan', 'Feb', 'March', 'June', 'July']}
-                            horizontalAxisLabel="Mes"
-                            horizontalAxisType="category"
-                            verticalAxisValues={[140000, 122000, 220000, 70000, 123000]}
-                            verticalAxisLabel="Ventas"
-                            verticalAxisType="value"
-                        />
-                    </div>
-                </div>
+            </div>
+        </div>
+    )
+}
 
-                <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2 shadow-md">
+/*
+
+<div className="p-5 rounded-md bg-sidebar flex flex-col gap-2 shadow-md">
                     <div className="text-md font-bold text-center">
                         Ventas en promedio este mes
                     </div>
@@ -105,8 +104,4 @@ export default function DashboardGrid() {
                         2800
                     </div>
                 </div>
-
-            </div>
-        </div>
-    )
-}
+ */

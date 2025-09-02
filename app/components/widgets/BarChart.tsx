@@ -1,7 +1,7 @@
 import ReactECharts from 'echarts-for-react';
 import {ClientOnly} from "remix-utils/client-only";
 
-interface LineChartPropTypes {
+interface BarChartPropTypes {
     horizontalAxisValues: string[] | number[]
     horizontalAxisLabel: string
     horizontalAxisType: 'value' | 'category' | 'time'
@@ -10,25 +10,11 @@ interface LineChartPropTypes {
     verticalAxisType: 'value' | 'category' | 'time'
 }
 
-export default function LineChart({horizontalAxisValues, verticalAxisValues, horizontalAxisLabel, verticalAxisLabel, horizontalAxisType, verticalAxisType}: LineChartPropTypes) {
-    /*
-    const [isMounted, setIsMounted] = useState(false)
-    useEffect(() => {
-        setTimeout(() => {
-            setIsMounted(true)
-        }, 0)
-    }, [])
-
-    if (!isMounted) return <div>Cargando...</div>
-     */
+export default function BarChart({horizontalAxisValues, verticalAxisValues,
+                                     horizontalAxisLabel, verticalAxisLabel,
+                                     horizontalAxisType, verticalAxisType}: BarChartPropTypes) {
 
     function shapeData() {
-        /* Transforms the data into this:  source: [
-                {month: 'Jan', value: 100},
-                {month: 'Feb', value: 300},
-                {month: 'March', value: 400}
-            ]
-         */
         // Check if both columns and values are the same size
         if (horizontalAxisValues.length !== verticalAxisValues.length) {
             throw new Error("Error, columns and values must be the same length")
@@ -46,7 +32,7 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
 
     function getOption() {
         return {
-            grid: { // Add this to remove extra padding
+            grid: {
                 left: '2%',
                 right: '1%',
                 bottom: 0,
@@ -55,19 +41,9 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
             },
             dataset: {
                 source: shapeData()
-                //dimensions: ['month', 'value'],
-                /*
-                source: [
-                    {month: 'Jan', value: 100},
-                    {month: 'Feb', value: 300},
-                    {month: 'March', value: 400}
-                ]
-                 */
             },
             xAxis: {
                 type: horizontalAxisType,
-                //type: 'category',
-                //data: ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic'],
                 axisLine: {
                     lineStyle: {
                         color: '#cbd5e1'
@@ -104,13 +80,10 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
             },
             series: [
                 {
-                    //data: [150, 230, 224, 218, 135, 147, 150, 230, 224, 218, 135, 147],
-                    type: 'line',
+                    type: 'bar',
                     encode: {
                         x: horizontalAxisLabel,
                         y: verticalAxisLabel,
-                        //x: 'month',
-                        //y: 'value'
                     },
                     smooth: true,
                     lineStyle: {
@@ -150,6 +123,7 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
                             symbolSize: 12
                         }
                     },
+                    /*
                     markLine: {
                         data: [
                             {
@@ -158,6 +132,7 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
                             }
                         ]
                     }
+                     */
                 }
             ],
             tooltip: {
@@ -167,40 +142,8 @@ export default function LineChart({horizontalAxisValues, verticalAxisValues, hor
                 borderWidth: 1,
                 textStyle: {
                     color: '#1e293b'
-                },
-                /*
-                formatter: function (params: CallbackDataParams[]) {
-                    // console.log(params[0])
-                    return `
-                        <div style="font-weight: bold; margin-bottom: 4px;">
-                            ${horizontalAxisLabel}: ${params[0].axisValueLabel || 'N/A'}
-                        </div>
-                        <div>
-                            <span style="display: inline-block; width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; margin-right: 8px;"></span>
-                            ${verticalAxisLabel}: ${params[0].value[verticalAxisLabel] || 'N/A'}
-                        </div>
-                    `
                 }
-                 */
-            },
-            /*
-            dataZoom: [
-                {
-                    type: 'slider',
-                    xAxisIndex: 'all',
-                    left: '10%',
-                    right: '10%',
-                    bottom: 0,
-                    height: 30,
-                    throttle: 120
-                },
-                {
-                    type: 'inside',
-                    xAxisIndex: 'all',
-                    throttle: 120
-                }
-            ]
-             */
+            }
         }
     }
 

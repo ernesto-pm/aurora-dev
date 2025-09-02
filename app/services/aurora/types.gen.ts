@@ -870,9 +870,9 @@ export type GetBusinessesForUserBody = {
 };
 
 /**
- * GetSalesPerMonthWidgetDataBody
+ * GetOrderRevenuePerMonthBody
  */
-export type GetSalesPerMonthWidgetDataBody = {
+export type GetOrderRevenuePerMonthBody = {
     /**
      * Dashboardid
      */
@@ -880,9 +880,35 @@ export type GetSalesPerMonthWidgetDataBody = {
 };
 
 /**
- * GetSalesPerMonthWidgetDataResponse
+ * GetOrderRevenuePerMonthResponse
  */
-export type GetSalesPerMonthWidgetDataResponse = {
+export type GetOrderRevenuePerMonthResponse = {
+    /**
+     * Horizontalaxisvalues
+     */
+    horizontalAxisValues: Array<string>;
+    /**
+     * Verticalaxisvalues
+     */
+    verticalAxisValues: Array<number>;
+    horizontalAxisType: WidgetAxisTypeEnum;
+    verticalAxisType: WidgetAxisTypeEnum;
+};
+
+/**
+ * GetSalesPerMonthBody
+ */
+export type GetSalesPerMonthBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+};
+
+/**
+ * GetSalesPerMonthResponse
+ */
+export type GetSalesPerMonthResponse = {
     /**
      * Horizontalaxisvalues
      */
@@ -2467,30 +2493,55 @@ export type GetDashboardsForSupabaseUserResponses = {
 
 export type GetDashboardsForSupabaseUserResponse = GetDashboardsForSupabaseUserResponses[keyof GetDashboardsForSupabaseUserResponses];
 
-export type GetSalesPerMonthWidgetDataData = {
-    body: GetSalesPerMonthWidgetDataBody;
+export type GetSalesPerMonthData = {
+    body: GetSalesPerMonthBody;
     path?: never;
     query?: never;
-    url: '/dashboards/get-sales-per-month-widget-data';
+    url: '/dashboards/get-sales-per-month';
 };
 
-export type GetSalesPerMonthWidgetDataErrors = {
+export type GetSalesPerMonthErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type GetSalesPerMonthWidgetDataError = GetSalesPerMonthWidgetDataErrors[keyof GetSalesPerMonthWidgetDataErrors];
+export type GetSalesPerMonthError = GetSalesPerMonthErrors[keyof GetSalesPerMonthErrors];
 
-export type GetSalesPerMonthWidgetDataResponses = {
+export type GetSalesPerMonthResponses = {
     /**
      * Successful Response
      */
-    200: GetSalesPerMonthWidgetDataResponse;
+    200: GetSalesPerMonthResponse;
 };
 
-export type GetSalesPerMonthWidgetDataResponse2 = GetSalesPerMonthWidgetDataResponses[keyof GetSalesPerMonthWidgetDataResponses];
+export type GetSalesPerMonthResponse2 = GetSalesPerMonthResponses[keyof GetSalesPerMonthResponses];
+
+export type GetOrderRevenuePerMonthData = {
+    body: GetOrderRevenuePerMonthBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/get-order-revenue-per-month';
+};
+
+export type GetOrderRevenuePerMonthErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetOrderRevenuePerMonthError = GetOrderRevenuePerMonthErrors[keyof GetOrderRevenuePerMonthErrors];
+
+export type GetOrderRevenuePerMonthResponses = {
+    /**
+     * Successful Response
+     */
+    200: GetOrderRevenuePerMonthResponse;
+};
+
+export type GetOrderRevenuePerMonthResponse2 = GetOrderRevenuePerMonthResponses[keyof GetOrderRevenuePerMonthResponses];
 
 export type LoadRawOrdersData = {
     body: BodyLoadRawOrders;
