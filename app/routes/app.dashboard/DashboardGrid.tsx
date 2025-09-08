@@ -8,6 +8,8 @@ import { useOutletContext } from "@remix-run/react";
 import {Label} from "~/components/ui/label";
 import SalesPerMonthWidget from "~/routes/app.dashboard/widgets/SalesPerMonthWidget";
 import OrderRevenuePerMonthWidget from "~/routes/app.dashboard/widgets/OrderRevenuePerMonthWidget";
+import BestSellingVariantsGroupedByProductWidget
+    from "~/routes/app.dashboard/widgets/BestSellingVariantsGroupedByProductWidget";
 
 export default function DashboardGrid() {
     const {accessToken} = useOutletContext<{accessToken: string}>()
@@ -73,6 +75,14 @@ export default function DashboardGrid() {
                     selectedDashboardId
                     &&
                     <OrderRevenuePerMonthWidget
+                        dashboardId={selectedDashboardId}
+                    />
+                }
+
+                {
+                    selectedDashboardId
+                    &&
+                    <BestSellingVariantsGroupedByProductWidget
                         dashboardId={selectedDashboardId}
                     />
                 }

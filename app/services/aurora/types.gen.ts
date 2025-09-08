@@ -393,12 +393,54 @@ export type AuroraVisit = {
 };
 
 /**
+ * Body_load_addresses_with_params
+ */
+export type BodyLoadAddressesWithParams = {
+    /**
+     * File
+     * CSV file with customers
+     */
+    file: Blob | File;
+    /**
+     * Business Id
+     * The business_id to add to the data
+     */
+    business_id: string;
+    /**
+     * Data Source Id
+     * The data source_id to add to the data
+     */
+    data_source_id: string;
+};
+
+/**
  * Body_load_customers
  */
 export type BodyLoadCustomers = {
     /**
      * File
      * CSV file with orders
+     */
+    file: Blob | File;
+    /**
+     * Business Id
+     * The business_id to add to the data
+     */
+    business_id: string;
+    /**
+     * Data Source Id
+     * The data source_id to add to the data
+     */
+    data_source_id: string;
+};
+
+/**
+ * Body_load_customers_with_params
+ */
+export type BodyLoadCustomersWithParams = {
+    /**
+     * File
+     * CSV file with customers
      */
     file: Blob | File;
     /**
@@ -422,6 +464,27 @@ export type BodyLoadLineItems = {
      * CSV file with line items
      */
     file: Blob | File;
+};
+
+/**
+ * Body_load_line_items_with_params
+ */
+export type BodyLoadLineItemsWithParams = {
+    /**
+     * File
+     * CSV file with line items
+     */
+    file: Blob | File;
+    /**
+     * Business Id
+     * The business_id to add to the data
+     */
+    business_id: string;
+    /**
+     * Data Source Id
+     * The data source_id to add to the data
+     */
+    data_source_id: string;
 };
 
 /**
@@ -467,6 +530,27 @@ export type BodyLoadOrders = {
 };
 
 /**
+ * Body_load_orders_with_params
+ */
+export type BodyLoadOrdersWithParams = {
+    /**
+     * File
+     * CSV file with orders
+     */
+    file: Blob | File;
+    /**
+     * Business Id
+     * The business_id to add to the data
+     */
+    business_id: string;
+    /**
+     * Data Source Id
+     * The data source_id to add to the data
+     */
+    data_source_id: string;
+};
+
+/**
  * Body_load_postal_code_mapping
  */
 export type BodyLoadPostalCodeMapping = {
@@ -478,12 +562,54 @@ export type BodyLoadPostalCodeMapping = {
 };
 
 /**
+ * Body_load_product_variants_with_params
+ */
+export type BodyLoadProductVariantsWithParams = {
+    /**
+     * File
+     * CSV file with product variants
+     */
+    file: Blob | File;
+    /**
+     * Business Id
+     * The business_id to add to the data
+     */
+    business_id: string;
+    /**
+     * Data Source Id
+     * The data source_id to add to the data
+     */
+    data_source_id: string;
+};
+
+/**
  * Body_load_products
  */
 export type BodyLoadProducts = {
     /**
      * File
      * CSV file with orders
+     */
+    file: Blob | File;
+    /**
+     * Business Id
+     * The business_id to add to the data
+     */
+    business_id: string;
+    /**
+     * Data Source Id
+     * The data source_id to add to the data
+     */
+    data_source_id: string;
+};
+
+/**
+ * Body_load_products_with_params
+ */
+export type BodyLoadProductsWithParams = {
+    /**
+     * File
+     * CSV file with products
      */
     file: Blob | File;
     /**
@@ -922,6 +1048,20 @@ export type GetSalesPerMonthResponse = {
 };
 
 /**
+ * GetTotalSalesPerProductAndVariantsBody
+ */
+export type GetTotalSalesPerProductAndVariantsBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+    /**
+     * Orderstate
+     */
+    orderState?: string;
+};
+
+/**
  * GrantAccessForSupabaseUserEmail
  */
 export type GrantAccessForSupabaseUserEmail = {
@@ -1265,6 +1405,24 @@ export type OrdersPerMonthRequest = {
      * Businessid
      */
     businessId: string;
+};
+
+/**
+ * POC_GetTotalSalesPerProductAndVariantsRow
+ */
+export type PocGetTotalSalesPerProductAndVariantsRow = {
+    /**
+     * Sum Quantity
+     */
+    sum_quantity: number;
+    /**
+     * Variant Name
+     */
+    variant_name: string | null;
+    /**
+     * Product Name
+     */
+    product_name: string | null;
 };
 
 /**
@@ -2543,6 +2701,32 @@ export type GetOrderRevenuePerMonthResponses = {
 
 export type GetOrderRevenuePerMonthResponse2 = GetOrderRevenuePerMonthResponses[keyof GetOrderRevenuePerMonthResponses];
 
+export type GetTotalSalesPerProductAndVariantsData = {
+    body: GetTotalSalesPerProductAndVariantsBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/get-total-sales-per-product-and-variants';
+};
+
+export type GetTotalSalesPerProductAndVariantsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetTotalSalesPerProductAndVariantsError = GetTotalSalesPerProductAndVariantsErrors[keyof GetTotalSalesPerProductAndVariantsErrors];
+
+export type GetTotalSalesPerProductAndVariantsResponses = {
+    /**
+     * Response Get Total Sales Per Product And Variants
+     * Successful Response
+     */
+    200: Array<PocGetTotalSalesPerProductAndVariantsRow>;
+};
+
+export type GetTotalSalesPerProductAndVariantsResponse = GetTotalSalesPerProductAndVariantsResponses[keyof GetTotalSalesPerProductAndVariantsResponses];
+
 export type LoadRawOrdersData = {
     body: BodyLoadRawOrders;
     path?: never;
@@ -2606,6 +2790,144 @@ export type LoadRawProductsErrors = {
 export type LoadRawProductsError = LoadRawProductsErrors[keyof LoadRawProductsErrors];
 
 export type LoadRawProductsResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type LoadProductsWithParamsData = {
+    body: BodyLoadProductsWithParams;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-products-with-params';
+};
+
+export type LoadProductsWithParamsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadProductsWithParamsError = LoadProductsWithParamsErrors[keyof LoadProductsWithParamsErrors];
+
+export type LoadProductsWithParamsResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type LoadProductVariantsWithParamsData = {
+    body: BodyLoadProductVariantsWithParams;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-product-variants-with-params';
+};
+
+export type LoadProductVariantsWithParamsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadProductVariantsWithParamsError = LoadProductVariantsWithParamsErrors[keyof LoadProductVariantsWithParamsErrors];
+
+export type LoadProductVariantsWithParamsResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type LoadOrdersWithParamsData = {
+    body: BodyLoadOrdersWithParams;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-orders-with-params';
+};
+
+export type LoadOrdersWithParamsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadOrdersWithParamsError = LoadOrdersWithParamsErrors[keyof LoadOrdersWithParamsErrors];
+
+export type LoadOrdersWithParamsResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type LoadLineItemsWithParamsData = {
+    body: BodyLoadLineItemsWithParams;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-line-items-with-params';
+};
+
+export type LoadLineItemsWithParamsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadLineItemsWithParamsError = LoadLineItemsWithParamsErrors[keyof LoadLineItemsWithParamsErrors];
+
+export type LoadLineItemsWithParamsResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type LoadCustomersWithParamsData = {
+    body: BodyLoadCustomersWithParams;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-customers-with-params';
+};
+
+export type LoadCustomersWithParamsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadCustomersWithParamsError = LoadCustomersWithParamsErrors[keyof LoadCustomersWithParamsErrors];
+
+export type LoadCustomersWithParamsResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type LoadAddressesWithParamsData = {
+    body: BodyLoadAddressesWithParams;
+    path?: never;
+    query?: never;
+    url: '/data-ingestion/load-addresses-with-params';
+};
+
+export type LoadAddressesWithParamsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LoadAddressesWithParamsError = LoadAddressesWithParamsErrors[keyof LoadAddressesWithParamsErrors];
+
+export type LoadAddressesWithParamsResponses = {
     /**
      * Successful Response
      */
