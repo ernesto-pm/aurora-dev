@@ -121,6 +121,7 @@ export default function Login() {
                                         <Button
                                             type="submit"
                                             className="w-full"
+                                            disabled={form.formState.isSubmitting}
                                         >
                                             Iniciar sesión
                                         </Button>

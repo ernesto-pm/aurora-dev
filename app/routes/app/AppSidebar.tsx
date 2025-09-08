@@ -18,7 +18,7 @@ import {
     SidebarGroupLabel, SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem
+    SidebarMenuItem, useSidebar
 } from "~/components/ui/sidebar"
 import {Link} from "@remix-run/react";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
@@ -76,6 +76,7 @@ interface PropTypes {
 }
 
 export function AppSidebar(props: PropTypes) {
+    const {setOpenMobile} = useSidebar()
 
     async function handleSignOut() {
         const {error} = await props.supabase.auth.signOut()
@@ -111,10 +112,13 @@ export function AppSidebar(props: PropTypes) {
                             {businessMenuMapping.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link
+                                            to={item.url}
+                                            onClick={() => setOpenMobile(false)}
+                                        >
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
@@ -129,10 +133,13 @@ export function AppSidebar(props: PropTypes) {
                             {auroraMenuMapping.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link
+                                            to={item.url}
+                                            onClick={() => setOpenMobile(false)}
+                                        >
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
@@ -148,10 +155,13 @@ export function AppSidebar(props: PropTypes) {
                             {userMenuMapping.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link
+                                            to={item.url}
+                                            onClick={() => setOpenMobile(false)}
+                                        >
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
