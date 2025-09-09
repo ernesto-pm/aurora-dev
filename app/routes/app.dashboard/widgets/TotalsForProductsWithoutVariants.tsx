@@ -35,7 +35,7 @@ export default function TotalsForProductsWithoutVariants(props: TotalsForProduct
 
 
     return (
-        <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2 shadow-md min-h-[250px] max-h-[500px]">
+        <div className="rounded-lg bg-sidebar flex flex-col gap-2 shadow-md w-full h-full">
             <div className="px-4 py-2 bg-sidebar-accent rounded-t-lg flex flex-row">
                 <div className="flex-1 text-sm font-semibold">
                     Total de productos (sin variantes) mas vendidos
@@ -53,8 +53,8 @@ export default function TotalsForProductsWithoutVariants(props: TotalsForProduct
                     <TableHeader>
                         <TableRow>
                             <TableHead>Nombre del producto</TableHead>
-                            <TableHead className="w-[100px]">Porcentaje del total</TableHead>
-                            <TableHead className="w-[100px]">Cantidad vendida</TableHead>
+                            <TableHead className="w-[100px] text-center">Porcentaje</TableHead>
+                            <TableHead className="w-[100px] text-center">Cantidad</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -65,10 +65,10 @@ export default function TotalsForProductsWithoutVariants(props: TotalsForProduct
                                         <TableCell className="font-medium">
                                             {item.product_name}
                                         </TableCell>
-                                        <TableCell>
-                                            {item.percentage_of_total}
+                                        <TableCell className="text-center">
+                                            {item.percentage_of_total}%
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="text-center">
                                             {item.total_sales}
                                         </TableCell>
                                     </TableRow>

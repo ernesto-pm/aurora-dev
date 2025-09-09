@@ -8,6 +8,9 @@ import "react-grid-layout/css/styles.css"
 import { Responsive, WidthProvider } from "react-grid-layout";
 import SalesPerMonthWidget from "~/routes/app.dashboard/widgets/SalesPerMonthWidget";
 import OrderRevenuePerMonthWidget from "~/routes/app.dashboard/widgets/OrderRevenuePerMonthWidget";
+import TotalsForProductsWithoutVariants from "~/routes/app.dashboard/widgets/TotalsForProductsWithoutVariants";
+import TotalsForVariants from "~/routes/app.dashboard/widgets/TotalsForVariants";
+import TotalsForProductsAndVariants from "~/routes/app.dashboard/widgets/TotalsForProductsAndVariants";
 
 export default function DashboardGridLayout() {
     const {accessToken} = useOutletContext<{ accessToken: string }>()
@@ -159,6 +162,21 @@ function AuroraGridLayout(props: AuroraGridLayoutProptypes) {
                 </div>
                 <div key="2">
                     <OrderRevenuePerMonthWidget
+                        dashboardId={props.selectedDashboardId}
+                    />
+                </div>
+                <div key="3">
+                    <TotalsForProductsWithoutVariants
+                        dashboardId={props.selectedDashboardId}
+                    />
+                </div>
+                <div key="4">
+                    <TotalsForVariants
+                        dashboardId={props.selectedDashboardId}
+                    />
+                </div>
+                <div key="5">
+                    <TotalsForProductsAndVariants
                         dashboardId={props.selectedDashboardId}
                     />
                 </div>

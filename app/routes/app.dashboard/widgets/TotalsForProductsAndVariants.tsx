@@ -8,16 +8,18 @@ import {
     TableHeader,
     TableRow,
 } from "~/components/ui/table"
-import {getTotalItemsForVariantsOptions} from "~/services/aurora/@tanstack/react-query.gen";
+import {
+    getTotalsForProductsAndVariantsOptions
+} from "~/services/aurora/@tanstack/react-query.gen";
 
 
-interface TotalsForProductsWithoutVariantsPropTypes {
+interface TotalsForProductsAndVariantsPropTypes {
     dashboardId: string
 }
 
-export default function TotalsForVariants(props: TotalsForProductsWithoutVariantsPropTypes) {
+export default function TotalsForProductsAndVariants(props: TotalsForProductsAndVariantsPropTypes) {
     const {data, isError, error, isLoading} = useQuery({
-        ...getTotalItemsForVariantsOptions({
+        ...getTotalsForProductsAndVariantsOptions({
             body: {
                 dashboardId: props.dashboardId,
                 orderState: 'sale',
@@ -36,7 +38,7 @@ export default function TotalsForVariants(props: TotalsForProductsWithoutVariant
         <div className="rounded-lg bg-sidebar flex flex-col gap-2 shadow-md w-full h-full">
             <div className="px-4 py-2 bg-sidebar-accent rounded-t-lg flex flex-row">
                 <div className="flex-1 text-sm font-semibold">
-                    Total de variantes mas vendidas
+                    Totales por producto & variante
                 </div>
                 <div className="flex flex-row gap-2 items-center">
                     {/*
@@ -50,7 +52,8 @@ export default function TotalsForVariants(props: TotalsForProductsWithoutVariant
                     <TableCaption>Desglose del total de variantes de productos vendidas en <span className="font-semibold">todas</span> las ordenes.</TableCaption>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Nombre del producto</TableHead>
+                            <TableHead>Producto</TableHead>
+                            <TableHead>Variante</TableHead>
                             <TableHead className="w-[100px] text-center">Porcentaje</TableHead>
                             <TableHead className="w-[100px] text-center">Cantidad</TableHead>
                         </TableRow>
@@ -58,8 +61,11 @@ export default function TotalsForVariants(props: TotalsForProductsWithoutVariant
                     <TableBody>
                         {
                             data.map(
-                                (item) => (
-                                    <TableRow key={item.variant_id}>
+                                (item, i) => (
+                                    <TableRow key={i}>
+                                        <TableCell className="font-medium">
+                                            {item.product_name}
+                                        </TableCell>
                                         <TableCell className="font-medium">
                                             {item.variant_name}
                                         </TableCell>

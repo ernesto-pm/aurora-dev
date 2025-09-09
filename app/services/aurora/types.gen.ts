@@ -1098,6 +1098,24 @@ export type GetTotalSalesPerProductAndVariantsBody = {
 };
 
 /**
+ * GetTotalsForProductsAndVariantsBody
+ */
+export type GetTotalsForProductsAndVariantsBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+    /**
+     * Orderstate
+     */
+    orderState?: string;
+    /**
+     * Limit
+     */
+    limit?: number;
+};
+
+/**
  * GrantAccessForSupabaseUserEmail
  */
 export type GrantAccessForSupabaseUserEmail = {
@@ -1503,6 +1521,28 @@ export type PocGetTotalSalesPerProductAndVariantsRow = {
      * Product Name
      */
     product_name: string | null;
+};
+
+/**
+ * POC_TotalsForProductsAndVariantsRow
+ */
+export type PocTotalsForProductsAndVariantsRow = {
+    /**
+     * Product Name
+     */
+    product_name: string | null;
+    /**
+     * Variant Name
+     */
+    variant_name: string;
+    /**
+     * Total Sales
+     */
+    total_sales: number;
+    /**
+     * Percentage Of Total
+     */
+    percentage_of_total: string;
 };
 
 /**
@@ -2858,6 +2898,32 @@ export type GetTotalItemsForVariantsResponses = {
 };
 
 export type GetTotalItemsForVariantsResponse = GetTotalItemsForVariantsResponses[keyof GetTotalItemsForVariantsResponses];
+
+export type GetTotalsForProductsAndVariantsData = {
+    body: GetTotalsForProductsAndVariantsBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/get-totals-for-products-and-variants';
+};
+
+export type GetTotalsForProductsAndVariantsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetTotalsForProductsAndVariantsError = GetTotalsForProductsAndVariantsErrors[keyof GetTotalsForProductsAndVariantsErrors];
+
+export type GetTotalsForProductsAndVariantsResponses = {
+    /**
+     * Response Get Totals For Products And Variants
+     * Successful Response
+     */
+    200: Array<PocTotalsForProductsAndVariantsRow>;
+};
+
+export type GetTotalsForProductsAndVariantsResponse = GetTotalsForProductsAndVariantsResponses[keyof GetTotalsForProductsAndVariantsResponses];
 
 export type LoadRawOrdersData = {
     body: BodyLoadRawOrders;
