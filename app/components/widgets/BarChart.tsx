@@ -1,5 +1,6 @@
 import ReactECharts from 'echarts-for-react';
 import {ClientOnly} from "remix-utils/client-only";
+import {useEffect, useState} from "react";
 
 interface BarChartPropTypes {
     horizontalAxisValues: string[] | number[]
@@ -8,11 +9,18 @@ interface BarChartPropTypes {
     verticalAxisValues: string[] | number[]
     verticalAxisLabel: string
     verticalAxisType: 'value' | 'category' | 'time'
+    initialLoadDelay: number
 }
 
-export default function BarChart({horizontalAxisValues, verticalAxisValues,
-                                     horizontalAxisLabel, verticalAxisLabel,
-                                     horizontalAxisType, verticalAxisType}: BarChartPropTypes) {
+export default function BarChart({horizontalAxisValues, verticalAxisValues, horizontalAxisLabel, verticalAxisLabel, horizontalAxisType, verticalAxisType, initialLoadDelay}: BarChartPropTypes) {
+    const [isMounted, setIsMounted] = useState(false)
+    useEffect(() => {
+        setTimeout(() => {
+            setIsMounted(true)
+        }, initialLoadDelay)
+    }, [initialLoadDelay])
+
+    if (!isMounted) return <div></div>
 
     function shapeData() {
         // Check if both columns and values are the same size

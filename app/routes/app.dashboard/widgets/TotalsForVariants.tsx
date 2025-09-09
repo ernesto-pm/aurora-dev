@@ -50,6 +50,7 @@ export default function TotalsForVariants(props: TotalsForProductsWithoutVariant
                     <TableCaption>Desglose del total de variantes de productos vendidas en <span className="font-semibold">todas</span> las ordenes.</TableCaption>
                     <TableHeader>
                         <TableRow>
+                            <TableHead></TableHead>
                             <TableHead>Nombre del producto</TableHead>
                             <TableHead className="w-[100px] text-center">Porcentaje</TableHead>
                             <TableHead className="w-[100px] text-center">Cantidad</TableHead>
@@ -58,8 +59,11 @@ export default function TotalsForVariants(props: TotalsForProductsWithoutVariant
                     <TableBody>
                         {
                             data.map(
-                                (item) => (
+                                (item, index) => (
                                     <TableRow key={item.variant_id}>
+                                        <TableCell className="text-muted-foreground">
+                                            {index + 1}
+                                        </TableCell>
                                         <TableCell className="font-medium">
                                             {item.variant_name}
                                         </TableCell>

@@ -45,6 +45,8 @@ export default function OrderRevenuePerMonthWidget(props: RevenuePerMonthProptyp
                     verticalAxisValues={data.verticalAxisValues}
                     horizontalAxisType={data.horizontalAxisType}
                     verticalAxisType={data.verticalAxisType}
+
+                    initialLoadDelay={150}
                 />
             </div>
         </div>

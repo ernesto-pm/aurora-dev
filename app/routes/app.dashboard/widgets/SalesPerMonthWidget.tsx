@@ -46,6 +46,8 @@ export default function SalesPerMonthWidget(props: TotalSalesPerMonthProptypes) 
                     verticalAxisValues={data.verticalAxisValues}
                     horizontalAxisType={data.horizontalAxisType}
                     verticalAxisType={data.verticalAxisType}
+
+                    initialLoadDelay={150}
                 />
             </div>
         </div>

@@ -1,5 +1,6 @@
 import ReactECharts from 'echarts-for-react';
 import {ClientOnly} from "remix-utils/client-only";
+import {useEffect, useState} from "react";
 
 interface LineChartPropTypes {
     horizontalAxisValues: string[] | number[]
@@ -8,19 +9,18 @@ interface LineChartPropTypes {
     verticalAxisValues: string[] | number[]
     verticalAxisLabel: string
     verticalAxisType: 'value' | 'category' | 'time'
+    initialLoadDelay: number
 }
 
-export default function LineChart({horizontalAxisValues, verticalAxisValues, horizontalAxisLabel, verticalAxisLabel, horizontalAxisType, verticalAxisType}: LineChartPropTypes) {
-    /*
+export default function LineChart({horizontalAxisValues, verticalAxisValues, horizontalAxisLabel, verticalAxisLabel, horizontalAxisType, verticalAxisType, initialLoadDelay}: LineChartPropTypes) {
     const [isMounted, setIsMounted] = useState(false)
     useEffect(() => {
         setTimeout(() => {
             setIsMounted(true)
-        }, 0)
-    }, [])
+        }, initialLoadDelay)
+    }, [initialLoadDelay])
 
-    if (!isMounted) return <div>Cargando...</div>
-     */
+    if (!isMounted) return <div></div>
 
     function shapeData() {
         /* Transforms the data into this:  source: [
