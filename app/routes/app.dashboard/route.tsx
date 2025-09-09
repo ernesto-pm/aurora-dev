@@ -1,6 +1,7 @@
 import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
 import type {MetaFunction} from "@remix-run/cloudflare";
 import DashboardGrid from "~/routes/app.dashboard/DashboardGrid";
+import DashboardGridLayout from "./DashboardGridLayout";
 
 export const meta: MetaFunction = () => {
     return [
@@ -15,7 +16,7 @@ export default function Dashboard() {
             <div className="flex flex-1 flex-col gap-4 px-4 py-2">
                 <div className="@container/main flex flex-1 flex-col gap-2">
                     <div className="py-4 px-6 flex flex-col gap-5">
-                        <DashboardGrid/>
+                        <DashboardGridLayout />
                     </div>
                 </div>
             </div>

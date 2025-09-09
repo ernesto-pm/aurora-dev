@@ -25,7 +25,7 @@ export default function SalesPerMonthWidget(props: TotalSalesPerMonthProptypes) 
     // console.log(data)
 
     return (
-        <div className="col-span-4 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2 shadow-md min-h-[250px]">
+        <div className="rounded-lg bg-sidebar flex flex-col gap-2 shadow-md h-full w-full">
             <div className="px-4 py-2 bg-sidebar-accent rounded-t-lg flex flex-row">
                 <div className="flex-1 text-sm font-semibold">
                     Total de ventas por mes
