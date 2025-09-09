@@ -39,7 +39,7 @@ export default function DashboardGridLayout() {
     return (
         <div className="flex flex-col gap-7">
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 px-2">
                 <Label>
                     Selecciona el origen de los datos:
                 </Label>
