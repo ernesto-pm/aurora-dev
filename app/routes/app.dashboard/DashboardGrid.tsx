@@ -10,6 +10,8 @@ import SalesPerMonthWidget from "~/routes/app.dashboard/widgets/SalesPerMonthWid
 import OrderRevenuePerMonthWidget from "~/routes/app.dashboard/widgets/OrderRevenuePerMonthWidget";
 import BestSellingVariantsGroupedByProductWidget
     from "~/routes/app.dashboard/widgets/BestSellingVariantsGroupedByProductWidget";
+import TotalsForProductsWithoutVariants from "~/routes/app.dashboard/widgets/TotalsForProductsWithoutVariants";
+import TotalsForVariants from "./widgets/TotalsForVariants";
 
 export default function DashboardGrid() {
     const {accessToken} = useOutletContext<{accessToken: string}>()
@@ -83,6 +85,22 @@ export default function DashboardGrid() {
                     selectedDashboardId
                     &&
                     <BestSellingVariantsGroupedByProductWidget
+                        dashboardId={selectedDashboardId}
+                    />
+                }
+
+                {
+                    selectedDashboardId
+                    &&
+                    <TotalsForProductsWithoutVariants
+                        dashboardId={selectedDashboardId}
+                    />
+                }
+
+                {
+                    selectedDashboardId
+                    &&
+                    <TotalsForVariants
                         dashboardId={selectedDashboardId}
                     />
                 }

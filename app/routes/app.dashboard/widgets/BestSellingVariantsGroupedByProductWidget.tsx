@@ -31,14 +31,12 @@ export default function BestSellingVariantsGroupedByProductWidget(props: BestSel
     if (isError) return <div>{error.message}</div>
     if (!data) return <div>No hay datos para este widget</div>
 
-    console.log(data)
-
 
     return (
         <div className="col-span-8 row-span-4 rounded-lg bg-sidebar flex flex-col gap-2 shadow-md min-h-[250px] max-h-[500px]">
             <div className="px-4 py-2 bg-sidebar-accent rounded-t-lg flex flex-row">
                 <div className="flex-1 text-sm font-semibold">
-                    Productos mas vendidos (agrupados)
+                    Productos con variantes mas vendidos (agrupados)
                 </div>
                 <div className="flex flex-row gap-2 items-center">
                     {/*

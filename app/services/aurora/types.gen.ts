@@ -1048,6 +1048,42 @@ export type GetSalesPerMonthResponse = {
 };
 
 /**
+ * GetTotalItemsForProductsWithoutVariantsBody
+ */
+export type GetTotalItemsForProductsWithoutVariantsBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+    /**
+     * Orderstate
+     */
+    orderState?: string;
+    /**
+     * Limit
+     */
+    limit?: number;
+};
+
+/**
+ * GetTotalItemsForVariantsBody
+ */
+export type GetTotalItemsForVariantsBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+    /**
+     * Orderstate
+     */
+    orderState?: string;
+    /**
+     * Limit
+     */
+    limit?: number;
+};
+
+/**
  * GetTotalSalesPerProductAndVariantsBody
  */
 export type GetTotalSalesPerProductAndVariantsBody = {
@@ -1405,6 +1441,50 @@ export type OrdersPerMonthRequest = {
      * Businessid
      */
     businessId: string;
+};
+
+/**
+ * POC_GetTotalItemsForProductsWithoutVariantsRow
+ */
+export type PocGetTotalItemsForProductsWithoutVariantsRow = {
+    /**
+     * Product Id
+     */
+    product_id: string | null;
+    /**
+     * Product Name
+     */
+    product_name: string | null;
+    /**
+     * Total Sales
+     */
+    total_sales: number;
+    /**
+     * Percentage Of Total
+     */
+    percentage_of_total: string;
+};
+
+/**
+ * POC_GetTotalItemsForVariantsRow
+ */
+export type PocGetTotalItemsForVariantsRow = {
+    /**
+     * Variant Id
+     */
+    variant_id: string;
+    /**
+     * Variant Name
+     */
+    variant_name: string | null;
+    /**
+     * Total Sales
+     */
+    total_sales: number;
+    /**
+     * Percentage Of Total
+     */
+    percentage_of_total: string;
 };
 
 /**
@@ -2726,6 +2806,58 @@ export type GetTotalSalesPerProductAndVariantsResponses = {
 };
 
 export type GetTotalSalesPerProductAndVariantsResponse = GetTotalSalesPerProductAndVariantsResponses[keyof GetTotalSalesPerProductAndVariantsResponses];
+
+export type GetTotalItemsForProductsWithoutVariantsData = {
+    body: GetTotalItemsForProductsWithoutVariantsBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/get-total-items-for-products-without-variants';
+};
+
+export type GetTotalItemsForProductsWithoutVariantsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetTotalItemsForProductsWithoutVariantsError = GetTotalItemsForProductsWithoutVariantsErrors[keyof GetTotalItemsForProductsWithoutVariantsErrors];
+
+export type GetTotalItemsForProductsWithoutVariantsResponses = {
+    /**
+     * Response Get Total Items For Products Without Variants
+     * Successful Response
+     */
+    200: Array<PocGetTotalItemsForProductsWithoutVariantsRow>;
+};
+
+export type GetTotalItemsForProductsWithoutVariantsResponse = GetTotalItemsForProductsWithoutVariantsResponses[keyof GetTotalItemsForProductsWithoutVariantsResponses];
+
+export type GetTotalItemsForVariantsData = {
+    body: GetTotalItemsForVariantsBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/get-total-items-for-variants';
+};
+
+export type GetTotalItemsForVariantsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetTotalItemsForVariantsError = GetTotalItemsForVariantsErrors[keyof GetTotalItemsForVariantsErrors];
+
+export type GetTotalItemsForVariantsResponses = {
+    /**
+     * Response Get Total Items For Variants
+     * Successful Response
+     */
+    200: Array<PocGetTotalItemsForVariantsRow>;
+};
+
+export type GetTotalItemsForVariantsResponse = GetTotalItemsForVariantsResponses[keyof GetTotalItemsForVariantsResponses];
 
 export type LoadRawOrdersData = {
     body: BodyLoadRawOrders;
