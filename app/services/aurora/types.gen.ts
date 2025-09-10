@@ -169,6 +169,32 @@ export type AuroraBusinessOrder = {
 };
 
 /**
+ * AuroraChat
+ */
+export type AuroraChat = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Business Id
+     */
+    business_id: string;
+    /**
+     * Business Data Source Id
+     */
+    business_data_source_id: string;
+    /**
+     * Display Name
+     */
+    display_name: string | null;
+    /**
+     * Created At
+     */
+    created_at: string;
+};
+
+/**
  * AuroraLettaIntegrationAssistantMemoryBlockTemplateAssociation
  */
 export type AuroraLettaIntegrationAssistantMemoryBlockTemplateAssociation = {
@@ -240,40 +266,6 @@ export type AuroraLettaIntegrationMemoryBlockTemplate = {
      * Created At
      */
     created_at: string;
-};
-
-/**
- * AuroraLogoGenerationChat
- */
-export type AuroraLogoGenerationChat = {
-    /**
-     * Id
-     */
-    id: string;
-    /**
-     * Business Id
-     */
-    business_id: string;
-    /**
-     * Name
-     */
-    name: string | null;
-    /**
-     * Messages
-     */
-    messages: unknown;
-    /**
-     * Status
-     */
-    status: unknown;
-    /**
-     * Created At
-     */
-    created_at: string;
-    /**
-     * Updated At
-     */
-    updated_at: string | null;
 };
 
 /**
@@ -768,23 +760,21 @@ export type CreateBusinessResponse = {
 };
 
 /**
- * CreateLogoGenerationChatBody
+ * CreateChatBody
  */
-export type CreateLogoGenerationChatBody = {
-    /**
-     * Name
-     */
-    name?: string | null;
+export type CreateChatBody = {
     /**
      * Businessid
      */
     businessId: string;
     /**
-     * Initialmessages
+     * Businessdatasourceid
      */
-    initialMessages?: Array<{
-        [key: string]: unknown;
-    }> | null;
+    businessDataSourceId: string;
+    /**
+     * Displayname
+     */
+    displayName: string;
 };
 
 /**
@@ -1845,91 +1835,30 @@ export type GetBusinessesDataConnectionsForSupabaseUserResponses = {
 
 export type GetBusinessesDataConnectionsForSupabaseUserResponse = GetBusinessesDataConnectionsForSupabaseUserResponses[keyof GetBusinessesDataConnectionsForSupabaseUserResponses];
 
-export type GetLogoGenerationChatsForBusinessData = {
-    body?: never;
-    path?: never;
-    query: {
-        /**
-         * Business Id
-         */
-        business_id: string;
-    };
-    url: '/chats/logo-generation';
-};
-
-export type GetLogoGenerationChatsForBusinessErrors = {
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type GetLogoGenerationChatsForBusinessError = GetLogoGenerationChatsForBusinessErrors[keyof GetLogoGenerationChatsForBusinessErrors];
-
-export type GetLogoGenerationChatsForBusinessResponses = {
-    /**
-     * Response Get Logo Generation Chats For Business
-     * Successful Response
-     */
-    200: Array<AuroraLogoGenerationChat>;
-};
-
-export type GetLogoGenerationChatsForBusinessResponse = GetLogoGenerationChatsForBusinessResponses[keyof GetLogoGenerationChatsForBusinessResponses];
-
-export type CreateLogoGenerationChatData = {
-    body: CreateLogoGenerationChatBody;
+export type CreateChatData = {
+    body: CreateChatBody;
     path?: never;
     query?: never;
-    url: '/chats/logo-generation';
+    url: '/chats/';
 };
 
-export type CreateLogoGenerationChatErrors = {
+export type CreateChatErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type CreateLogoGenerationChatError = CreateLogoGenerationChatErrors[keyof CreateLogoGenerationChatErrors];
+export type CreateChatError = CreateChatErrors[keyof CreateChatErrors];
 
-export type CreateLogoGenerationChatResponses = {
+export type CreateChatResponses = {
     /**
      * Successful Response
      */
-    200: AuroraLogoGenerationChat;
+    200: AuroraChat;
 };
 
-export type CreateLogoGenerationChatResponse = CreateLogoGenerationChatResponses[keyof CreateLogoGenerationChatResponses];
-
-export type GetLogoGenerationChatData = {
-    body?: never;
-    path: {
-        /**
-         * Chat Id
-         */
-        chat_id: string;
-    };
-    query?: never;
-    url: '/chats/logo-generation/{chat_id}';
-};
-
-export type GetLogoGenerationChatErrors = {
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type GetLogoGenerationChatError = GetLogoGenerationChatErrors[keyof GetLogoGenerationChatErrors];
-
-export type GetLogoGenerationChatResponses = {
-    /**
-     * Successful Response
-     */
-    200: AuroraLogoGenerationChat;
-};
-
-export type GetLogoGenerationChatResponse = GetLogoGenerationChatResponses[keyof GetLogoGenerationChatResponses];
+export type CreateChatResponse = CreateChatResponses[keyof CreateChatResponses];
 
 export type LoginUserData = {
     body: LoginBody;
