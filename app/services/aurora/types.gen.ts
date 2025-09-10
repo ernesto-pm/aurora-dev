@@ -844,6 +844,40 @@ export type GeoCodeAddressesBody = {
 };
 
 /**
+ * GetAllChatsForSupabaseUserRow
+ */
+export type GetAllChatsForSupabaseUserRow = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Business Id
+     */
+    business_id: string;
+    /**
+     * Business Data Source Id
+     */
+    business_data_source_id: string;
+    /**
+     * Display Name
+     */
+    display_name: string | null;
+    /**
+     * Created At
+     */
+    created_at: string;
+    /**
+     * Business Name
+     */
+    business_name: string;
+    /**
+     * Data Source Name
+     */
+    data_source_name: string;
+};
+
+/**
  * GetAllDashboardsForSupabaseUserIdRow
  */
 export type GetAllDashboardsForSupabaseUserIdRow = {
@@ -1859,6 +1893,23 @@ export type CreateChatResponses = {
 };
 
 export type CreateChatResponse = CreateChatResponses[keyof CreateChatResponses];
+
+export type GetAllChatsForSupabaseUserData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/chats/for-supabase-user';
+};
+
+export type GetAllChatsForSupabaseUserResponses = {
+    /**
+     * Response Get All Chats For Supabase User
+     * Successful Response
+     */
+    200: Array<GetAllChatsForSupabaseUserRow>;
+};
+
+export type GetAllChatsForSupabaseUserResponse = GetAllChatsForSupabaseUserResponses[keyof GetAllChatsForSupabaseUserResponses];
 
 export type LoginUserData = {
     body: LoginBody;

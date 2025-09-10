@@ -2,7 +2,7 @@ import {useQuery} from "@tanstack/react-query";
 import {
     getBusinessesDataConnectionsForSupabaseUserOptions
 } from "~/services/aurora/@tanstack/react-query.gen";
-import {useOutletContext} from "@remix-run/react";
+import {useNavigate, useOutletContext} from "@remix-run/react";
 import {
     Dialog,
     DialogContent,
@@ -30,6 +30,7 @@ const CreateChatFormSchema = z.object({
 interface CreateChatPropTypes {}
 export default function CreateChat(props: CreateChatPropTypes) {
     const {accessToken} = useOutletContext<{accessToken: string}>()
+    const navigate = useNavigate()
 
     const {data, isLoading, isError, error} = useQuery({
         ...getBusinessesDataConnectionsForSupabaseUserOptions({
@@ -61,7 +62,9 @@ export default function CreateChat(props: CreateChatPropTypes) {
                 throwOnError: true
             })
 
-            console.log(newChat)
+            if (!newChat.data) throw new Error("No new chat data...")
+
+            navigate(`/app/chat/${newChat.data?.id}`)
         } catch (e) {
             alert("Ha ocurrido un error al crear el chat, por favor intentalo de nuevo...")
         }
@@ -94,7 +97,7 @@ export default function CreateChat(props: CreateChatPropTypes) {
                             name="composedBusinessDataSourceId"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Score</FormLabel>
+                                    <FormLabel>Conexión de datos</FormLabel>
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
                                             <SelectTrigger>
@@ -130,7 +133,7 @@ export default function CreateChat(props: CreateChatPropTypes) {
                                 <FormItem>
                                     <FormLabel>Dale un nombre a esta conversación (Opcional):</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="" {...field} />
+                                        <Input type="text" placeholder="" autoComplete="off" data-1p-ignore {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

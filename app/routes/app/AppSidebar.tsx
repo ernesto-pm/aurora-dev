@@ -52,7 +52,7 @@ const auroraMenuMapping = [
     },
     {
         title: "Pregúntale a Aurora",
-        url: "/app/chat",
+        url: "/app/chat-index",
         icon: Bot,
     },
 ]
