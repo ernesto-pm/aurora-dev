@@ -40,7 +40,7 @@ export default function DashboardGridLayout() {
         de control.</div>
 
     return (
-        <div className="flex flex-col gap-7">
+        <div className="flex-1 overflow-y-auto px-10 py-5 flex flex-col gap-7">
 
             <div className="flex flex-col gap-3 px-2">
                 <Label>

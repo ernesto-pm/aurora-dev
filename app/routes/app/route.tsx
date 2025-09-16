@@ -89,15 +89,17 @@ export default function App() {
 
     return (
         <SidebarProvider>
-            <AppSidebar user={user} supabase={supabase} />
-            <SidebarInset>
-                {
-                    isAppIndex && <AppIndex/>
-                }
-                {
-                    !isAppIndex && <Outlet context={{user, accessToken}}/>
-                }
-            </SidebarInset>
+            <div className="flex w-full h-dvh">
+                <AppSidebar user={user} supabase={supabase} />
+                <SidebarInset>
+                    {
+                        isAppIndex && <AppIndex/>
+                    }
+                    {
+                        !isAppIndex && <Outlet context={{user, accessToken}}/>
+                    }
+                </SidebarInset>
+            </div>
         </SidebarProvider>
     )
 }

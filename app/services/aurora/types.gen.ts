@@ -195,6 +195,32 @@ export type AuroraChat = {
 };
 
 /**
+ * AuroraChatMessage
+ */
+export type AuroraChatMessage = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Chat Id
+     */
+    chat_id: string;
+    /**
+     * Role
+     */
+    role: string;
+    /**
+     * Content
+     */
+    content: string;
+    /**
+     * Created At
+     */
+    created_at: string;
+};
+
+/**
  * AuroraLettaIntegrationAssistantMemoryBlockTemplateAssociation
  */
 export type AuroraLettaIntegrationAssistantMemoryBlockTemplateAssociation = {
@@ -831,6 +857,24 @@ export type ErrorResponse = {
      * Detail
      */
     detail: string;
+};
+
+/**
+ * GeneralAssistantChatCompletionBody
+ */
+export type GeneralAssistantChatCompletionBody = {
+    /**
+     * Newusermessage
+     */
+    newUserMessage: string;
+    /**
+     * Chatid
+     */
+    chatId: string;
+    /**
+     * Debug
+     */
+    debug?: boolean;
 };
 
 /**
@@ -3111,6 +3155,63 @@ export type LoadAddressesWithParamsResponses = {
      */
     200: unknown;
 };
+
+export type GeneralAssistantChatCompletionData = {
+    body: GeneralAssistantChatCompletionBody;
+    path?: never;
+    query?: never;
+    url: '/chat-messages/general-assistant-chat-completion';
+};
+
+export type GeneralAssistantChatCompletionErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GeneralAssistantChatCompletionError = GeneralAssistantChatCompletionErrors[keyof GeneralAssistantChatCompletionErrors];
+
+export type GeneralAssistantChatCompletionResponses = {
+    /**
+     * Response General Assistant Chat Completion
+     * Successful Response
+     */
+    200: Array<AuroraChatMessage>;
+};
+
+export type GeneralAssistantChatCompletionResponse = GeneralAssistantChatCompletionResponses[keyof GeneralAssistantChatCompletionResponses];
+
+export type GetAllMessagesForChatData = {
+    body?: never;
+    path?: never;
+    query: {
+        /**
+         * Chatid
+         */
+        chatId: string;
+    };
+    url: '/chat-messages/get-all-messages-for-chat/{chat_id}';
+};
+
+export type GetAllMessagesForChatErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetAllMessagesForChatError = GetAllMessagesForChatErrors[keyof GetAllMessagesForChatErrors];
+
+export type GetAllMessagesForChatResponses = {
+    /**
+     * Response Get All Messages For Chat
+     * Successful Response
+     */
+    200: Array<AuroraChatMessage>;
+};
+
+export type GetAllMessagesForChatResponse = GetAllMessagesForChatResponses[keyof GetAllMessagesForChatResponses];
 
 export type ClientOptions = {
     baseURL: `${string}://${string}/aurora` | (string & {});
