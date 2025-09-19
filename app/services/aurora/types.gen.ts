@@ -15,6 +15,32 @@ export type AssociateAssistantWithMemoryBlockBody = {
 };
 
 /**
+ * AuroraAssistant
+ */
+export type AuroraAssistant = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Assistant Name
+     */
+    assistant_name: string;
+    /**
+     * Assistant Description
+     */
+    assistant_description: string;
+    /**
+     * System Prompt
+     */
+    system_prompt: string;
+    /**
+     * Created At
+     */
+    created_at: string;
+};
+
+/**
  * AuroraBusiness
  */
 export type AuroraBusiness = {
@@ -184,6 +210,14 @@ export type AuroraChat = {
      * Business Data Source Id
      */
     business_data_source_id: string;
+    /**
+     * Assistant Id
+     */
+    assistant_id: string;
+    /**
+     * Llm Model
+     */
+    llm_model: string;
     /**
      * Display Name
      */
@@ -903,6 +937,14 @@ export type GetAllChatsForSupabaseUserRow = {
      * Business Data Source Id
      */
     business_data_source_id: string;
+    /**
+     * Assistant Id
+     */
+    assistant_id: string;
+    /**
+     * Llm Model
+     */
+    llm_model: string;
     /**
      * Display Name
      */
@@ -1677,6 +1719,23 @@ export type ValidationError = {
  * WidgetAxisTypeEnum
  */
 export type WidgetAxisTypeEnum = 'category' | 'value' | 'time';
+
+export type GetAllAssistantsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/assistants/';
+};
+
+export type GetAllAssistantsResponses = {
+    /**
+     * Response Get All Assistants
+     * Successful Response
+     */
+    200: Array<AuroraAssistant>;
+};
+
+export type GetAllAssistantsResponse = GetAllAssistantsResponses[keyof GetAllAssistantsResponses];
 
 export type GetAllBusinessesData = {
     body?: never;

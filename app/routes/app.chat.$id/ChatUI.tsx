@@ -34,7 +34,7 @@ export default function ChatUI(props: ChatUIProptypes) {
     if (!data || data.length === 0) return <div className="flex-1 flex items-center justify-center text-gray-500">Aun no cuentas con ningun mensaje en esta conversacion!</div>
 
     return (
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-5">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto lg:px-10 lg:py-5 px-5 py-2">
             {
                 data.map(
                     (message) => {
