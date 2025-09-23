@@ -1,6 +1,6 @@
 import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
 import type { MetaFunction } from "@remix-run/cloudflare";
-import CreateChat from "~/routes/app.chat-index/CreateChat";
+import CreateChatButton from "~/routes/app.chat-index/CreateChatButton";
 import {Separator} from "~/components/ui/separator";
 import ChatList from "~/routes/app.chat-index/ChatList";
 
@@ -17,7 +17,7 @@ export default function Chat() {
             <AppNavigationHeader headerTitle="Preguntale a Aurora"/>
 
             <div className="flex flex-col gap-5 w-full h-full items-start p-10 py-5">
-                <CreateChat/>
+                <CreateChatButton/>
                 <Separator/>
                 <ChatList/>
             </div>
