@@ -32,13 +32,13 @@ export default function AssistantSelectorList({ selectedValue, onValueChange }: 
                     <Info className="h-4"/>
                 </div>
 
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground text-xs md:text-sm">
                     El tipo de asistente que selecciones determina las capacidades que tiene el asistente. Por ejemplo: un asistente de negocios es mejor proporcionado
                     guianza general de tu negocio mientras que el asistente de marketing es mas creativo para crear ofertas de negocio, etc.
                 </div>
             </div>
 
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-row gap-5 flex-wrap">
                 {
                     data.map((assistant) => (
                         <div

@@ -32,13 +32,13 @@ export default function AuroraPlanSelectorList({ selectedValue, onValueChange }:
                     <Info className="h-4"/>
                 </div>
 
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground text-xs md:text-sm">
                     El tipo de cerebro determina que tan inteligente y creativo es tu asistente, te damos varias opciones para que escojas el que mejor se alinea
                     con tu objetivo para esta conversacion.
                 </div>
             </div>
 
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-row gap-5 flex-wrap">
                 {
                     data.map((model) => (
                         <div

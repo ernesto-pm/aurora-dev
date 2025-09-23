@@ -35,7 +35,7 @@ export default function DataConnectionSelector({ selectedValue, onValueChange }:
                     <Info className="h-4"/>
                 </div>
 
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground text-xs md:text-sm">
                     El asistente necesita acceso a informacion de tu negocio para lograr su objetivo, selecciona los datos a los que quieres conectar a este asistente.
                 </div>
             </div>
