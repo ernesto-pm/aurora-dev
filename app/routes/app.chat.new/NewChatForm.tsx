@@ -55,78 +55,88 @@ export default function NewChatForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 overflow-y-auto lg:px-10 lg:py-5 px-5 py-2 flex flex-col gap-5">
-                <FormField
-                    control={form.control}
-                    name="assistantId"
-                    render={({ field }) => (
-                        <FormItem>
-                            <AssistantSelectorList
-                                selectedValue={field.value}
-                                onValueChange={field.onChange}
-                            />
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="llmModelId"
-                    render={({ field }) => (
-                        <FormItem>
-                            <AuroraPlanSelectorList
-                                selectedValue={field.value}
-                                onValueChange={field.onChange}
-                            />
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="composedBusinessDataSourceId"
-                    render={({ field }) => (
-                        <FormItem>
-                            <DataConnectionSelector
-                                selectedValue={field.value}
-                                onValueChange={field.onChange}
-                            />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="displayName"
-                    render={({ field }) => (
-                        <FormItem>
-                            <div className="flex flex-col gap-2">
-                                <FormLabel className="font-semibold">
-                                    Dale un nombre a tu conversacion (Opcional):
-                                </FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="text"
-                                        placeholder=""
-                                        autoComplete="off"
-                                        data-1p-ignore
-                                        {...field}
+            <div className="flex-1 flex flex-col h-full">
+                {/* Scrollable form content */}
+                <div className="flex-1 overflow-y-auto lg:px-10 lg:py-5 px-5 py-2">
+                    <div className="flex flex-col gap-5">
+                        <FormField
+                            control={form.control}
+                            name="assistantId"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <AssistantSelectorList
+                                        selectedValue={field.value}
+                                        onValueChange={field.onChange}
                                     />
-                                </FormControl>
-                            </div>
-                        </FormItem>
-                    )}
-                />
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                <div>
-                    <Button type="submit" disabled={form.formState.isSubmitting}>
+                        <FormField
+                            control={form.control}
+                            name="llmModelId"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <AuroraPlanSelectorList
+                                        selectedValue={field.value}
+                                        onValueChange={field.onChange}
+                                    />
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="composedBusinessDataSourceId"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <DataConnectionSelector
+                                        selectedValue={field.value}
+                                        onValueChange={field.onChange}
+                                    />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="displayName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="flex flex-col gap-2">
+                                        <FormLabel className="font-semibold">
+                                            Dale un nombre a tu conversacion (Opcional):
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="text"
+                                                placeholder=""
+                                                autoComplete="off"
+                                                data-1p-ignore
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                </div>
+
+                {/* Fixed submit button area */}
+                <div className="shrink-0 border-t bg-background p-4 lg:px-10">
+                    <Button
+                        type="submit"
+                        disabled={form.formState.isSubmitting}
+                        onClick={form.handleSubmit(onSubmit)}
+                        className="w-full"
+                    >
                         Crear Conversacion
                     </Button>
                 </div>
-
-            </form>
+            </div>
         </Form>
     )
 }
