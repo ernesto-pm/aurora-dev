@@ -11,10 +11,11 @@ interface MessageInputProptypes {
 
 export default function ChatMessageInput(props: MessageInputProptypes) {
     const [message, setMessage] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
     const queryClient = useQueryClient()
 
     async function handleSubmit() {
-        // ToDo: add a global loading state
+        setIsLoading(true)
         try {
             await generalAssistantChatCompletion({
                 body: {
@@ -34,6 +35,8 @@ export default function ChatMessageInput(props: MessageInputProptypes) {
                 })
             })
             setMessage("")
+
+            setIsLoading(false)
         } catch (e) {
             alert(e)
         }
@@ -58,11 +61,13 @@ export default function ChatMessageInput(props: MessageInputProptypes) {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyDown}
+                    disabled={isLoading}
                 />
 
                 <button
                     onClick={handleSubmit}
                     className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                    disabled={isLoading}
                 >
                     <Send size={20} />
                 </button>
