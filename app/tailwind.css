@@ -9,6 +9,24 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+
+    /* Prevent iOS Safari body bouncing */
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+/* Prevent touch scrolling on non-scrollable elements */
+* {
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+}
+
+/* Allow scrolling only on designated scroll containers */
+.scroll-container {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
 }
 
 @supports (-webkit-touch-callout: none) {
