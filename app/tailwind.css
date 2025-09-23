@@ -11,7 +11,12 @@ body {
   }
 }
 
-
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari specific */
+    .form-container {
+        height: calc(100vh - env(keyboard-inset-height, 0px));
+    }
+}
 
 @layer base {
   :root {
