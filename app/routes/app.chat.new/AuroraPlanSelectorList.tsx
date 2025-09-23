@@ -1,14 +1,15 @@
 import {Info} from "lucide-react";
-import {useQuery} from "@tanstack/react-query";
-import {getAllAssistantBrainsOptions} from "~/services/aurora/@tanstack/react-query.gen";
 import {cn} from "~/lib/utils";
+import {AuroraChatLlmModel} from "~/services/aurora";
 
 interface AuroraPlanSelectorListProps {
     selectedValue?: string;
     onValueChange?: (value: string) => void;
+    assistantBrains: AuroraChatLlmModel[]
 }
 
-export default function AuroraPlanSelectorList({ selectedValue, onValueChange }: AuroraPlanSelectorListProps) {
+export default function AuroraPlanSelectorList({ selectedValue, onValueChange, assistantBrains }: AuroraPlanSelectorListProps) {
+    /*
     const {data, isLoading, isError, error} = useQuery({
         ...getAllAssistantBrainsOptions()
     })
@@ -16,6 +17,8 @@ export default function AuroraPlanSelectorList({ selectedValue, onValueChange }:
     if (isLoading || data === undefined) return <div>Cargando cerebros...</div>
     if (isError) return <div className="flex-1 flex items-center justify-center text-red-500">{error.message}</div>
     if (!data || data.length === 0) return <div className="flex-1 flex items-center justify-center text-gray-500">Aun no existe ningun cerebro para el asistente!</div>
+     */
+
 
     const handleModelSelect = (modelId: string) => {
         onValueChange?.(modelId);
@@ -40,7 +43,7 @@ export default function AuroraPlanSelectorList({ selectedValue, onValueChange }:
 
             <div className="flex flex-row gap-5 flex-wrap">
                 {
-                    data.map((model) => (
+                    assistantBrains.map((model) => (
                         <div
                             key={model.id}
                             onClick={() => handleModelSelect(model.id)}
