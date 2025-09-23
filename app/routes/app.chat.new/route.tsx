@@ -1,13 +1,11 @@
 import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
-import ChatUI from "~/routes/app.chat.$id/ChatUI";
-import ChatMessageInput from "~/routes/app.chat.$id/ChatMessageInput";
-import AssistantsList from "~/routes/app.chat.new/AssistantsList";
+import NewChatForm from "~/routes/app.chat.new/NewChatForm";
 
 export default function NewChat() {
     return (
         <div className="flex flex-col h-full w-full">
-            <AppNavigationHeader headerTitle="Chat" />
-            <AssistantsList/>
+            <AppNavigationHeader headerTitle="Inicia una nueva conversacion" />
+            <NewChatForm/>
         </div>
     )
 }

@@ -229,6 +229,32 @@ export type AuroraChat = {
 };
 
 /**
+ * AuroraChatLlmModel
+ */
+export type AuroraChatLlmModel = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Model Key
+     */
+    model_key: unknown;
+    /**
+     * Display Name
+     */
+    display_name: string;
+    /**
+     * Internal Name
+     */
+    internal_name: string;
+    /**
+     * Description
+     */
+    description: string;
+};
+
+/**
  * AuroraChatMessage
  */
 export type AuroraChatMessage = {
@@ -831,6 +857,14 @@ export type CreateChatBody = {
      * Businessdatasourceid
      */
     businessDataSourceId: string;
+    /**
+     * Assistantid
+     */
+    assistantId: string;
+    /**
+     * Llmmodelid
+     */
+    llmModelId: string;
     /**
      * Displayname
      */
@@ -2013,6 +2047,23 @@ export type GetAllChatsForSupabaseUserResponses = {
 };
 
 export type GetAllChatsForSupabaseUserResponse = GetAllChatsForSupabaseUserResponses[keyof GetAllChatsForSupabaseUserResponses];
+
+export type GetAllAssistantBrainsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/chats/get-all-assistant-brains';
+};
+
+export type GetAllAssistantBrainsResponses = {
+    /**
+     * Response Get All Assistant Brains
+     * Successful Response
+     */
+    200: Array<AuroraChatLlmModel>;
+};
+
+export type GetAllAssistantBrainsResponse = GetAllAssistantBrainsResponses[keyof GetAllAssistantBrainsResponses];
 
 export type LoginUserData = {
     body: LoginBody;
