@@ -4,10 +4,15 @@ import {
     getAllChatsForSupabaseUserOptions
 } from "~/services/aurora/@tanstack/react-query.gen";
 import {Button} from "~/components/ui/button";
-import {ExternalLink, Trash} from "lucide-react";
+import {Trash} from "lucide-react";
 import {GetAllChatsForSupabaseUserRow} from "~/services/aurora";
 
-export default function ChatList() {
+interface ChatListProptypes {
+    chats: GetAllChatsForSupabaseUserRow[]
+}
+
+export default function ChatList(props: ChatListProptypes) {
+    /*
     const {accessToken} = useOutletContext<{accessToken: string}>()
 
     const {data, isLoading, isError, error} = useQuery({
@@ -22,6 +27,7 @@ export default function ChatList() {
     if (isLoading || data===undefined) return <div>Cargando datos...</div>
     if (isError) return <div>{error.message}</div>
     if (!data || data.length === 0) return <div>Aun no cuentas con ninguna conversacion!</div>
+     */
 
 
     return (
@@ -32,7 +38,7 @@ export default function ChatList() {
 
             <div className="flex flex-row gap-5 flex-wrap">
                 {
-                    data.map(
+                    props.chats.map(
                         (chat, index) => (
                             <ChatElement chat={chat} key={chat.id} index={index} />
                         )

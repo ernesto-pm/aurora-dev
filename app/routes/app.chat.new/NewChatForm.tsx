@@ -7,7 +7,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/
 import {useForm} from "react-hook-form";
 import z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {createChat} from "~/services/aurora";
+import {AuroraAssistant, AuroraChatLlmModel, createChat} from "~/services/aurora";
 import {useNavigate} from "@remix-run/react";
 
 const NewFormSchema = z.object({
@@ -17,7 +17,12 @@ const NewFormSchema = z.object({
     displayName: z.string().optional()
 })
 
-export default function NewChatForm() {
+interface NewChatFormProptypes {
+    assistants: AuroraAssistant[]
+    assistantBrains: AuroraChatLlmModel[]
+}
+
+export default function NewChatForm(props: NewChatFormProptypes) {
     const form = useForm<z.infer<typeof NewFormSchema>>({
         resolver: zodResolver(NewFormSchema),
         defaultValues: {
@@ -55,7 +60,7 @@ export default function NewChatForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 overflow-y-auto lg:px-10 lg:py-5 px-5 py-2 flex flex-col gap-5">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 overflow-y-auto lg:px-10 lg:py-5 px-5 py-2 flex flex-col gap-5 form-container">
                 <FormField
                     control={form.control}
                     name="assistantId"
@@ -64,6 +69,7 @@ export default function NewChatForm() {
                             <AssistantSelectorList
                                 selectedValue={field.value}
                                 onValueChange={field.onChange}
+                                assistants={props.assistants}
                             />
                             <FormMessage />
                         </FormItem>
@@ -78,6 +84,7 @@ export default function NewChatForm() {
                             <AuroraPlanSelectorList
                                 selectedValue={field.value}
                                 onValueChange={field.onChange}
+                                assistantBrains={props.assistantBrains}
                             />
                             <FormMessage />
                         </FormItem>

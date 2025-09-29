@@ -1,14 +1,15 @@
-import {useQuery} from "@tanstack/react-query";
-import {getAllAssistantsOptions} from "~/services/aurora/@tanstack/react-query.gen";
 import {Info} from "lucide-react";
 import {cn} from "~/lib/utils";
+import {AuroraAssistant} from "~/services/aurora";
 
 interface AssistantSelectorListProps {
     selectedValue?: string;
     onValueChange?: (value: string) => void;
+    assistants: AuroraAssistant[]
 }
 
-export default function AssistantSelectorList({ selectedValue, onValueChange }: AssistantSelectorListProps) {
+export default function AssistantSelectorList({ selectedValue, onValueChange, assistants}: AssistantSelectorListProps) {
+    /*
     const {data, isLoading, isError, error} = useQuery({
         ...getAllAssistantsOptions()
     })
@@ -16,6 +17,7 @@ export default function AssistantSelectorList({ selectedValue, onValueChange }: 
     if (isLoading || data === undefined) return <div>Cargando asistentes...</div>
     if (isError) return <div className="flex-1 flex items-center justify-center text-red-500">{error.message}</div>
     if (!data || data.length === 0) return <div className="flex-1 flex items-center justify-center text-gray-500">Aun no existe ningun asistente con el que puedas platicar!</div>
+     */
 
     const handleAssistantSelect = (assistantId: string) => {
         onValueChange?.(assistantId);
@@ -32,15 +34,15 @@ export default function AssistantSelectorList({ selectedValue, onValueChange }: 
                     <Info className="h-4"/>
                 </div>
 
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground text-xs md:text-sm">
                     El tipo de asistente que selecciones determina las capacidades que tiene el asistente. Por ejemplo: un asistente de negocios es mejor proporcionado
                     guianza general de tu negocio mientras que el asistente de marketing es mas creativo para crear ofertas de negocio, etc.
                 </div>
             </div>
 
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-row gap-5 flex-wrap">
                 {
-                    data.map((assistant) => (
+                    assistants.map((assistant) => (
                         <div
                             key={assistant.id}
                             onClick={() => handleAssistantSelect(assistant.id)}
