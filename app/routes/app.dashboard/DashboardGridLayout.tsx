@@ -11,6 +11,10 @@ import OrderRevenuePerMonthWidget from "~/routes/app.dashboard/widgets/OrderReve
 import TotalsForProductsWithoutVariants from "~/routes/app.dashboard/widgets/TotalsForProductsWithoutVariants";
 import TotalsForVariants from "~/routes/app.dashboard/widgets/TotalsForVariants";
 import TotalsForProductsAndVariants from "~/routes/app.dashboard/widgets/TotalsForProductsAndVariants";
+import GraphChart from "~/components/widgets/GraphChart";
+import MockGroupedProductsWidget from "~/routes/app.dashboard/widgets/MockGroupedProductsWidget";
+import MockAntecedentSubsequentWidget from "~/routes/app.dashboard/widgets/MockAntecedentSubsequentWidget";
+import MockRFMHeatmapWidget from "~/routes/app.dashboard/widgets/MockRFMHeatmapWidget";
 
 export default function DashboardGridLayout() {
     const {accessToken} = useOutletContext<{ accessToken: string }>()
@@ -179,6 +183,18 @@ function AuroraGridLayout(props: AuroraGridLayoutProptypes) {
                     <TotalsForProductsAndVariants
                         dashboardId={props.selectedDashboardId}
                     />
+                </div>
+
+                <div key="6">
+                    <MockGroupedProductsWidget/>
+                </div>
+
+                <div key="7">
+                    <MockAntecedentSubsequentWidget/>
+                </div>
+
+                <div key="8">
+                    <MockRFMHeatmapWidget/>
                 </div>
             </ResponsiveGridLayout>
         </div>
