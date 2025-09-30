@@ -281,6 +281,32 @@ export type AuroraChatMessage = {
 };
 
 /**
+ * AuroraDashboard
+ */
+export type AuroraDashboard = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Business Data Source Id
+     */
+    business_data_source_id: string;
+    /**
+     * Display Name
+     */
+    display_name: string | null;
+    /**
+     * Layout
+     */
+    layout: unknown;
+    /**
+     * Created At
+     */
+    created_at: string;
+};
+
+/**
  * AuroraLettaIntegrationAssistantMemoryBlockTemplateAssociation
  */
 export type AuroraLettaIntegrationAssistantMemoryBlockTemplateAssociation = {
@@ -1014,6 +1040,10 @@ export type GetAllDashboardsForSupabaseUserIdRow = {
      */
     display_name: string | null;
     /**
+     * Layout
+     */
+    layout: unknown;
+    /**
      * Created At
      */
     created_at: string;
@@ -1729,6 +1759,22 @@ export type TestNewMessageBody = {
      * Businessid
      */
     businessId: string;
+};
+
+/**
+ * UpdateDashboardLayoutBody
+ */
+export type UpdateDashboardLayoutBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+    /**
+     * Layout
+     */
+    layout: [
+        unknown
+    ];
 };
 
 /**
@@ -3058,6 +3104,31 @@ export type GetTotalsForProductsAndVariantsResponses = {
 };
 
 export type GetTotalsForProductsAndVariantsResponse = GetTotalsForProductsAndVariantsResponses[keyof GetTotalsForProductsAndVariantsResponses];
+
+export type UpdateDashboardLayoutData = {
+    body: UpdateDashboardLayoutBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/update-layout';
+};
+
+export type UpdateDashboardLayoutErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type UpdateDashboardLayoutError = UpdateDashboardLayoutErrors[keyof UpdateDashboardLayoutErrors];
+
+export type UpdateDashboardLayoutResponses = {
+    /**
+     * Successful Response
+     */
+    200: AuroraDashboard;
+};
+
+export type UpdateDashboardLayoutResponse = UpdateDashboardLayoutResponses[keyof UpdateDashboardLayoutResponses];
 
 export type LoadRawOrdersData = {
     body: BodyLoadRawOrders;

@@ -11,8 +11,15 @@ import OrderRevenuePerMonthWidget from "~/routes/app.dashboard/widgets/OrderReve
 import TotalsForProductsWithoutVariants from "~/routes/app.dashboard/widgets/TotalsForProductsWithoutVariants";
 import TotalsForVariants from "~/routes/app.dashboard/widgets/TotalsForVariants";
 import TotalsForProductsAndVariants from "~/routes/app.dashboard/widgets/TotalsForProductsAndVariants";
+import {Button} from "~/components/ui/button";
+import {GetAllDashboardsForSupabaseUserIdRow, updateDashboardLayout} from "~/services/aurora";
 
-export default function DashboardGridLayout() {
+interface DashboardGridLayoutProptypes {
+    debugModeEnabled: boolean
+}
+
+
+export default function DashboardGridLayout(props: DashboardGridLayoutProptypes) {
     const {accessToken} = useOutletContext<{ accessToken: string }>()
     const {data, error, isLoading, isError} = useQuery({
         ...getDashboardsForSupabaseUserOptions({
@@ -23,11 +30,19 @@ export default function DashboardGridLayout() {
         throwOnError: true
     })
     const [selectedDashboardId, setSelectedDashboardId] = useState<null | string>(null)
+    const [selectedDashboard, setSelectedDashboard] = useState<GetAllDashboardsForSupabaseUserIdRow | undefined>()
 
     useEffect(() => {
         if (!data) return
         if (data.length > 0) setSelectedDashboardId(data[0].id)
     }, [data])
+
+    useEffect(() => {
+        if (selectedDashboardId && data) {
+            const selectedDashboard = data.filter((dashboard) => dashboard.id === selectedDashboardId)[0]
+            setSelectedDashboard(selectedDashboard)
+        }
+    }, [selectedDashboardId, data])
 
     function handleDashboardSelectChange(dashboardId: string) {
         setSelectedDashboardId(dashboardId)
@@ -62,9 +77,18 @@ export default function DashboardGridLayout() {
                 </Select>
             </div>
 
-            <div>
-                <AuroraGridLayout selectedDashboardId={selectedDashboardId}/>
-            </div>
+
+            {
+                selectedDashboard
+                &&
+                <div>
+                    <AuroraGridLayout
+                        selectedDashboardId={selectedDashboardId}
+                        selectedDashboard={selectedDashboard}
+                        debugModeEnabled={props.debugModeEnabled}
+                    />
+                </div>
+            }
         </div>
     )
 }
@@ -73,8 +97,12 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 interface AuroraGridLayoutProptypes {
     selectedDashboardId: string | null
+    selectedDashboard: GetAllDashboardsForSupabaseUserIdRow
+    debugModeEnabled: boolean
 }
 function AuroraGridLayout(props: AuroraGridLayoutProptypes) {
+    const [isReshapeable, setIsReshapeable] = useState(false)
+
     // Default layouts for when localStorage is empty
     const defaultLayouts = {
         lg: [
@@ -100,6 +128,7 @@ function AuroraGridLayout(props: AuroraGridLayoutProptypes) {
     };
     const [layouts, setLayouts] = useState(defaultLayouts);
 
+    /*
     useEffect(() => {
         // Load layout from localStorage
         const savedLayouts = getLayoutsFromLocalStorage();
@@ -107,18 +136,6 @@ function AuroraGridLayout(props: AuroraGridLayoutProptypes) {
             setLayouts(savedLayouts);
         }
     }, []);
-
-    if (!props.selectedDashboardId) return <div></div>
-
-    function onLayoutChange(layout, layouts) {
-        // 'layout' is the current layout for the current breakpoint
-        // 'layouts' is an object containing layouts for all breakpoints
-        console.log('Current layout:', layout);
-        console.log('All layouts:', layouts);
-
-        setLayouts(layouts);
-        saveLayoutsToLocalStorage(layouts);
-    }
 
     function getLayoutsFromLocalStorage() {
         let savedLayouts = {};
@@ -141,19 +158,65 @@ function AuroraGridLayout(props: AuroraGridLayoutProptypes) {
             console.error('Error saving layouts to localStorage:', e);
         }
     }
+     */
+
+    if (!props.selectedDashboardId) return <div></div>
+
+    function onLayoutChange(layout, layouts) {
+        // 'layout' is the current layout for the current breakpoint
+        // 'layouts' is an object containing layouts for all breakpoints
+        // console.log('Current layout:', layout);
+        // console.log('All layouts:', layouts);
+
+        setLayouts(layouts);
+        // saveLayoutsToLocalStorage(layouts);
+    }
+
+    async function syncDashboardLayout() {
+        try {
+            const {data} = await updateDashboardLayout({
+                body: {
+                    dashboardId: props.selectedDashboardId!,
+                    layout: JSON.stringify(layouts)
+                },
+                throwOnError: true
+            })
+
+            console.log(data)
+            alert("Success saving layout!")
+        } catch (e) {
+            console.error(e)
+            alert(`Error happened during updating of layout ${e}`)
+        }
+    }
 
 
     return (
-        <div>
+        <div className="flex flex-col gap-5">
+            {
+                props.debugModeEnabled
+                &&
+                <div className="flex flex-row gap-2">
+                    <Button onClick={() => setIsReshapeable(!isReshapeable)}>
+                        {isReshapeable ? "Disable" : "Enable"} Resize and Drag
+                    </Button>
+
+                    <Button onClick={syncDashboardLayout}>
+                        Sync layout to server
+                    </Button>
+                </div>
+            }
+
             <ResponsiveGridLayout
                 className="layout w-full"
-                layouts={layouts}
+                //layouts={layouts}
+                layouts={props.selectedDashboard.layout}
                 onLayoutChange={onLayoutChange}
                 breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                 cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
                 rowHeight={60}
-                isDraggable={true}
-                isResizable={true}
+                isDraggable={isReshapeable}
+                isResizable={isReshapeable}
             >
                 <div key="1">
                     <SalesPerMonthWidget
