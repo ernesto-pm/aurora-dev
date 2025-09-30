@@ -1772,9 +1772,7 @@ export type UpdateDashboardLayoutBody = {
     /**
      * Layout
      */
-    layout: [
-        unknown
-    ];
+    layout: string;
 };
 
 /**

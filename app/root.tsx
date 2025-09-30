@@ -35,7 +35,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <ScrollRestoration />
-        <LoadingOverlay />
+        <NavigationProgress />
         <Scripts />
       </body>
     </html>
@@ -58,6 +58,7 @@ export default function App() {
 import { ErrorBoundary as CustomErrorBoundary } from "~/components/ErrorBoundary";
 import {AlertDialogProvider} from "~/contexts/AlertDialogContext";
 import {LoadingOverlay} from "~/components/LoadingOverlay";
+import NavigationProgress from "~/components/NavigationProgress";
 
 export function ErrorBoundary() {
     return <CustomErrorBoundary />;

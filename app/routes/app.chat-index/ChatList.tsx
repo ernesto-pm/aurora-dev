@@ -1,8 +1,4 @@
-import {useNavigate, useOutletContext} from "@remix-run/react";
-import {useQuery} from "@tanstack/react-query";
-import {
-    getAllChatsForSupabaseUserOptions
-} from "~/services/aurora/@tanstack/react-query.gen";
+import {useNavigate} from "@remix-run/react";
 import {Button} from "~/components/ui/button";
 import {Trash} from "lucide-react";
 import {GetAllChatsForSupabaseUserRow} from "~/services/aurora";

@@ -106,27 +106,6 @@ export function AppSidebar(props: PropTypes) {
             <SidebarContent>
 
                 <SidebarGroup>
-                    <SidebarGroupLabel>Tu negocio</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {businessMenuMapping.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <Link
-                                            to={item.url}
-                                            onClick={() => setOpenMobile(false)}
-                                        >
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </Link>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-
-                <SidebarGroup>
                     <SidebarGroupLabel>Aurora</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
@@ -147,6 +126,27 @@ export function AppSidebar(props: PropTypes) {
                     </SidebarGroupContent>
                 </SidebarGroup>
 
+
+                <SidebarGroup>
+                    <SidebarGroupLabel>Tu negocio</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {businessMenuMapping.map((item) => (
+                                <SidebarMenuItem key={item.title}>
+                                    <SidebarMenuButton asChild>
+                                        <Link
+                                            to={item.url}
+                                            onClick={() => setOpenMobile(false)}
+                                        >
+                                            <item.icon />
+                                            <span>{item.title}</span>
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
 
                 <SidebarGroup>
                     <SidebarGroupLabel>Usuario</SidebarGroupLabel>

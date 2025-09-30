@@ -1,6 +1,3 @@
-import {useOutletContext} from "@remix-run/react";
-import {useQuery} from "@tanstack/react-query";
-import {getDashboardsForSupabaseUserOptions} from "~/services/aurora/@tanstack/react-query.gen";
 import {useEffect, useState} from "react";
 import {Label} from "~/components/ui/label";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
@@ -16,43 +13,26 @@ import {GetAllDashboardsForSupabaseUserIdRow, updateDashboardLayout} from "~/ser
 
 interface DashboardGridLayoutProptypes {
     debugModeEnabled: boolean
+    dashboards: GetAllDashboardsForSupabaseUserIdRow[]
+    selectedDashboardId: string
+    selectedDashboard: GetAllDashboardsForSupabaseUserIdRow
 }
 
 
 export default function DashboardGridLayout(props: DashboardGridLayoutProptypes) {
-    const {accessToken} = useOutletContext<{ accessToken: string }>()
-    const {data, error, isLoading, isError} = useQuery({
-        ...getDashboardsForSupabaseUserOptions({
-            headers: {
-                'Authorization': `bearer ${accessToken}`
-            }
-        }),
-        throwOnError: true
-    })
-    const [selectedDashboardId, setSelectedDashboardId] = useState<null | string>(null)
-    const [selectedDashboard, setSelectedDashboard] = useState<GetAllDashboardsForSupabaseUserIdRow | undefined>()
+    const [selectedDashboardId, setSelectedDashboardId] = useState<null | string>(props.selectedDashboardId)
+    const [selectedDashboard, setSelectedDashboard] = useState<GetAllDashboardsForSupabaseUserIdRow | undefined>(props.selectedDashboard)
 
     useEffect(() => {
-        if (!data) return
-        if (data.length > 0) setSelectedDashboardId(data[0].id)
-    }, [data])
-
-    useEffect(() => {
-        if (selectedDashboardId && data) {
-            const selectedDashboard = data.filter((dashboard) => dashboard.id === selectedDashboardId)[0]
+        if (selectedDashboardId && props.dashboards) {
+            const selectedDashboard = props.dashboards.filter((dashboard) => dashboard.id === selectedDashboardId)[0]
             setSelectedDashboard(selectedDashboard)
         }
-    }, [selectedDashboardId, data])
+    }, [selectedDashboardId, props.dashboards])
 
     function handleDashboardSelectChange(dashboardId: string) {
         setSelectedDashboardId(dashboardId)
     }
-
-
-    if (isLoading || data === undefined) return <div>Cargando, un momento por favor...</div>
-    if (isError) return <div>{error.message}</div>
-    if (!data || data.length === 0) return <div>No cuentas con ningúna conexión de datos disponible para usar el centro
-        de control.</div>
 
     return (
         <div className="flex-1 overflow-y-auto px-10 py-5 flex flex-col gap-7">
@@ -67,7 +47,7 @@ export default function DashboardGridLayout(props: DashboardGridLayoutProptypes)
                     </SelectTrigger>
                     <SelectContent>
                         {
-                            data.map((dashboard) => (
+                            props.dashboards.map((dashboard) => (
                                 <SelectItem key={dashboard.id} value={dashboard.id} className="text-sm">
                                     {dashboard.business_name} - {dashboard.data_source_display_name}
                                 </SelectItem>
@@ -209,8 +189,7 @@ function AuroraGridLayout(props: AuroraGridLayoutProptypes) {
 
             <ResponsiveGridLayout
                 className="layout w-full"
-                //layouts={layouts}
-                layouts={props.selectedDashboard.layout}
+                layouts={props.selectedDashboard.layout as ReactGridLayout.Layouts}
                 onLayoutChange={onLayoutChange}
                 breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                 cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
