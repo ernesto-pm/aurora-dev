@@ -1,6 +1,6 @@
 import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
 import type {LoaderFunctionArgs, MetaFunction} from "@remix-run/cloudflare";
-import MAWeeklyOrderSummaryApp from "~/routes/app.apps.$id/MAWeeklyOrderSummaryApp";
+import MAWeeklyOrderSummaryApp from "~/routes/app.custom-app.$id/MAWeeklyOrderSummaryApp";
 import {useLoaderData} from "@remix-run/react";
 import {ComponentType} from "react";
 

@@ -119,7 +119,16 @@ function PreviousWeeklyOrderSummaries() {
 
     if (isLoading) return <div>Loading...</div>
     if (isError) return <div>{error.message}</div>
-    if (!data) return <div>No data hehe</div>
+    if (!data) return (
+        <div className="flex flex-col gap-3">
+            <div className="text-lg font-semibold">
+                Registro de ventas pasadas
+            </div>
+            <div className="text-muted-foreground">
+                No se encontraron resumenes aun...
+            </div>
+        </div>
+    )
 
     async function handleGenerateLink(summaryId: string) {
         try {

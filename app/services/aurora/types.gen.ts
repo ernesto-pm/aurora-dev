@@ -281,6 +281,32 @@ export type AuroraChatMessage = {
 };
 
 /**
+ * AuroraCustomApp
+ */
+export type AuroraCustomApp = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Unique Identifier
+     */
+    unique_identifier: string;
+    /**
+     * Description
+     */
+    description: string;
+    /**
+     * Created At
+     */
+    created_at: string;
+};
+
+/**
  * AuroraDashboard
  */
 export type AuroraDashboard = {
@@ -3391,6 +3417,23 @@ export type GetAllMessagesForChatResponses = {
 };
 
 export type GetAllMessagesForChatResponse = GetAllMessagesForChatResponses[keyof GetAllMessagesForChatResponses];
+
+export type GetAllCustomAppsForSupabaseUserData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/custom-apps/for-supabase-user';
+};
+
+export type GetAllCustomAppsForSupabaseUserResponses = {
+    /**
+     * Response Get All Custom Apps For Supabase User
+     * Successful Response
+     */
+    200: Array<AuroraCustomApp>;
+};
+
+export type GetAllCustomAppsForSupabaseUserResponse = GetAllCustomAppsForSupabaseUserResponses[keyof GetAllCustomAppsForSupabaseUserResponses];
 
 export type ClientOptions = {
     baseURL: `${string}://${string}/aurora` | (string & {});
