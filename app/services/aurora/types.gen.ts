@@ -281,32 +281,6 @@ export type AuroraChatMessage = {
 };
 
 /**
- * AuroraCustomApp
- */
-export type AuroraCustomApp = {
-    /**
-     * Id
-     */
-    id: string;
-    /**
-     * Name
-     */
-    name: string;
-    /**
-     * Unique Identifier
-     */
-    unique_identifier: string;
-    /**
-     * Description
-     */
-    description: string;
-    /**
-     * Created At
-     */
-    created_at: string;
-};
-
-/**
  * AuroraDashboard
  */
 export type AuroraDashboard = {
@@ -1005,6 +979,36 @@ export type GeoCodeAddressesBody = {
      * Businessid
      */
     businessId: string;
+};
+
+/**
+ * GetAllAppsForSupabaseUserRow
+ */
+export type GetAllAppsForSupabaseUserRow = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Unique Identifier
+     */
+    unique_identifier: string;
+    /**
+     * Description
+     */
+    description: string;
+    /**
+     * Created At
+     */
+    created_at: string;
+    /**
+     * Business Name
+     */
+    business_name: string;
 };
 
 /**
@@ -3430,7 +3434,7 @@ export type GetAllCustomAppsForSupabaseUserResponses = {
      * Response Get All Custom Apps For Supabase User
      * Successful Response
      */
-    200: Array<AuroraCustomApp>;
+    200: Array<GetAllAppsForSupabaseUserRow>;
 };
 
 export type GetAllCustomAppsForSupabaseUserResponse = GetAllCustomAppsForSupabaseUserResponses[keyof GetAllCustomAppsForSupabaseUserResponses];

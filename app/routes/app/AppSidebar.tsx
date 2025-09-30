@@ -1,4 +1,5 @@
 import {
+    Aperture,
     Bot,
     Cable,
     ChevronUp,
@@ -41,6 +42,11 @@ const businessMenuMapping = [
         title: "Conecta tus datos",
         url: "/app/conexion-de-datos",
         icon: Cable,
+    },
+    {
+        title: "Tus Apps",
+        url: "/app/custom-apps-index",
+        icon: Aperture
     }
 ]
 
