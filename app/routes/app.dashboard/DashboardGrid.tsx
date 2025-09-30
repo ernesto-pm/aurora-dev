@@ -1,6 +1,4 @@
 import {useEffect, useState} from "react"
-import {Settings, TrendingUp} from "lucide-react";
-import LineChart from "~/components/widgets/LineChart";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
 import {useQuery} from "@tanstack/react-query";
 import {getDashboardsForSupabaseUserOptions} from "~/services/aurora/@tanstack/react-query.gen";
@@ -109,27 +107,3 @@ export default function DashboardGrid() {
         </div>
     )
 }
-
-/*
-
-<div className="p-5 rounded-md bg-sidebar flex flex-col gap-2 shadow-md">
-                    <div className="text-md font-bold text-center">
-                        Ventas en promedio este mes
-                    </div>
-                    <div className="text-2xl flex-1 text-center">
-                        <div className="flex justify-center items-center gap-2">
-                            <TrendingUp className="text-green-800"/>
-                            <div className="text-green-800 font-semibold">150</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="p-5 rounded-md bg-sidebar flex flex-col gap-2 shadow-md">
-                    <div className="text-lg font-semibold text-center">
-                        Productos registrados
-                    </div>
-                    <div className="text-lg flex-1 text-center">
-                        2800
-                    </div>
-                </div>
- */

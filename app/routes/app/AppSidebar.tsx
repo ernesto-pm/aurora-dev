@@ -106,10 +106,10 @@ export function AppSidebar(props: PropTypes) {
             <SidebarContent>
 
                 <SidebarGroup>
-                    <SidebarGroupLabel>Aurora</SidebarGroupLabel>
+                    <SidebarGroupLabel>Tu negocio</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {auroraMenuMapping.map((item) => (
+                            {businessMenuMapping.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <Link
@@ -126,12 +126,11 @@ export function AppSidebar(props: PropTypes) {
                     </SidebarGroupContent>
                 </SidebarGroup>
 
-
                 <SidebarGroup>
-                    <SidebarGroupLabel>Tu negocio</SidebarGroupLabel>
+                    <SidebarGroupLabel>Aurora</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {businessMenuMapping.map((item) => (
+                            {auroraMenuMapping.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <Link
