@@ -10,6 +10,9 @@ import TotalsForVariants from "~/routes/app.dashboard/widgets/TotalsForVariants"
 import TotalsForProductsAndVariants from "~/routes/app.dashboard/widgets/TotalsForProductsAndVariants";
 import {Button} from "~/components/ui/button";
 import {GetAllDashboardsForSupabaseUserIdRow, updateDashboardLayout} from "~/services/aurora";
+import RevenueConcentrationParetoChartWidget
+    from "~/routes/app.dashboard/widgets/RevenueConcentrationParetoChartWidget";
+import OrderVelocityWidget from "~/routes/app.dashboard/widgets/OrderVelocityWidget";
 
 interface DashboardGridLayoutProptypes {
     debugModeEnabled: boolean
@@ -219,6 +222,16 @@ function AuroraGridLayout(props: AuroraGridLayoutProptypes) {
                 </div>
                 <div key="5">
                     <TotalsForProductsAndVariants
+                        dashboardId={props.selectedDashboardId}
+                    />
+                </div>
+                <div key="6">
+                    <RevenueConcentrationParetoChartWidget
+                        dashboardId={props.selectedDashboardId}
+                    />
+                </div>
+                <div key="7">
+                    <OrderVelocityWidget
                         dashboardId={props.selectedDashboardId}
                     />
                 </div>

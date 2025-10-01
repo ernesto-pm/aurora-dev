@@ -1226,6 +1226,62 @@ export type GetOrderRevenuePerMonthResponse = {
 };
 
 /**
+ * GetOrderVelocityBody
+ */
+export type GetOrderVelocityBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+};
+
+/**
+ * GetOrderVelocityResponse
+ */
+export type GetOrderVelocityResponse = {
+    /**
+     * Ordercounts
+     */
+    orderCounts: Array<number>;
+    /**
+     * Movingavgs
+     */
+    movingAvgs: Array<number>;
+    /**
+     * Categories
+     */
+    categories: Array<string>;
+};
+
+/**
+ * GetRevenueConcentrationBody
+ */
+export type GetRevenueConcentrationBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+};
+
+/**
+ * GetRevenueConcentrationResponse
+ */
+export type GetRevenueConcentrationResponse = {
+    /**
+     * Revenues
+     */
+    revenues: Array<number>;
+    /**
+     * Cumulativepercentages
+     */
+    cumulativePercentages: Array<number>;
+    /**
+     * Categories
+     */
+    categories: Array<string>;
+};
+
+/**
  * GetSalesPerMonthBody
  */
 export type GetSalesPerMonthBody = {
@@ -3132,6 +3188,56 @@ export type GetTotalsForProductsAndVariantsResponses = {
 };
 
 export type GetTotalsForProductsAndVariantsResponse = GetTotalsForProductsAndVariantsResponses[keyof GetTotalsForProductsAndVariantsResponses];
+
+export type GetRevenueConcentrationData = {
+    body: GetRevenueConcentrationBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/get-revenue-concentration';
+};
+
+export type GetRevenueConcentrationErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetRevenueConcentrationError = GetRevenueConcentrationErrors[keyof GetRevenueConcentrationErrors];
+
+export type GetRevenueConcentrationResponses = {
+    /**
+     * Successful Response
+     */
+    200: GetRevenueConcentrationResponse;
+};
+
+export type GetRevenueConcentrationResponse2 = GetRevenueConcentrationResponses[keyof GetRevenueConcentrationResponses];
+
+export type GetOrderVelocityData = {
+    body: GetOrderVelocityBody;
+    path?: never;
+    query?: never;
+    url: '/dashboards/get-order-velocity';
+};
+
+export type GetOrderVelocityErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetOrderVelocityError = GetOrderVelocityErrors[keyof GetOrderVelocityErrors];
+
+export type GetOrderVelocityResponses = {
+    /**
+     * Successful Response
+     */
+    200: GetOrderVelocityResponse;
+};
+
+export type GetOrderVelocityResponse2 = GetOrderVelocityResponses[keyof GetOrderVelocityResponses];
 
 export type UpdateDashboardLayoutData = {
     body: UpdateDashboardLayoutBody;
