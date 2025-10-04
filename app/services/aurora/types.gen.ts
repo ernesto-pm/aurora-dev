@@ -999,7 +999,7 @@ export type CreateWidgetAssistanceChatBody = {
 /**
  * DashboardWidgetUniqueIdentifierEnum
  */
-export type DashboardWidgetUniqueIdentifierEnum = 'salesPerMonth';
+export type DashboardWidgetUniqueIdentifierEnum = 'salesPerMonth' | 'revenueConcentration';
 
 /**
  * DeleteAssistantTemplateBody
