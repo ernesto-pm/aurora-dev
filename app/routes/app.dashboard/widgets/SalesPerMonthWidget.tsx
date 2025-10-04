@@ -5,6 +5,7 @@ import LineChart from "~/components/widgets/LineChart";
 import BarChart from "~/components/widgets/BarChart";
 import {upsertWidgetAssistanceChat} from "~/services/aurora";
 import {useNavigate} from "@remix-run/react";
+import {Button} from "~/components/ui/button";
 
 interface TotalSalesPerMonthProptypes {
     dashboardId: string
@@ -48,10 +49,13 @@ export default function SalesPerMonthWidget(props: TotalSalesPerMonthProptypes) 
                     Total de ventas por mes
                 </div>
                 <div className="flex flex-row gap-2 items-center">
-                    <Bot
-                        className="text-purple-600 cursor-pointer h-5"
-                        onClick={createWidgetAssistanceChat}
-                    />
+                    <div className="border rounded-md">
+                        <Bot
+                            className="text-purple-600 h-5 cursor-pointer"
+                            onClick={createWidgetAssistanceChat}
+                        />
+                    </div>
+
                 </div>
             </div>
 
