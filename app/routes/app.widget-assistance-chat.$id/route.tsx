@@ -1,11 +1,12 @@
 import {LoaderFunctionArgs} from "@remix-run/cloudflare";
 import {getSupabaseAccessToken} from "~/services/supabaseServerClientUtils";
 import {getWidgetAssistanceChatWithId} from "~/services/aurora";
-import {useLoaderData} from "@remix-run/react";
+import {useLoaderData, useSearchParams} from "@remix-run/react";
 import WidgetRenderer from "~/routes/app.widget-assistance-chat.$id/WidgetRenderer"
 import AppNavigationHeader from "~/routes/app/AppNavigationHeader";
 import ChatMessagesWindow from "~/routes/app.widget-assistance-chat.$id/ChatMessagesWindow";
 import ChatInputWindow from "~/routes/app.widget-assistance-chat.$id/ChatInputWindow";
+import {useEffect} from "react";
 
 export async function loader({params}: LoaderFunctionArgs) {
     if (!params.id) throw new Error("Error, ID must be specified")
@@ -44,7 +45,9 @@ export default function WidgetAssistanceChat() {
                 {/* Chat Messages Container - Flexible height with proper scroll */}
                 <div className="flex-1 min-h-0 bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col">
                     <div className="flex-1 overflow-y-auto">
-                        <ChatMessagesWindow chatId={chat.id} />
+                        <ChatMessagesWindow
+                            chatId={chat.id}
+                        />
                     </div>
                 </div>
 

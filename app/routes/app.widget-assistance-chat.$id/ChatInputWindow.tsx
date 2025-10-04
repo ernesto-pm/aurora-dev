@@ -1,6 +1,6 @@
 import {Send} from "lucide-react";
 import {Textarea} from "~/components/ui/textarea";
-import {useState} from "react";
+import {useEffect, useState, useRef, useCallback} from "react";
 import {
     insertUserMessageIntoWidgetAssistantChat, triggerAssistantResponseForWidgetAssistanceChat
 } from "~/services/aurora";
@@ -8,19 +8,27 @@ import {useQueryClient} from "@tanstack/react-query";
 import {
     getAllMessagesForWidgetAssistanceChatWithIdQueryKey
 } from "~/services/aurora/@tanstack/react-query.gen";
+import {useSearchParams} from "@remix-run/react";
 
 interface MessageInputProptypes {
     chatId: string
+    optionalInitialUserMessage?: string
 }
 
 export default function ChatMessageInput(props: MessageInputProptypes) {
     const [message, setMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const queryClient = useQueryClient()
+    const hasAutoSubmitted = useRef(false)
 
-    async function handleSubmit() {
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const handleSubmit = useCallback(async (messageToSend?: string) => {
+        // Use provided message or fall back to state
+        const messageContent = messageToSend || message
+
         // Don't submit if message is empty or only whitespace
-        if (!message.trim()) return;
+        if (!messageContent.trim()) return;
 
         setIsLoading(true)
         try {
@@ -28,7 +36,7 @@ export default function ChatMessageInput(props: MessageInputProptypes) {
             await insertUserMessageIntoWidgetAssistantChat({
                 body: {
                     chatId: props.chatId,
-                    content: message
+                    content: messageContent
                 },
                 throwOnError: true
             })
@@ -63,7 +71,25 @@ export default function ChatMessageInput(props: MessageInputProptypes) {
             console.error('Error sending message:', e)
             alert('Error al enviar el mensaje. Por favor, intenta de nuevo.')
         }
-    }
+    }, [message, props.chatId, queryClient])
+
+    // Handle auto-submit from URL params
+    useEffect(() => {
+        const newUserMessage = searchParams.get("newUserMessage")
+
+        if (newUserMessage && !hasAutoSubmitted.current) {
+            hasAutoSubmitted.current = true
+
+            // Clear the search param first
+            const params = new URLSearchParams(searchParams)
+            params.delete("newUserMessage")
+            setSearchParams(params)
+
+            // Set the message and submit
+            setMessage(newUserMessage)
+            handleSubmit(newUserMessage)
+        }
+    }, [searchParams, setSearchParams, handleSubmit])
 
     function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -93,7 +119,7 @@ export default function ChatMessageInput(props: MessageInputProptypes) {
             </div>
 
             <button
-                onClick={handleSubmit}
+                onClick={() => handleSubmit()}
                 className={`
                     flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center
                     transition-all duration-200 transform
