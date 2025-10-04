@@ -49,13 +49,10 @@ export default function SalesPerMonthWidget(props: TotalSalesPerMonthProptypes) 
                     Total de ventas por mes
                 </div>
                 <div className="flex flex-row gap-2 items-center">
-                    <div className="border rounded-md">
-                        <Bot
-                            className="text-purple-600 h-5 cursor-pointer"
-                            onClick={createWidgetAssistanceChat}
-                        />
-                    </div>
-
+                    <Bot
+                        className="text-purple-600 h-5 cursor-pointer"
+                        onClick={createWidgetAssistanceChat}
+                    />
                 </div>
             </div>
 

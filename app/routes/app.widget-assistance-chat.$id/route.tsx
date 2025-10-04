@@ -29,29 +29,28 @@ export default function WidgetAssistanceChat() {
     const {chat} = useLoaderData<typeof loader>()
 
     return (
+        <div className="flex flex-col h-screen w-full bg-gray-50">
+            <AppNavigationHeader headerTitle={chat.display_name || "Consulta con Aurora"}/>
 
-        <div className="flex flex-col h-full w-full">
-            <AppNavigationHeader headerTitle="Consulta con Aurora"/>
-
-            <div className="flex flex-1 flex-col p-4 overflow-y-auto">
-
-                <div className="h-1/6">
+            <div className="flex flex-1 flex-col min-h-0 p-4 gap-4">
+                {/* Widget Container - Fixed height with better styling */}
+                <div className="p-4 flex-shrink-0">
                     <WidgetRenderer
                         dashboardId={chat.dashboard_id}
                         widgetIdentifier={chat.widget_unique_identifier}
                     />
                 </div>
 
-                <div className="h-5/6 mt-5 overflow-y-auto bg-sidebar p-5 rounded-md">
-                    <ChatMessagesWindow
-                        chatId={chat.id}
-                    />
+                {/* Chat Messages Container - Flexible height with proper scroll */}
+                <div className="flex-1 min-h-0 bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col">
+                    <div className="flex-1 overflow-y-auto">
+                        <ChatMessagesWindow chatId={chat.id} />
+                    </div>
                 </div>
 
-                <div>
-                    <ChatInputWindow
-                        chatId={chat.id}
-                    />
+                {/* Chat Input - Fixed at bottom */}
+                <div className="flex-shrink-0 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                    <ChatInputWindow chatId={chat.id} />
                 </div>
             </div>
         </div>

@@ -16,13 +16,19 @@ export default function WidgetRenderer({widgetIdentifier, dashboardId}: WidgetRe
             case "revenueConcentration":
                 return <RevenueConcentrationParetoChartWidget dashboardId={dashboardId} />
             default:
-                return <div>No widget available...</div>
+                return (
+                    <div className="text-center py-8 text-gray-400">
+                        <div className="mb-2">📊</div>
+                        <p>Widget no disponible</p>
+                        <p className="text-sm mt-1">ID: {widgetIdentifier}</p>
+                    </div>
+                )
         }
     }
 
     return (
         <div className="flex flex-col items-center">
-            <div className="w-[450px]">
+            <div className="w-full max-w-[600px]">
                 {renderWidget()}
             </div>
         </div>

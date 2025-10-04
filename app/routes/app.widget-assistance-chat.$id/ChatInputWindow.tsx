@@ -19,9 +19,11 @@ export default function ChatMessageInput(props: MessageInputProptypes) {
     const queryClient = useQueryClient()
 
     async function handleSubmit() {
+        // Don't submit if message is empty or only whitespace
+        if (!message.trim()) return;
+
         setIsLoading(true)
         try {
-
             // We first insert the message the user sent
             await insertUserMessageIntoWidgetAssistantChat({
                 body: {
@@ -57,7 +59,9 @@ export default function ChatMessageInput(props: MessageInputProptypes) {
 
             setIsLoading(false)
         } catch (e) {
-            alert(e)
+            setIsLoading(false)
+            console.error('Error sending message:', e)
+            alert('Error al enviar el mensaje. Por favor, intenta de nuevo.')
         }
     }
 
@@ -70,22 +74,38 @@ export default function ChatMessageInput(props: MessageInputProptypes) {
     }
 
     return (
-        <div className="flex space-x-2">
-            <Textarea
-                placeholder="Escribe tu mensaje..."
-                className="border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={handleKeyDown}
-                disabled={isLoading}
-            />
+        <div className="flex items-end gap-3">
+            <div className="flex-1 relative">
+                <Textarea
+                    placeholder="Escribe tu mensaje..."
+                    className="min-h-[48px] max-h-32 resize-none pr-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    disabled={isLoading}
+                    rows={1}
+                />
+                {isLoading && (
+                    <div className="absolute inset-0 bg-white/50 flex items-center justify-center rounded-md">
+                        <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                )}
+            </div>
 
             <button
                 onClick={handleSubmit}
-                className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-                disabled={isLoading}
+                className={`
+                    flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center
+                    transition-all duration-200 transform
+                    ${!message.trim() || isLoading
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-blue-500 text-white hover:bg-blue-600 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl'
+                }
+                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                `}
+                disabled={!message.trim() || isLoading}
             >
-                <Send size={20} />
+                <Send size={20} className={isLoading ? 'animate-pulse' : ''} />
             </button>
         </div>
     )
