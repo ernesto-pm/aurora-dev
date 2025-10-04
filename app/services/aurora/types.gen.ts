@@ -497,6 +497,58 @@ export type AuroraVisit = {
 };
 
 /**
+ * AuroraWidgetAssistanceChat
+ */
+export type AuroraWidgetAssistanceChat = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Widget Unique Identifier
+     */
+    widget_unique_identifier: string;
+    /**
+     * Dashboard Id
+     */
+    dashboard_id: string;
+    /**
+     * System Prompt
+     */
+    system_prompt: string;
+    /**
+     * Display Name
+     */
+    display_name: string | null;
+};
+
+/**
+ * AuroraWidgetAssistanceChatMessage
+ */
+export type AuroraWidgetAssistanceChatMessage = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Widget Assistance Chat Id
+     */
+    widget_assistance_chat_id: string;
+    /**
+     * Role
+     */
+    role: string;
+    /**
+     * Content
+     */
+    content: string;
+    /**
+     * Created At
+     */
+    created_at: string;
+};
+
+/**
  * Body_load_addresses_with_params
  */
 export type BodyLoadAddressesWithParams = {
@@ -932,6 +984,22 @@ export type CreateNewMemoryBlockTemplateBody = {
      */
     description: string;
 };
+
+/**
+ * CreateWidgetAssistanceChatBody
+ */
+export type CreateWidgetAssistanceChatBody = {
+    /**
+     * Dashboardid
+     */
+    dashboardId: string;
+    dashboardWidgetUniqueIdentifier: DashboardWidgetUniqueIdentifierEnum;
+};
+
+/**
+ * DashboardWidgetUniqueIdentifierEnum
+ */
+export type DashboardWidgetUniqueIdentifierEnum = 'salesPerMonth';
 
 /**
  * DeleteAssistantTemplateBody
@@ -1552,6 +1620,20 @@ export type InsertMaProductForBusinessBody = {
 };
 
 /**
+ * InsertUserMessageIntoWidgetAssistantChatBody
+ */
+export type InsertUserMessageIntoWidgetAssistantChatBody = {
+    /**
+     * Chatid
+     */
+    chatId: string;
+    /**
+     * Content
+     */
+    content: string;
+};
+
+/**
  * LoginBody
  */
 export type LoginBody = {
@@ -1845,6 +1927,16 @@ export type TestNewMessageBody = {
      * Businessid
      */
     businessId: string;
+};
+
+/**
+ * TriggerAssistantResponseForWidgetAssistanceChat
+ */
+export type TriggerAssistantResponseForWidgetAssistanceChat = {
+    /**
+     * Chatid
+     */
+    chatId: string;
 };
 
 /**
@@ -3544,6 +3636,142 @@ export type GetAllCustomAppsForSupabaseUserResponses = {
 };
 
 export type GetAllCustomAppsForSupabaseUserResponse = GetAllCustomAppsForSupabaseUserResponses[keyof GetAllCustomAppsForSupabaseUserResponses];
+
+export type UpsertWidgetAssistanceChatData = {
+    body: CreateWidgetAssistanceChatBody;
+    path?: never;
+    query?: never;
+    url: '/widget-assistance-chats/upsert';
+};
+
+export type UpsertWidgetAssistanceChatErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type UpsertWidgetAssistanceChatError = UpsertWidgetAssistanceChatErrors[keyof UpsertWidgetAssistanceChatErrors];
+
+export type UpsertWidgetAssistanceChatResponses = {
+    /**
+     * Successful Response
+     */
+    200: AuroraWidgetAssistanceChat;
+};
+
+export type UpsertWidgetAssistanceChatResponse = UpsertWidgetAssistanceChatResponses[keyof UpsertWidgetAssistanceChatResponses];
+
+export type GetWidgetAssistanceChatWithIdData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/widget-assistance-chats/{id}';
+};
+
+export type GetWidgetAssistanceChatWithIdErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetWidgetAssistanceChatWithIdError = GetWidgetAssistanceChatWithIdErrors[keyof GetWidgetAssistanceChatWithIdErrors];
+
+export type GetWidgetAssistanceChatWithIdResponses = {
+    /**
+     * Successful Response
+     */
+    200: AuroraWidgetAssistanceChat;
+};
+
+export type GetWidgetAssistanceChatWithIdResponse = GetWidgetAssistanceChatWithIdResponses[keyof GetWidgetAssistanceChatWithIdResponses];
+
+export type InsertUserMessageIntoWidgetAssistantChatData = {
+    body: InsertUserMessageIntoWidgetAssistantChatBody;
+    path?: never;
+    query?: never;
+    url: '/widget-assistance-chats/insert-user-message';
+};
+
+export type InsertUserMessageIntoWidgetAssistantChatErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type InsertUserMessageIntoWidgetAssistantChatError = InsertUserMessageIntoWidgetAssistantChatErrors[keyof InsertUserMessageIntoWidgetAssistantChatErrors];
+
+export type InsertUserMessageIntoWidgetAssistantChatResponses = {
+    /**
+     * Successful Response
+     */
+    200: AuroraWidgetAssistanceChatMessage;
+};
+
+export type InsertUserMessageIntoWidgetAssistantChatResponse = InsertUserMessageIntoWidgetAssistantChatResponses[keyof InsertUserMessageIntoWidgetAssistantChatResponses];
+
+export type GetAllMessagesForWidgetAssistanceChatWithIdData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/widget-assistance-chats/{id}/messages';
+};
+
+export type GetAllMessagesForWidgetAssistanceChatWithIdErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetAllMessagesForWidgetAssistanceChatWithIdError = GetAllMessagesForWidgetAssistanceChatWithIdErrors[keyof GetAllMessagesForWidgetAssistanceChatWithIdErrors];
+
+export type GetAllMessagesForWidgetAssistanceChatWithIdResponses = {
+    /**
+     * Response Get All Messages For Widget Assistance Chat With Id
+     * Successful Response
+     */
+    200: Array<AuroraWidgetAssistanceChatMessage>;
+};
+
+export type GetAllMessagesForWidgetAssistanceChatWithIdResponse = GetAllMessagesForWidgetAssistanceChatWithIdResponses[keyof GetAllMessagesForWidgetAssistanceChatWithIdResponses];
+
+export type TriggerAssistantResponseForWidgetAssistanceChatData = {
+    body: TriggerAssistantResponseForWidgetAssistanceChat;
+    path?: never;
+    query?: never;
+    url: '/widget-assistance-chats/trigger-assistant-response-for-widget-assistance-chat';
+};
+
+export type TriggerAssistantResponseForWidgetAssistanceChatErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type TriggerAssistantResponseForWidgetAssistanceChatError = TriggerAssistantResponseForWidgetAssistanceChatErrors[keyof TriggerAssistantResponseForWidgetAssistanceChatErrors];
+
+export type TriggerAssistantResponseForWidgetAssistanceChatResponses = {
+    /**
+     * Successful Response
+     */
+    200: AuroraWidgetAssistanceChatMessage;
+};
+
+export type TriggerAssistantResponseForWidgetAssistanceChatResponse = TriggerAssistantResponseForWidgetAssistanceChatResponses[keyof TriggerAssistantResponseForWidgetAssistanceChatResponses];
 
 export type ClientOptions = {
     baseURL: `${string}://${string}/aurora` | (string & {});

@@ -1,8 +1,10 @@
 import {useQuery} from "@tanstack/react-query";
 import {getSalesPerMonthOptions} from "~/services/aurora/@tanstack/react-query.gen";
-import {Settings} from "lucide-react";
+import {Bot, Settings, Sparkles} from "lucide-react";
 import LineChart from "~/components/widgets/LineChart";
 import BarChart from "~/components/widgets/BarChart";
+import {upsertWidgetAssistanceChat} from "~/services/aurora";
+import {useNavigate} from "@remix-run/react";
 
 interface TotalSalesPerMonthProptypes {
     dashboardId: string
@@ -17,12 +19,27 @@ export default function SalesPerMonthWidget(props: TotalSalesPerMonthProptypes) 
             throwOnError: true
         })
     })
+    const navigate = useNavigate()
 
     if (isLoading || data === undefined) return <div>Cargando...</div>
     if (isError) return <div>{error.message}</div>
     if (!data) return <div>No hay datos para este widget</div>
 
-    // console.log(data)
+    async function createWidgetAssistanceChat() {
+        const {data} = await upsertWidgetAssistanceChat({
+            body: {
+                dashboardId: props.dashboardId,
+                dashboardWidgetUniqueIdentifier: 'salesPerMonth'
+            },
+            throwOnError: true
+        })
+
+        if (!data) {
+            throw new Error("Error, no data was provided")
+        }
+
+        navigate(`/app/widget-assistance-chat/${data.id}`)
+    }
 
     return (
         <div className="rounded-lg bg-sidebar flex flex-col gap-2 shadow-md h-full w-full">
@@ -31,9 +48,10 @@ export default function SalesPerMonthWidget(props: TotalSalesPerMonthProptypes) 
                     Total de ventas por mes
                 </div>
                 <div className="flex flex-row gap-2 items-center">
-                    {/*
-                     <Settings className="h-4 text-gray-500 cursor-pointer"/>
-                    */}
+                    <Bot
+                        className="text-purple-600 cursor-pointer h-5"
+                        onClick={createWidgetAssistanceChat}
+                    />
                 </div>
             </div>
 

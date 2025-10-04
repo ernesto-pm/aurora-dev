@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {Settings} from "lucide-react";
+import {Bot, Settings, Sparkles} from "lucide-react";
 import LineChart from "~/components/widgets/LineChart";
 import {getOrderRevenuePerMonthOptions} from "~/services/aurora/@tanstack/react-query.gen";
 
@@ -30,9 +30,7 @@ export default function OrderRevenuePerMonthWidget(props: RevenuePerMonthProptyp
                     Total de ingresos por mes
                 </div>
                 <div className="flex flex-row gap-2 items-center">
-                    {/*
-                     <Settings className="h-4 text-gray-500 cursor-pointer"/>
-                    */}
+
                 </div>
             </div>
 
