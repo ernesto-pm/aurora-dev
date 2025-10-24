@@ -1,5 +1,8 @@
 import {SidebarTrigger} from "~/components/ui/sidebar";
 import {Separator} from "~/components/ui/separator";
+import {Button} from "~/components/ui/button";
+import {Flag, Megaphone, MessageCircleQuestionMark} from "lucide-react";
+import IssueReporter from "~/components/IssueReporter";
 
 interface AppNavigationHeaderProptypes {
     headerTitle: string
@@ -14,7 +17,14 @@ export default function AppNavigationHeader(props: AppNavigationHeaderProptypes)
                     orientation="vertical"
                     className="mr-2 h-4"
                 />
-                <h1 className="text-base font-medium">{props.headerTitle}</h1>
+
+                <div className="w-full flex items-center justify-between">
+                    <h1 className="text-base font-medium">
+                        {props.headerTitle}
+                    </h1>
+                    <IssueReporter />
+                </div>
+
             </div>
         </header>
     )
