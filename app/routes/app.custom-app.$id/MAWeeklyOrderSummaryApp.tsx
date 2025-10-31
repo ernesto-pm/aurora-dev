@@ -51,6 +51,7 @@ function CreateNewWeeklyOrderSummary() {
                 },
                 throwOnError: true
             })
+
             console.log(newSummary)
             setIsLoading(false)
             await queryClient.invalidateQueries({
@@ -58,6 +59,7 @@ function CreateNewWeeklyOrderSummary() {
             })
         } catch (e) {
             alert("Error...")
+            setIsLoading(false)
         }
     }
 
@@ -87,6 +89,7 @@ function CreateNewWeeklyOrderSummary() {
                     <PopoverContent className="w-auto p-0">
                         <Calendar
                             mode="range"
+                            timeZone="America/Mexico_City"
                             selected={dateRange}
                             onSelect={setDateRange}
                             required={true}
