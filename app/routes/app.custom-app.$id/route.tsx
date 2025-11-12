@@ -3,6 +3,7 @@ import type {LoaderFunctionArgs, MetaFunction} from "@remix-run/cloudflare";
 import MAWeeklyOrderSummaryApp from "~/routes/app.custom-app.$id/MAWeeklyOrderSummaryApp";
 import {useLoaderData} from "@remix-run/react";
 import {ComponentType} from "react";
+import MACanastaApp from "~/routes/app.custom-app.$id/MACanastaApp/route";
 
 export const meta: MetaFunction = () => {
     return [
@@ -31,6 +32,10 @@ export default function AppsIndex() {
         "ma-weekly-orders": {
             Component: MAWeeklyOrderSummaryApp,
             displayName: "Resumen de ordenes semanales"
+        },
+        "ma-canastas": {
+            Component: MACanastaApp,
+            displayName: "Logica de canastas - MA"
         }
     }
     const mappingDatum = APP_MAPPING[appId]

@@ -44,11 +44,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 const queryClient = new QueryClient()
 
+import { Provider } from 'jotai'
+
 export default function App() {
   return (
       <QueryClientProvider client={queryClient}>
           <AlertDialogProvider>
-              <Outlet/>
+              <Provider>
+                  <Outlet/>
+              </Provider>
           </AlertDialogProvider>
       </QueryClientProvider>
   )

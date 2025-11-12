@@ -89,9 +89,15 @@ importers:
       echarts-for-react:
         specifier: ^3.0.4
         version: 3.0.4(echarts@6.0.0)(react@18.3.1)
+      fuse.js:
+        specifier: ^7.1.0
+        version: 7.1.0
       isbot:
         specifier: ^4.1.0
         version: 4.4.0
+      jotai:
+        specifier: ^2.15.1
+        version: 2.15.1(@babel/core@7.28.3)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1)
       lucide-react:
         specifier: ^0.536.0
         version: 0.536.0(react@18.3.1)
@@ -3134,6 +3140,10 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
+  fuse.js@7.1.0:
+    resolution: {integrity: sha512-trLf4SzuuUxfusZADLINj+dE8clK1frKdmqiJNb1Es75fmI5oY6X2mxLVUciLLjxqw/xr72Dhy+lER6dGd02FQ==}
+    engines: {node: '>=10'}
+
   generic-names@4.0.0:
     resolution: {integrity: sha512-ySFolZQfw9FoDb3ed9d80Cm9f0+r7qj+HJkWjeD9RBfpxEVTlVhol+gvaQB/78WbwYfbnNh8nWHHBSlg072y6A==}
 
@@ -3533,6 +3543,24 @@ packages:
   jiti@2.5.1:
     resolution: {integrity: sha512-twQoecYPiVA5K/h6SxtORw/Bs3ar+mLUtoPSc7iMXzQzK8d7eJ/R09wmTwAjiamETn1cXYPGfNnu7DMoHgu12w==}
     hasBin: true
+
+  jotai@2.15.1:
+    resolution: {integrity: sha512-yHT1HAZ3ba2Q8wgaUQ+xfBzEtcS8ie687I8XVCBinfg4bNniyqLIN+utPXWKQE93LMF5fPbQSVRZqgpcN5yd6Q==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@babel/core': '>=7.0.0'
+      '@babel/template': '>=7.0.0'
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/template':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -8428,6 +8456,8 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
+  fuse.js@7.1.0: {}
+
   generic-names@4.0.0:
     dependencies:
       loader-utils: 3.3.1
@@ -8848,6 +8878,13 @@ snapshots:
   jiti@1.21.7: {}
 
   jiti@2.5.1: {}
+
+  jotai@2.15.1(@babel/core@7.28.3)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1):
+    optionalDependencies:
+      '@babel/core': 7.28.3
+      '@babel/template': 7.27.2
+      '@types/react': 18.3.23
+      react: 18.3.1
 
   js-tokens@4.0.0: {}
 
