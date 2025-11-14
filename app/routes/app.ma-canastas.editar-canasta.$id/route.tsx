@@ -3,12 +3,13 @@ import {getBasketWithId, getShopifyProducts} from "~/services/aurora";
 import {useLoaderData} from "@remix-run/react";
 import {useHydrateAtoms} from "jotai/utils";
 import {
-    associatedProductsAtom,
     allShopifyProductsAtom,
     associatedProductIdsAtom
 } from "~/routes/app.ma-canastas.editar-canasta.$id/state";
 import ShopifyProductList from "~/routes/app.ma-canastas.editar-canasta.$id/ShopifyProductList";
 import AssociatedProducts from "~/routes/app.ma-canastas.editar-canasta.$id/AssociatedProducts";
+import {useSetAtom} from "jotai";
+import {useEffect} from "react";
 
 export async function loader({params}: LoaderFunctionArgs) {
     if (!params.id) {
@@ -41,8 +42,17 @@ export async function loader({params}: LoaderFunctionArgs) {
 
 export default function EditarCanasta() {
     const {basket, associatedProducts, shopifyProducts} = useLoaderData<typeof loader>()
-    useHydrateAtoms([[associatedProductIdsAtom, associatedProducts.map(product => product.shopify_product_id)]])
-    useHydrateAtoms([[allShopifyProductsAtom, shopifyProducts]])
+    const setAssociatedProductIds = useSetAtom(associatedProductIdsAtom);
+    const setAllShopifyProducts = useSetAtom(allShopifyProductsAtom);
+
+    // Update atoms whenever loader data changes
+    useEffect(() => {
+        setAssociatedProductIds(associatedProducts.map(product => product.shopify_product_id));
+    }, [associatedProducts, setAssociatedProductIds]);
+
+    useEffect(() => {
+        setAllShopifyProducts(shopifyProducts);
+    }, [shopifyProducts, setAllShopifyProducts]);
 
     return (
         <div className="p-5 flex flex-col w-full h-full gap-5 overflow-y-auto">
