@@ -26,8 +26,6 @@ export default function OrderSummary() {
                 toYear: dateRange.to.getFullYear()
             }
         })
-
-        console.log(dateRange?.from?.toISOString())
     }
 
     return (
