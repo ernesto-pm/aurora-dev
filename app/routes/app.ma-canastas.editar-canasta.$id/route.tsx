@@ -1,7 +1,6 @@
 import type {LoaderFunctionArgs} from "@remix-run/cloudflare";
-import {getBasketWithId, getShopifyProducts} from "~/services/aurora";
+import {getBasketWithId, getMaProductsDumps, getShopifyProducts} from "~/services/aurora";
 import {useLoaderData} from "@remix-run/react";
-import {useHydrateAtoms} from "jotai/utils";
 import {
     allShopifyProductsAtom,
     associatedProductIdsAtom
@@ -24,24 +23,20 @@ export async function loader({params}: LoaderFunctionArgs) {
     })
     if (!getBasketWithIdResponse) throw new Error("Error al obtener informacion sobre canasta")
 
-    const {data: shopifyProductsData} = await getShopifyProducts({
-        body: {
-            vendorFilter: "Mercado Tlalpan",
-            productTitleFilter: "canasta"
-        },
+    const {data: maProductDumps} = await getMaProductsDumps({
         throwOnError: true
     })
-    if (!shopifyProductsData) throw new Error("Error, no shopify products found")
+    if (!maProductDumps) throw new Error("Error, no shopify products found")
 
     return {
         basket: getBasketWithIdResponse.basket,
         associatedProducts: getBasketWithIdResponse.associatedProducts,
-        shopifyProducts: shopifyProductsData
+        maProductDumps: maProductDumps
     }
 }
 
 export default function EditarCanasta() {
-    const {basket, associatedProducts, shopifyProducts} = useLoaderData<typeof loader>()
+    const {basket, associatedProducts, maProductDumps} = useLoaderData<typeof loader>()
     const setAssociatedProductIds = useSetAtom(associatedProductIdsAtom);
     const setAllShopifyProducts = useSetAtom(allShopifyProductsAtom);
 
@@ -51,8 +46,8 @@ export default function EditarCanasta() {
     }, [associatedProducts, setAssociatedProductIds]);
 
     useEffect(() => {
-        setAllShopifyProducts(shopifyProducts);
-    }, [shopifyProducts, setAllShopifyProducts]);
+        setAllShopifyProducts(maProductDumps);
+    }, [maProductDumps, setAllShopifyProducts]);
 
     return (
         <div className="p-5 flex flex-col w-full h-full gap-5 overflow-y-auto">

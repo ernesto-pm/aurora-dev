@@ -30,7 +30,7 @@ export default function MACanastasIndex() {
                             {basket.name}
                         </div>
                         <div className="flex justify-center">
-                            <Button onClick={() => {navigate(`/app/ma-canastas/editar-canasta/${basket.id}`)}}>
+                            <Button onClick={() => {navigate(`/app/ma-editar-canasta/${basket.id}`)}}>
                                 Editar
                             </Button>
                         </div>

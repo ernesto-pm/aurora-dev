@@ -19,6 +19,36 @@ export type AssociateAssistantWithMemoryBlockBody = {
 };
 
 /**
+ * AssociatedProductWithBasketPayload
+ */
+export type AssociatedProductWithBasketPayload = {
+    /**
+     * Productname
+     */
+    productName: string;
+    /**
+     * Vendor
+     */
+    vendor: string;
+    /**
+     * Presentation
+     */
+    presentation: string;
+    /**
+     * Quantity
+     */
+    quantity: number;
+    /**
+     * Price
+     */
+    price: number;
+    /**
+     * Shopifyproductid
+     */
+    shopifyProductId?: string | null;
+};
+
+/**
  * AuroraAssistant
  */
 export type AuroraAssistant = {
@@ -435,27 +465,9 @@ export type AuroraMiscMaBasket = {
      */
     shopify_product_id: string;
     /**
-     * Created At
+     * Price
      */
-    created_at: string;
-};
-
-/**
- * AuroraMiscMaProductsBasket
- */
-export type AuroraMiscMaProductsBasket = {
-    /**
-     * Id
-     */
-    id: string;
-    /**
-     * Basket Id
-     */
-    basket_id: string;
-    /**
-     * Shopify Product Id
-     */
-    shopify_product_id: string;
+    price: string;
     /**
      * Created At
      */
@@ -1103,20 +1115,6 @@ export type DeleteAssistantTemplateBody = {
     assistantId: string;
 };
 
-/**
- * EditAssociatedProductsBody
- */
-export type EditAssociatedProductsBody = {
-    /**
-     * Basketid
-     */
-    basketId: string;
-    /**
-     * Shopifyproductids
-     */
-    shopifyProductIds?: Array<string>;
-};
-
 export type EmbeddingConfig = unknown;
 
 /**
@@ -1339,7 +1337,7 @@ export type GetBasketWithIdResponse = {
     /**
      * Associatedproducts
      */
-    associatedProducts: Array<AuroraMiscMaProductsBasket>;
+    associatedProducts: Array<AssociatedProductWithBasketPayload>;
 };
 
 /**
@@ -2064,6 +2062,36 @@ export type ShopifyProduct = {
      * Vendor
      */
     vendor: string;
+    /**
+     * Variants
+     */
+    variants: Array<ShopifyProductVariant>;
+};
+
+/**
+ * ShopifyProductVariant
+ */
+export type ShopifyProductVariant = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Displayname
+     */
+    displayName: string;
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Price
+     */
+    price: number;
+    /**
+     * Cost
+     */
+    cost?: number | null;
 };
 
 /**
@@ -2106,6 +2134,20 @@ export type TriggerAssistantResponseForWidgetAssistanceChat = {
      * Chatid
      */
     chatId: string;
+};
+
+/**
+ * UpdateAssociatedProductsBody
+ */
+export type UpdateAssociatedProductsBody = {
+    /**
+     * Basketid
+     */
+    basketId: string;
+    /**
+     * Associatedproducts
+     */
+    associatedProducts: Array<AssociatedProductWithBasketPayload>;
 };
 
 /**
@@ -4007,7 +4049,7 @@ export type GetBasketWithIdData = {
         id: string;
     };
     query?: never;
-    url: '/ma_basket/{id}';
+    url: '/ma_basket/with-id/{id}';
 };
 
 export type GetBasketWithIdErrors = {
@@ -4070,23 +4112,23 @@ export type CreateBasketResponses = {
 
 export type CreateBasketResponse = CreateBasketResponses[keyof CreateBasketResponses];
 
-export type EditAssociatedProductsData = {
-    body: EditAssociatedProductsBody;
+export type UpdateAssociatedProductsData = {
+    body: UpdateAssociatedProductsBody;
     path?: never;
     query?: never;
     url: '/ma_basket/associated-products';
 };
 
-export type EditAssociatedProductsErrors = {
+export type UpdateAssociatedProductsErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type EditAssociatedProductsError = EditAssociatedProductsErrors[keyof EditAssociatedProductsErrors];
+export type UpdateAssociatedProductsError = UpdateAssociatedProductsErrors[keyof UpdateAssociatedProductsErrors];
 
-export type EditAssociatedProductsResponses = {
+export type UpdateAssociatedProductsResponses = {
     /**
      * Successful Response
      */
@@ -4118,6 +4160,40 @@ export type GetShopifyProductsResponses = {
 };
 
 export type GetShopifyProductsResponse = GetShopifyProductsResponses[keyof GetShopifyProductsResponses];
+
+export type SyncAllProductsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/ma_basket/sync-all-products';
+};
+
+export type SyncAllProductsResponses = {
+    /**
+     * Response Sync All Products
+     * Successful Response
+     */
+    200: string;
+};
+
+export type SyncAllProductsResponse = SyncAllProductsResponses[keyof SyncAllProductsResponses];
+
+export type GetMaProductsDumpsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/ma_basket/get-ma-products-dumps';
+};
+
+export type GetMaProductsDumpsResponses = {
+    /**
+     * Response Get Ma Products Dumps
+     * Successful Response
+     */
+    200: Array<ShopifyProduct>;
+};
+
+export type GetMaProductsDumpsResponse = GetMaProductsDumpsResponses[keyof GetMaProductsDumpsResponses];
 
 export type ClientOptions = {
     baseURL: `${string}://${string}/aurora` | (string & {});

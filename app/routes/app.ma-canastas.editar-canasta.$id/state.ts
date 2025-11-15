@@ -51,7 +51,7 @@ export const searchedUnassociatedProductsAtom = atom<ShopifyProduct[]>((get) => 
         includeScore: false,
         keys: [
             { name: "title", weight: 0.55 },
-            //{ name: "vendor", weight: 0.25 },
+            { name: "vendor", weight: 0.25 },
             //{ name: "tags", weight: 0.12 },
             //{ name: "handle", weight: 0.08 },
         ],

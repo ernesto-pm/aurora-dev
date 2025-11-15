@@ -51,6 +51,9 @@ function ShopifyProductComponent({product}: ShopifyProductProptypes) {
                 {product.title}
             </div>
             <div className="text-xs text-center text-black/50">
+                {product.vendor}
+            </div>
+            <div className="text-xs text-center text-black/50">
                 {product.id}
             </div>
             <div className="flex justify-center">
