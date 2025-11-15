@@ -1,6 +1,7 @@
 import {getAllBaskets} from "~/services/aurora";
 import {useLoaderData, useNavigate} from "@remix-run/react";
 import {Button} from "~/components/ui/button";
+import OrderSummary from "~/routes/app.ma-canastas-index/OrderSummary";
 
 export async function loader() {
     const {data} = await getAllBaskets({throwOnError: true})
@@ -20,6 +21,7 @@ export default function MACanastasIndex() {
 
     return (
         <div className="flex flex-col gap-5 p-10">
+
             <div className="text-2xl font-semibold">
                 Canastas registradas
             </div>
@@ -37,6 +39,11 @@ export default function MACanastasIndex() {
                     </div>
                 ))}
             </div>
+
+            <div>
+                <OrderSummary/>
+            </div>
+
         </div>
     )
 }

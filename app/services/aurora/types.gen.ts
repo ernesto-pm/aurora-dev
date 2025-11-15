@@ -1076,6 +1076,36 @@ export type CreateNewAssistantTemplateBody = {
 };
 
 /**
+ * CreateNewBasketOrderSummaryBody
+ */
+export type CreateNewBasketOrderSummaryBody = {
+    /**
+     * Fromday
+     */
+    fromDay: number;
+    /**
+     * Frommonth
+     */
+    fromMonth: number;
+    /**
+     * Fromyear
+     */
+    fromYear: number;
+    /**
+     * Today
+     */
+    toDay: number;
+    /**
+     * Tomonth
+     */
+    toMonth: number;
+    /**
+     * Toyear
+     */
+    toYear: number;
+};
+
+/**
  * CreateNewMemoryBlockTemplateBody
  */
 export type CreateNewMemoryBlockTemplateBody = {
@@ -4129,6 +4159,29 @@ export type UpdateAssociatedProductsErrors = {
 export type UpdateAssociatedProductsError = UpdateAssociatedProductsErrors[keyof UpdateAssociatedProductsErrors];
 
 export type UpdateAssociatedProductsResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
+export type CreateNewBasketOrderSummaryData = {
+    body: CreateNewBasketOrderSummaryBody;
+    path?: never;
+    query?: never;
+    url: '/ma_basket/order-summary';
+};
+
+export type CreateNewBasketOrderSummaryErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateNewBasketOrderSummaryError = CreateNewBasketOrderSummaryErrors[keyof CreateNewBasketOrderSummaryErrors];
+
+export type CreateNewBasketOrderSummaryResponses = {
     /**
      * Successful Response
      */
