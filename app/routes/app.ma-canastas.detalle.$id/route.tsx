@@ -1,6 +1,17 @@
 import type {LoaderFunctionArgs} from "@remix-run/cloudflare";
 import {getOrderSummaryWithId} from "~/services/aurora";
 import {useLoaderData} from "@remix-run/react";
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "~/components/ui/table"
+import line from "zrender/src/graphic/shape/Line";
 
 export async function loader({params}: LoaderFunctionArgs) {
     if (!params.id) throw new Error("Error, proporciona el ID de la canasta")
@@ -23,26 +34,57 @@ export default function DetalleMaCanastas() {
     const {summary} = useLoaderData<typeof loader>()
 
     return (
-        <div>
-            {
-                summary.map(order => (
-                    <div>
-                        {order.name} - {order.createdAt}
-                        <div>
-                            {order.lineItems.map(
-                                (lineItem) => (
-                                    <div>
-                                        {lineItem.basketName} - {lineItem.productName} - {lineItem.vendor}
-                                        <div>
-                                            {JSON.stringify(lineItem.originalLineItem)}
-                                        </div>
-                                    </div>
+        <div className="flex flex-wrap gap-5 px-10 py-5 overflow-y-auto">
+            <div className="text-xl font-semibold">
+                Desglosado de articulos para ordenes
+            </div>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Orden</TableHead>
+                        <TableHead>Nombre Canasta</TableHead>
+                        <TableHead>Nombre de producto</TableHead>
+                        <TableHead>Presentacion</TableHead>
+                        <TableHead>Precio</TableHead>
+                        <TableHead>Cantidad</TableHead>
+                        <TableHead>Productor</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {
+                        summary.map(
+                            (order) => {
+                                return order.lineItems.map(
+                                    (lineItem) => (
+                                        <TableRow key={lineItem.originalLineItem.id}>
+                                            <TableCell>{order.name}</TableCell>
+                                            <TableCell>{lineItem.basketName}</TableCell>
+                                            <TableCell>{lineItem.productName}</TableCell>
+                                            <TableCell>{lineItem.presentation}</TableCell>
+                                            <TableCell>{lineItem.price}</TableCell>
+                                            <TableCell>{lineItem.quantity}</TableCell>
+                                            <TableCell>{lineItem.vendor}</TableCell>
+                                        </TableRow>
+                                    )
                                 )
-                            )}
-                        </div>
-                    </div>
-                ))
-            }
+                            }
+                        )
+                    }
+                </TableBody>
+            </Table>
         </div>
+
     )
 }
+
+/*
+
+ {invoices.map((invoice) => (
+                    <TableRow key={invoice.invoice}>
+                        <TableCell className="font-medium">{invoice.invoice}</TableCell>
+                        <TableCell>{invoice.paymentStatus}</TableCell>
+                        <TableCell>{invoice.paymentMethod}</TableCell>
+                        <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+                    </TableRow>
+                ))}
+ */

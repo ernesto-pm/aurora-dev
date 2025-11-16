@@ -959,84 +959,6 @@ export type BodyLoadShopifyProducts = {
 };
 
 /**
- * CanastaResult
- */
-export type CanastaResult = {
-    /**
-     * Id
-     */
-    id: string;
-    /**
-     * Createdat
-     */
-    createdAt: string;
-    /**
-     * Name
-     */
-    name: string;
-    /**
-     * Tags
-     */
-    tags: Array<string>;
-    /**
-     * Customerid
-     */
-    customerId: string;
-    /**
-     * Customeremail
-     */
-    customerEmail: string;
-    /**
-     * Customername
-     */
-    customerName: string;
-    /**
-     * Customerphone
-     */
-    customerPhone?: string | null;
-    /**
-     * Price
-     */
-    price: number;
-    /**
-     * Shippingaddressid
-     */
-    shippingAddressId: string;
-    /**
-     * Address1
-     */
-    address1: string;
-    /**
-     * Address2
-     */
-    address2?: string | null;
-    /**
-     * City
-     */
-    city: string;
-    /**
-     * Country
-     */
-    country: string;
-    /**
-     * Zip
-     */
-    zip: string;
-    /**
-     * Company
-     */
-    company?: string | null;
-    /**
-     * Note
-     */
-    note?: string | null;
-    /**
-     * Lineitems
-     */
-    lineItems: Array<LineItemResult>;
-};
-
-/**
  * CreateBasketBody
  */
 export type CreateBasketBody = {
@@ -1571,36 +1493,6 @@ export type GetOrderRevenuePerMonthResponse = {
 };
 
 /**
- * GetOrderSummaryWithIdResponse
- */
-export type GetOrderSummaryWithIdResponse = {
-    /**
-     * Id
-     */
-    id: string;
-    /**
-     * Name
-     */
-    name?: string | null;
-    /**
-     * Fromdate
-     */
-    fromDate: string;
-    /**
-     * Todate
-     */
-    toDate: string;
-    /**
-     * Ordersdump
-     */
-    ordersDump: Array<CanastaResult>;
-    /**
-     * Createdat
-     */
-    createdAt: string;
-};
-
-/**
  * GetOrderVelocityBody
  */
 export type GetOrderVelocityBody = {
@@ -1952,48 +1844,6 @@ export type InsertUserMessageIntoWidgetAssistantChatBody = {
      * Content
      */
     content: string;
-};
-
-/**
- * LineItemResult
- */
-export type LineItemResult = {
-    /**
-     * Id
-     */
-    id: string;
-    /**
-     * Title
-     */
-    title: string;
-    /**
-     * Quantity
-     */
-    quantity: number;
-    /**
-     * Productid
-     */
-    productId: string;
-    /**
-     * Variantid
-     */
-    variantId: string;
-    /**
-     * Cost
-     */
-    cost: number;
-    /**
-     * Varianttitle
-     */
-    variantTitle: string;
-    /**
-     * Price
-     */
-    price: number;
-    /**
-     * Vendor
-     */
-    vendor: string;
 };
 
 /**
@@ -4389,6 +4239,34 @@ export type CreateNewBasketOrderSummaryResponses = {
     200: unknown;
 };
 
+export type RefreshMaBasketSummaryData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/ma_basket/refresh-basket_summary/{id}';
+};
+
+export type RefreshMaBasketSummaryErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type RefreshMaBasketSummaryError = RefreshMaBasketSummaryErrors[keyof RefreshMaBasketSummaryErrors];
+
+export type RefreshMaBasketSummaryResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
 export type GetOrderSummaryWithIdData = {
     body?: never;
     path: {
@@ -4414,10 +4292,8 @@ export type GetOrderSummaryWithIdResponses = {
     /**
      * Successful Response
      */
-    200: GetOrderSummaryWithIdResponse;
+    200: unknown;
 };
-
-export type GetOrderSummaryWithIdResponse2 = GetOrderSummaryWithIdResponses[keyof GetOrderSummaryWithIdResponses];
 
 export type GetShopifyProductsData = {
     body: GetShopifyProductsBody;
