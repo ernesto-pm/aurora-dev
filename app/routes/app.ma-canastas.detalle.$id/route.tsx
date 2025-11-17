@@ -4,14 +4,11 @@ import {useLoaderData} from "@remix-run/react";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
 } from "~/components/ui/table"
-import line from "zrender/src/graphic/shape/Line";
 
 export async function loader({params}: LoaderFunctionArgs) {
     if (!params.id) throw new Error("Error, proporciona el ID de la canasta")
