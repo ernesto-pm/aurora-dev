@@ -32,8 +32,6 @@ export default function EditarCanasta() {
                 basketId={basket.id}
                 initialAssociatedProducts={associatedProducts}
             />
-
-            Todo: Agregar edicion de datos de la canasta en si
         </div>
     )
 }

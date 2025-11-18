@@ -45,12 +45,20 @@ export default function DetalleMaCanastas() {
                         <TableHead>Precio</TableHead>
                         <TableHead>Cantidad</TableHead>
                         <TableHead>Productor</TableHead>
+                        <TableHead>Fecha de creacion</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {
                         summary.map(
                             (order) => {
+
+                                const formattedCreatedAt = new Intl.DateTimeFormat('es-MX', {
+                                    timeZone: 'America/Mexico_City',
+                                    dateStyle: 'long',
+                                    timeStyle: 'short'
+                                }).format(new Date(order.createdAt))
+
                                 return order.lineItems.map(
                                     (lineItem) => (
                                         <TableRow key={lineItem.originalLineItem.id}>
@@ -61,6 +69,7 @@ export default function DetalleMaCanastas() {
                                             <TableCell>{lineItem.price}</TableCell>
                                             <TableCell>{lineItem.quantity}</TableCell>
                                             <TableCell>{lineItem.vendor}</TableCell>
+                                            <TableCell>{formattedCreatedAt}</TableCell>
                                         </TableRow>
                                     )
                                 )
