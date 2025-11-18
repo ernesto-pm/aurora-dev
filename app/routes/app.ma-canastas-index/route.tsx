@@ -1,22 +1,25 @@
-import {getAllBaskets} from "~/services/aurora";
+import {getAllBaskets, getAllOrderSummaries} from "~/services/aurora";
 import {useLoaderData, useNavigate} from "@remix-run/react";
 import {Button} from "~/components/ui/button";
-import OrderSummary from "~/routes/app.ma-canastas-index/OrderSummary";
+import CreateOrderSummary from "~/routes/app.ma-canastas-index/CreateOrderSummary";
+import OrderSummaryList from "~/routes/app.ma-canastas-index/OrderSummaryList";
 
 export async function loader() {
     const {data} = await getAllBaskets({throwOnError: true})
+    const {data: orderSummaries} = await getAllOrderSummaries({throwOnError: true})
 
-    if (!data) {
+    if (!data || !orderSummaries) {
         throw new Error("No data was returned")
     }
 
     return {
-        baskets: data
+        baskets: data,
+        orderSummaries: orderSummaries
     }
 }
 
 export default function MACanastasIndex() {
-    const {baskets} = useLoaderData<typeof loader>()
+    const {baskets, orderSummaries} = useLoaderData<typeof loader>()
     const navigate = useNavigate()
 
     return (
@@ -40,8 +43,10 @@ export default function MACanastasIndex() {
                 ))}
             </div>
 
+            <OrderSummaryList summaries={orderSummaries}/>
+
             <div>
-                <OrderSummary/>
+                <CreateOrderSummary/>
             </div>
 
         </div>

@@ -8,7 +8,7 @@ import {DateRange} from "react-day-picker";
 import {createNewBasketOrderSummary} from "~/services/aurora";
 
 
-export default function OrderSummary() {
+export default function CreateOrderSummary() {
     const [dateRange, setDateRange] = useState<DateRange | undefined>()
     const [isLoading, setIsLoading] = useState(false)
 
@@ -30,6 +30,11 @@ export default function OrderSummary() {
 
     return (
         <div className="flex flex-col gap-5">
+            <div className="text-2xl font-semibold">
+                Crear resumen de ordenes
+            </div>
+
+
             <div className="flex flex-col gap-3">
                 <div className="text-muted-foreground text-md">
                     Selecciona el rango de fechas que deseas para tu resumen:
