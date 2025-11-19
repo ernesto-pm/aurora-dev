@@ -13,7 +13,7 @@ export default function TablaDesglosadoGeneral() {
     const shopifyOrders = useAtomValue(shopifyOrdersAtom)
 
     return (
-        <div className="flex flex-col flex-wrap gap-5">
+        <div className="flex flex-col flex-wrap gap-5 px-3 py-2">
             <div className="text-2xl font-semibold">
                 Desglosado general
             </div>
@@ -27,6 +27,7 @@ export default function TablaDesglosadoGeneral() {
                         <TableHead>Precio</TableHead>
                         <TableHead>Cantidad</TableHead>
                         <TableHead>Productor</TableHead>
+                        <TableHead>Dia</TableHead>
                         <TableHead>Fecha de creacion</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -51,6 +52,7 @@ export default function TablaDesglosadoGeneral() {
                                             <TableCell>{augmentedLineItem.price}</TableCell>
                                             <TableCell>{augmentedLineItem.quantity}</TableCell>
                                             <TableCell>{augmentedLineItem.vendor}</TableCell>
+                                            <TableCell>{order.tags.join(", ")}</TableCell>
                                             <TableCell>{formattedCreatedAt}</TableCell>
                                         </TableRow>
                                     )

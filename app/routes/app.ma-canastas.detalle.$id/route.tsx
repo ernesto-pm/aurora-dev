@@ -6,6 +6,13 @@ import {shopifyOrdersAtom} from "~/routes/app.ma-canastas.detalle.$id/state";
 import TablaDesglosadoGeneral from "~/routes/app.ma-canastas.detalle.$id/TablaDesglosadoGeneral";
 import TablaTotalesPorCanasta from "~/routes/app.ma-canastas.detalle.$id/TablaTotalesPorCanasta";
 import TablaTotalesPorProducto from "~/routes/app.ma-canastas.detalle.$id/TablaTotalesPorProducto";
+import TablaOrdenesYDirecciones from "~/routes/app.ma-canastas.detalle.$id/TablaOrdenesYDirecciones";
+import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+} from "~/components/ui/tabs"
 
 export async function loader({params}: LoaderFunctionArgs) {
     if (!params.id) throw new Error("Error, proporciona el ID de la canasta")
@@ -30,9 +37,30 @@ export default function DetalleMaCanastas() {
 
     return (
         <div className="flex flex-col gap-5 px-10 py-5 overflow-y-auto">
-            <TablaTotalesPorCanasta/>
-            <TablaTotalesPorProducto/>
-            <TablaDesglosadoGeneral/>
+            <Tabs defaultValue="desglosadoGeneral">
+                <TabsList>
+                    <TabsTrigger value="desglosadoGeneral">Desglosado General</TabsTrigger>
+                    <TabsTrigger value="ordenesYDirecciones">Ordenes y direcciones</TabsTrigger>
+                    <TabsTrigger value="totalesPorCanasta">Totales por canasta</TabsTrigger>
+                    <TabsTrigger value="totalesPorProducto">Totales por producto</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="desglosadoGeneral">
+                    <TablaDesglosadoGeneral/>
+                </TabsContent>
+
+                <TabsContent value="ordenesYDirecciones">
+                    <TablaOrdenesYDirecciones/>
+                </TabsContent>
+
+                <TabsContent value="totalesPorCanasta">
+                    <TablaTotalesPorCanasta/>
+                </TabsContent>
+
+                <TabsContent value="totalesPorProducto">
+                    <TablaTotalesPorProducto/>
+                </TabsContent>
+            </Tabs>
         </div>
 
     )

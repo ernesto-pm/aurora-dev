@@ -1,5 +1,6 @@
 import {ShopifyOrder} from "~/services/aurora";
 import {atom} from "jotai";
+import {TableCell} from "~/components/ui/table";
 
 export const shopifyOrdersAtom = atom<ShopifyOrder[]>([])
 export const basketTotalsAtom = atom((get) => {
@@ -71,3 +72,31 @@ export const productTotalsAtom = atom((get) => {
     return mappingAsArray
 })
 
+export const ordersAndAddressesAtom = atom((get) => {
+    const shopifyOrders = get(shopifyOrdersAtom)
+
+    const ordersAndAddresses = shopifyOrders.map(order => {
+        const formattedCreatedAt = new Intl.DateTimeFormat('es-MX', {
+            timeZone: 'America/Mexico_City',
+            dateStyle: 'long',
+            timeStyle: 'short'
+        }).format(new Date(order.createdAt))
+
+        return {
+            'Orden': order.name,
+            'Nombre Cliente': order.customerName,
+            'e-mail': order.customerEmail,
+            'Telefono': order.customerPhone,
+            'Direccion 1': order.address1,
+            'Direccion 2': order.address2,
+            'Ciudad': order.city,
+            'Pais': order.country,
+            'Dia': order.tags.join(", "),
+            'Notas': order.note,
+            'Company': order.company,
+            'Fecha de creacion': formattedCreatedAt
+        }
+    })
+
+    return ordersAndAddresses
+})

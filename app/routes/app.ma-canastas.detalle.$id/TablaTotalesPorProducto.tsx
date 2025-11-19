@@ -6,7 +6,7 @@ export default function TablaTotalesPorProducto() {
     const totalsForBasket = useAtomValue(productTotalsAtom)
 
     return (
-        <div className="flex flex-col flex-wrap gap-5">
+        <div className="flex flex-col flex-wrap gap-5 px-3 py-2">
             <div className="text-2xl font-semibold">
                 Total de productos para esta semana
             </div>
