@@ -49,6 +49,41 @@ export type AssociatedProductWithBasketPayload = {
 };
 
 /**
+ * AugmentedLineItem
+ */
+export type AugmentedLineItem = {
+    /**
+     * Basketname
+     */
+    basketName: string;
+    /**
+     * Shopifyproductid
+     */
+    shopifyProductId?: string | null;
+    /**
+     * Productname
+     */
+    productName: string;
+    /**
+     * Presentation
+     */
+    presentation: string;
+    /**
+     * Price
+     */
+    price: number;
+    /**
+     * Quantity
+     */
+    quantity: number;
+    /**
+     * Vendor
+     */
+    vendor: string;
+    originalLineItem: ShopifyLineItem;
+};
+
+/**
  * AuroraAssistant
  */
 export type AuroraAssistant = {
@@ -2108,6 +2143,130 @@ export type RegisterSalesForMaBody = {
      * Sales
      */
     sales: Array<MaSale>;
+};
+
+/**
+ * ShopifyLineItem
+ */
+export type ShopifyLineItem = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Cost
+     */
+    cost: number;
+    /**
+     * Price
+     */
+    price: number;
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Vendor
+     */
+    vendor: string;
+    /**
+     * Quantity
+     */
+    quantity: number;
+    /**
+     * Productid
+     */
+    productId: string;
+    /**
+     * Variantid
+     */
+    variantId: string;
+    /**
+     * Varianttitle
+     */
+    variantTitle: string;
+};
+
+/**
+ * ShopifyOrder
+ */
+export type ShopifyOrder = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Zip
+     */
+    zip: string;
+    /**
+     * City
+     */
+    city: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Note
+     */
+    note?: string | null;
+    /**
+     * Tags
+     */
+    tags: Array<string>;
+    /**
+     * Price
+     */
+    price: number;
+    /**
+     * Company
+     */
+    company?: string | null;
+    /**
+     * Country
+     */
+    country: string;
+    /**
+     * Address1
+     */
+    address1: string;
+    /**
+     * Address2
+     */
+    address2?: string | null;
+    /**
+     * Createdat
+     */
+    createdAt: string;
+    /**
+     * Customerid
+     */
+    customerId: string;
+    /**
+     * Customername
+     */
+    customerName: string;
+    /**
+     * Customeremail
+     */
+    customerEmail: string | null;
+    /**
+     * Customerphone
+     */
+    customerPhone: string | null;
+    /**
+     * Shippingaddressid
+     */
+    shippingAddressId: string;
+    /**
+     * Lineitems
+     */
+    lineItems: Array<ShopifyLineItem>;
+    /**
+     * Augmentedlineitems
+     */
+    augmentedLineItems: Array<AugmentedLineItem>;
 };
 
 /**
@@ -4290,10 +4449,13 @@ export type GetOrderSummaryWithIdError = GetOrderSummaryWithIdErrors[keyof GetOr
 
 export type GetOrderSummaryWithIdResponses = {
     /**
+     * Response Get Order Summary With Id
      * Successful Response
      */
-    200: unknown;
+    200: Array<ShopifyOrder>;
 };
+
+export type GetOrderSummaryWithIdResponse = GetOrderSummaryWithIdResponses[keyof GetOrderSummaryWithIdResponses];
 
 export type GetShopifyProductsData = {
     body: GetShopifyProductsBody;

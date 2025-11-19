@@ -1,14 +1,11 @@
 import type {LoaderFunctionArgs} from "@remix-run/cloudflare";
 import {getOrderSummaryWithId} from "~/services/aurora";
 import {useLoaderData} from "@remix-run/react";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "~/components/ui/table"
+import {useHydrateAtoms} from "jotai/utils";
+import {shopifyOrdersAtom} from "~/routes/app.ma-canastas.detalle.$id/state";
+import TablaDesglosadoGeneral from "~/routes/app.ma-canastas.detalle.$id/TablaDesglosadoGeneral";
+import TablaTotalesPorCanasta from "~/routes/app.ma-canastas.detalle.$id/TablaTotalesPorCanasta";
+import TablaTotalesPorProducto from "~/routes/app.ma-canastas.detalle.$id/TablaTotalesPorProducto";
 
 export async function loader({params}: LoaderFunctionArgs) {
     if (!params.id) throw new Error("Error, proporciona el ID de la canasta")
@@ -29,55 +26,13 @@ export async function loader({params}: LoaderFunctionArgs) {
 
 export default function DetalleMaCanastas() {
     const {summary} = useLoaderData<typeof loader>()
+    useHydrateAtoms([[shopifyOrdersAtom, summary]])
 
     return (
-        <div className="flex flex-wrap gap-5 px-10 py-5 overflow-y-auto">
-            <div className="text-xl font-semibold">
-                Desglosado de articulos para ordenes
-            </div>
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Orden</TableHead>
-                        <TableHead>Nombre Canasta</TableHead>
-                        <TableHead>Nombre de producto</TableHead>
-                        <TableHead>Presentacion</TableHead>
-                        <TableHead>Precio</TableHead>
-                        <TableHead>Cantidad</TableHead>
-                        <TableHead>Productor</TableHead>
-                        <TableHead>Fecha de creacion</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {
-                        summary.map(
-                            (order) => {
-
-                                const formattedCreatedAt = new Intl.DateTimeFormat('es-MX', {
-                                    timeZone: 'America/Mexico_City',
-                                    dateStyle: 'long',
-                                    timeStyle: 'short'
-                                }).format(new Date(order.createdAt))
-
-                                return order.lineItems.map(
-                                    (lineItem) => (
-                                        <TableRow key={lineItem.originalLineItem.id}>
-                                            <TableCell>{order.name}</TableCell>
-                                            <TableCell>{lineItem.basketName}</TableCell>
-                                            <TableCell>{lineItem.productName}</TableCell>
-                                            <TableCell>{lineItem.presentation}</TableCell>
-                                            <TableCell>{lineItem.price}</TableCell>
-                                            <TableCell>{lineItem.quantity}</TableCell>
-                                            <TableCell>{lineItem.vendor}</TableCell>
-                                            <TableCell>{formattedCreatedAt}</TableCell>
-                                        </TableRow>
-                                    )
-                                )
-                            }
-                        )
-                    }
-                </TableBody>
-            </Table>
+        <div className="flex flex-col gap-5 px-10 py-5 overflow-y-auto">
+            <TablaTotalesPorCanasta/>
+            <TablaTotalesPorProducto/>
+            <TablaDesglosadoGeneral/>
         </div>
 
     )
