@@ -1,11 +1,14 @@
-import AllBaskets from "~/routes/app.custom-app.$id/MACanastaApp/AllBaskets";
+import {Button} from "~/components/ui/button";
+import {useNavigate} from "@remix-run/react";
 
 export default function MACanastaApp() {
+    const navigate = useNavigate()
+
     return(
         <div>
-            Hola esta es la logica de la canasta para el M.A.
-
-            <AllBaskets/>
+            <Button onClick={() => navigate("/app/ma-canastas-index")}>
+                Ir a la aplicacion
+            </Button>
         </div>
     )
 }
