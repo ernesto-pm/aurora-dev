@@ -1,8 +1,8 @@
 import {useAtom, useAtomValue, useSetAtom} from "jotai";
 import {associatedProductIdsAtom, associatedProductsAtom} from "~/routes/app.ma-canastas.editar-canasta.$id/state";
-import {editAssociatedProducts, ShopifyProduct} from "~/services/aurora";
+import {ShopifyProduct} from "~/services/aurora";
 import {Button} from "~/components/ui/button";
-import {CrossIcon, DeleteIcon, SquareXIcon} from "lucide-react";
+import {SquareXIcon} from "lucide-react";
 
 interface AssociatedProductsProtypes {
     basketId: string
@@ -14,6 +14,7 @@ export default function AssociatedProducts({basketId}: AssociatedProductsProtype
 
     async function handleSubmit() {
         try {
+            /*
             await editAssociatedProducts({
                 body: {
                     basketId: basketId,
@@ -21,6 +22,8 @@ export default function AssociatedProducts({basketId}: AssociatedProductsProtype
                 },
                 throwOnError: true
             })
+
+             */
 
             alert("Exito, canasta ha sido actualizada")
         } catch (e) {
