@@ -4426,6 +4426,34 @@ export type RefreshMaBasketSummaryResponses = {
     200: unknown;
 };
 
+export type DeleteBasketSummaryWithIdData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/ma_basket/delete-basket-summary/{id}';
+};
+
+export type DeleteBasketSummaryWithIdErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DeleteBasketSummaryWithIdError = DeleteBasketSummaryWithIdErrors[keyof DeleteBasketSummaryWithIdErrors];
+
+export type DeleteBasketSummaryWithIdResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
+
 export type GetOrderSummaryWithIdData = {
     body?: never;
     path: {

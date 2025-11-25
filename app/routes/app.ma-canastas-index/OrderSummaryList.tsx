@@ -1,14 +1,34 @@
-import {AuroraMiscMaBasketsOrderSummary} from "~/services/aurora";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "~/components/ui/table";
-import {ExternalLinkIcon} from "lucide-react";
+import {ExternalLinkIcon, TrashIcon} from "lucide-react";
 import {useNavigate} from "@remix-run/react";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {getAllOrderSummariesOptions, getAllOrderSummariesQueryKey} from "~/services/aurora/@tanstack/react-query.gen";
+import {Button} from "~/components/ui/button";
+import {deleteBasketSummaryWithId} from "~/services/aurora";
 
-interface OrderSummaryListProptypes {
-    summaries: AuroraMiscMaBasketsOrderSummary[]
-}
-
-export default function OrderSummaryList({summaries}: OrderSummaryListProptypes) {
+export default function OrderSummaryList() {
+    const {data, isError, isLoading} = useQuery({
+        ...getAllOrderSummariesOptions({throwOnError: true})
+    })
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
+    if (isLoading) return <div>Cargando....</div>
+    if (isError) return <div>Ha ocurrido un error</div>
+    if (!data) return <div>No se han obtenido datos</div>
+
+    async function handleDelete(id: string) {
+        await deleteBasketSummaryWithId({
+            path: {
+                id: id
+            },
+            throwOnError: true
+        })
+
+        await queryClient.invalidateQueries({
+            queryKey: getAllOrderSummariesQueryKey()
+        })
+    }
 
     return (
         <div className="flex flex-col gap-5">
@@ -22,11 +42,12 @@ export default function OrderSummaryList({summaries}: OrderSummaryListProptypes)
                         <TableHead>Fecha de inicio</TableHead>
                         <TableHead>Fecha fin</TableHead>
                         <TableHead>Detalle</TableHead>
+                        <TableHead>Borrar</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {
-                        summaries.map(
+                        data.map(
                             (summary) => {
                                 const formattedFromDate = new Intl.DateTimeFormat('es-MX', {
                                     timeZone: 'America/Mexico_City',
@@ -50,6 +71,14 @@ export default function OrderSummaryList({summaries}: OrderSummaryListProptypes)
                                                 className="h-5 cursor-pointer"
                                                 onClick={() => {navigate(`/app/ma-canastas/detalle/${summary.id}`)}}
                                             />
+                                        </TableCell>
+                                        <TableCell>
+                                            <Button
+                                                variant="destructive"
+                                                onClick={() => handleDelete(summary.id)}
+                                            >
+                                                <TrashIcon/>
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 )

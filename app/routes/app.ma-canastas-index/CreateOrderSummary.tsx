@@ -6,11 +6,14 @@ import {Calendar} from "~/components/ui/calendar";
 import {useState} from "react";
 import {DateRange} from "react-day-picker";
 import {createNewBasketOrderSummary} from "~/services/aurora";
+import {useQueryClient} from "@tanstack/react-query";
+import {getAllOrderSummariesQueryKey} from "~/services/aurora/@tanstack/react-query.gen";
 
 
 export default function CreateOrderSummary() {
     const [dateRange, setDateRange] = useState<DateRange | undefined>()
     const [isLoading, setIsLoading] = useState(false)
+    const queryClient = useQueryClient()
 
     async function handleSubmit() {
         if (!dateRange) return
@@ -25,6 +28,10 @@ export default function CreateOrderSummary() {
                 toMonth: dateRange.to.getMonth(),
                 toYear: dateRange.to.getFullYear()
             }
+        })
+
+        await queryClient.invalidateQueries({
+            queryKey: getAllOrderSummariesQueryKey()
         })
     }
 

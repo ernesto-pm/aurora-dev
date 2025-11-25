@@ -1,7 +1,6 @@
 import type {LoaderFunctionArgs} from "@remix-run/cloudflare";
-import {getOrderSummaryWithId} from "~/services/aurora";
+import {getOrderSummaryWithId, refreshMaBasketSummary} from "~/services/aurora";
 import {useLoaderData} from "@remix-run/react";
-import {useHydrateAtoms} from "jotai/utils";
 import {shopifyOrdersAtom} from "~/routes/app.ma-canastas.detalle.$id/state";
 import TablaDesglosadoGeneral from "~/routes/app.ma-canastas.detalle.$id/TablaDesglosadoGeneral";
 import TablaTotalesPorCanasta from "~/routes/app.ma-canastas.detalle.$id/TablaTotalesPorCanasta";
@@ -13,6 +12,10 @@ import {
     TabsList,
     TabsTrigger,
 } from "~/components/ui/tabs"
+import {useSetAtom} from "jotai";
+import {useEffect, useState} from "react";
+import {Button} from "~/components/ui/button";
+import {RefreshCcw} from "lucide-react";
 
 export async function loader({params}: LoaderFunctionArgs) {
     if (!params.id) throw new Error("Error, proporciona el ID de la canasta")
@@ -27,16 +30,58 @@ export async function loader({params}: LoaderFunctionArgs) {
     if (!data) throw new Error("Error when getting data")
 
     return {
-        summary: data
+        summary: data,
+        summaryId: params.id
     }
 }
 
 export default function DetalleMaCanastas() {
-    const {summary} = useLoaderData<typeof loader>()
-    useHydrateAtoms([[shopifyOrdersAtom, summary]])
+    const {summary, summaryId} = useLoaderData<typeof loader>()
+    const setSummary = useSetAtom(shopifyOrdersAtom)
+    const [refreshLoading, setRefreshLoading] = useState(false)
+
+    useEffect(() => {
+        setSummary(summary);
+    }, [summary, setSummary]);
+
+    async function handleRefreshSummary() {
+        try {
+            setRefreshLoading(true)
+            // Call the refresh action on the server
+            await refreshMaBasketSummary({
+                path: {
+                    id: summaryId
+                }
+            })
+
+            // Get the data and set the state again
+            const {data} = await getOrderSummaryWithId({
+                path: {
+                    id: summaryId
+                },
+                throwOnError: true
+            })
+            setSummary(data)
+        } catch (e) {
+            console.error("There was an error")
+        } finally {
+            setRefreshLoading(false)
+        }
+    }
 
     return (
         <div className="flex flex-col gap-5 px-10 py-5 overflow-y-auto">
+            <div>
+                <Button onClick={handleRefreshSummary} disabled={refreshLoading}>
+                    {
+                        refreshLoading && "Cargando..."
+                    }
+                    {
+                        !refreshLoading && <><RefreshCcw/> Actualizar informacion</>
+                    }
+                </Button>
+            </div>
+
             <Tabs defaultValue="desglosadoGeneral">
                 <TabsList>
                     <TabsTrigger value="desglosadoGeneral">Desglosado General</TabsTrigger>
