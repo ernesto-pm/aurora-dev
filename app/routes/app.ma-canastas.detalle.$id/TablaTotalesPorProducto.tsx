@@ -33,7 +33,7 @@ export default function TablaTotalesPorProducto() {
                                         <TableCell>{totals.vendor}</TableCell>
                                         <TableCell>{formatCurrency(totals.price)}</TableCell>
                                         <TableCell>{totals.count}</TableCell>
-                                        <TableCell>{formatCurrency(totals.price * totals.count)}</TableCell>
+                                        <TableCell>{formatCurrency(totals.totalCost)}</TableCell>
                                     </TableRow>
                                 )
                             }

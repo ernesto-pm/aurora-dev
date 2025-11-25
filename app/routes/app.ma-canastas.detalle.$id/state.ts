@@ -1,5 +1,6 @@
 import {ShopifyOrder} from "~/services/aurora";
 import {atom} from "jotai";
+import line from "zrender/src/graphic/shape/Line";
 
 export const shopifyOrdersAtom = atom<ShopifyOrder[]>([])
 export const basketTotalsAtom = atom((get) => {
@@ -63,7 +64,8 @@ export const productTotalsAtom = atom((get) => {
                 'presentation': product.presentation,
                 'quantity': product.quantity,
                 'price': product.price,
-                'vendor': product.vendor
+                'vendor': product.vendor,
+                'totalCost': product.price * product.count
             }
         }
     )
