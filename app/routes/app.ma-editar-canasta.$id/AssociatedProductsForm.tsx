@@ -40,7 +40,8 @@ export default function AssociatedProductsForm({basketId, initialAssociatedProdu
             presentation: '',
             quantity: 0,
             price: 0,
-            shopifyProductId: ''
+            shopifyProductId: '',
+            inventoryQuantity: 0
         });
     }
 
@@ -74,6 +75,7 @@ export default function AssociatedProductsForm({basketId, initialAssociatedProdu
                             <TableHead>Presentación</TableHead>
                             <TableHead>Cantidad en canasta</TableHead>
                             <TableHead>Precio</TableHead>
+                            <TableHead>Cantidad en Inventario</TableHead>
                             <TableHead>ID Shopify (Opcional)</TableHead>
                             <TableHead>Acciones</TableHead>
                         </TableRow>
@@ -111,6 +113,12 @@ export default function AssociatedProductsForm({basketId, initialAssociatedProdu
                                         type="number"
                                         step="0.01"
                                         {...register(`products.${index}.price`, { valueAsNumber: true })}
+                                        className="min-w-[100px]"
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <Input
+                                        {...register(`products.${index}.inventoryQuantity`, { valueAsNumber: true })}
                                         className="min-w-[100px]"
                                     />
                                 </TableCell>

@@ -46,6 +46,10 @@ export type AssociatedProductWithBasketPayload = {
      * Shopifyproductid
      */
     shopifyProductId?: string | null;
+    /**
+     * Inventoryquantity
+     */
+    inventoryQuantity: number;
 };
 
 /**
