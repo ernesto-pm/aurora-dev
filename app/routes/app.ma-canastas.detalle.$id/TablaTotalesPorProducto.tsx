@@ -1,6 +1,7 @@
 import {useAtomValue} from "jotai";
 import {productTotalsAtom} from "~/routes/app.ma-canastas.detalle.$id/state";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "~/components/ui/table";
+import {formatCurrency} from "~/routes/app.ma-canastas.detalle.$id/TablaDesglosadoGeneral";
 
 export default function TablaTotalesPorProducto() {
     const totalsForBasket = useAtomValue(productTotalsAtom)
@@ -16,7 +17,9 @@ export default function TablaTotalesPorProducto() {
                         <TableHead>Nombre de producto</TableHead>
                         <TableHead>Presentacion</TableHead>
                         <TableHead>Productor</TableHead>
-                        <TableHead>Total</TableHead>
+                        <TableHead>Costo Individual</TableHead>
+                        <TableHead>Cantidad</TableHead>
+                        <TableHead>Costo Total</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -28,7 +31,9 @@ export default function TablaTotalesPorProducto() {
                                         <TableCell>{totals.productName}</TableCell>
                                         <TableCell>{totals.presentation}</TableCell>
                                         <TableCell>{totals.vendor}</TableCell>
+                                        <TableCell>{formatCurrency(totals.price)}</TableCell>
                                         <TableCell>{totals.count}</TableCell>
+                                        <TableCell>{formatCurrency(totals.price * totals.count)}</TableCell>
                                     </TableRow>
                                 )
                             }

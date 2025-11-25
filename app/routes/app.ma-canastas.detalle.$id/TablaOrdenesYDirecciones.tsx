@@ -37,6 +37,10 @@ export default function TablaOrdenesYDirecciones() {
                         <TableHead>Orden</TableHead>
                         <TableHead>Nombre cliente</TableHead>
                         <TableHead>Email</TableHead>
+                        <TableHead># Canastas Toronjil</TableHead>
+                        <TableHead># Canastas Nochebuena</TableHead>
+                        <TableHead># Canastas Cosmos</TableHead>
+                        <TableHead># Total de canastas</TableHead>
                         <TableHead>Numero</TableHead>
                         <TableHead>Direccion 1</TableHead>
                         <TableHead>Direccion 2</TableHead>
@@ -57,6 +61,10 @@ export default function TablaOrdenesYDirecciones() {
                                         <TableCell>{order['Orden']}</TableCell>
                                         <TableCell>{order['Nombre Cliente']}</TableCell>
                                         <TableCell>{order['e-mail']}</TableCell>
+                                        <TableCell>{order['Total Toronjil']}</TableCell>
+                                        <TableCell>{order['Total Nochebuena']}</TableCell>
+                                        <TableCell>{order['Total Cosmos']}</TableCell>
+                                        <TableCell>{order['Total de canastas']}</TableCell>
                                         <TableCell>{order['Telefono']}</TableCell>
                                         <TableCell>{order['Direccion 1']}</TableCell>
                                         <TableCell>{order['Direccion 2']}</TableCell>

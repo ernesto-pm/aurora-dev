@@ -1,6 +1,5 @@
 import {ShopifyOrder} from "~/services/aurora";
 import {atom} from "jotai";
-import {TableCell} from "~/components/ui/table";
 
 export const shopifyOrdersAtom = atom<ShopifyOrder[]>([])
 export const basketTotalsAtom = atom((get) => {
@@ -82,6 +81,32 @@ export const ordersAndAddressesAtom = atom((get) => {
             timeStyle: 'short'
         }).format(new Date(order.createdAt))
 
+        // calculate the count for current baskets, hardcoded for now
+        const totalsForBaskets = {
+            'nochebuena': 0,
+            'toronjil': 0,
+            'cosmos': 0
+        }
+
+        order.lineItems.forEach(
+            lineItem => {
+                // console.log(lineItem.title)
+                switch (lineItem.title) {
+                    case 'Canasta Toronjil - pza':
+                        totalsForBaskets['toronjil'] += 1
+                        break
+                    case 'Canasta Nochebuena - pza':
+                        totalsForBaskets['nochebuena'] += 1
+                        break
+                    case 'Canasta Cosmos - pza':
+                        totalsForBaskets['cosmos'] += 1
+                        break
+                    default:
+                        break
+                }
+            }
+        )
+
         return {
             'Orden': order.name,
             'Nombre Cliente': order.customerName,
@@ -94,6 +119,10 @@ export const ordersAndAddressesAtom = atom((get) => {
             'Dia': order.tags.join(", "),
             'Notas': order.note,
             'Company': order.company,
+            'Total Nochebuena': totalsForBaskets['nochebuena'],
+            'Total Cosmos': totalsForBaskets['cosmos'],
+            'Total Toronjil': totalsForBaskets['toronjil'],
+            'Total de canastas': totalsForBaskets['nochebuena'] + totalsForBaskets['cosmos'] + totalsForBaskets['toronjil'],
             'Fecha de creacion': formattedCreatedAt
         }
     })

@@ -9,7 +9,7 @@ import {
     flexRender,
     createColumnHelper,
     ExpandedState,
-    GroupingState,
+    GroupingState, Cell, Row,
 } from "@tanstack/react-table"
 import {
     Table,
@@ -22,7 +22,7 @@ import {
 import {ChevronDown, ChevronRight} from "lucide-react";
 
 // Helper to format currency
-const formatCurrency = (value) => {
+export const formatCurrency = (value) => {
     return new Intl.NumberFormat("es-MX", {
         style: "currency",
         currency: "MXN",
@@ -60,6 +60,7 @@ export default function TablaDesglosadoGeneral() {
                 price: item.price,
                 quantity: item.quantity,
                 vendor: item.vendor,
+                originalPrice: item.originalLineItem.price
             }))
         })
     }, [shopifyOrders])
@@ -162,36 +163,7 @@ export default function TablaDesglosadoGeneral() {
                                                         fontWeight: row.getIsGrouped() ? "bold" : "normal",
                                                     }}
                                                 >
-                                                    {cell.getIsGrouped() ? (
-                                                        // If it's a grouped cell (The Order Name Header)
-                                                        <div className="flex items-center gap-2">
-                                                            <button
-                                                                onClick={row.getToggleExpandedHandler()}
-                                                                style={{ cursor: "pointer" }}
-                                                            >
-                                                                {row.getIsExpanded() ? <ChevronDown className="inline"/> : <ChevronRight className="inline" />}{" "}
-                                                                {flexRender(
-                                                                    cell.column.columnDef.cell,
-                                                                    cell.getContext()
-                                                                )}{" "}
-                                                            </button>
-                                                        </div>
-                                                    ) : cell.getIsAggregated() ? (
-                                                        // If the cell is aggregated (optional)
-                                                        flexRender(
-                                                            cell.column.columnDef.aggregatedCell ??
-                                                            cell.column.columnDef.cell,
-                                                            cell.getContext()
-                                                        )
-                                                    ) : cell.getIsPlaceholder() ? (
-                                                        null // For empty cells in group rows
-                                                    ) : (
-                                                        // Standard cell
-                                                        flexRender(
-                                                            cell.column.columnDef.cell,
-                                                            cell.getContext()
-                                                        )
-                                                    )}
+                                                    <InnerConditionalTableCell cell={cell} row={row}/>
                                                 </TableCell>
                                             )
                                         })}
@@ -213,4 +185,63 @@ export default function TablaDesglosadoGeneral() {
             </div>
         </div>
     )
+}
+
+interface InnerConditionalTableCellProptypes {
+    cell: Cell<unknown, unknown>
+    row: Row<unknown>
+}
+function InnerConditionalTableCell({ cell, row }: InnerConditionalTableCellProptypes){
+
+    // A. Handle Grouped Cells (The expanders)
+    if (cell.getIsGrouped()) {
+        return (
+            <div className="flex items-center gap-2">
+                <button
+                    onClick={row.getToggleExpandedHandler()}
+                    style={{ cursor: "pointer" }}
+                >
+                    {row.getIsExpanded() ? (
+                        <ChevronDown className="inline" />
+                    ) : (
+                        <ChevronRight className="inline" />
+                    )}
+                    {' '}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </button>
+            </div>
+        );
+    }
+
+    // B. Handle Aggregated Cells (Summary data)
+    if (cell.getIsAggregated()) {
+
+        if (cell.column.id == "price") {
+            //console.log("ayyo precio")
+            //const firstRowData = row.getLeafRows()[0].original;
+            //console.log(firstRowData)
+
+            return (
+                <span>
+
+                </span>
+            );
+
+        }
+
+
+
+        return flexRender(
+            cell.column.columnDef.aggregatedCell ?? cell.column.columnDef.cell,
+            cell.getContext()
+        );
+    }
+
+    // C. Handle Placeholders (Empty space in grouped rows)
+    if (cell.getIsPlaceholder()) {
+        return null;
+    }
+
+    // D. Default (Standard Cells)
+    return flexRender(cell.column.columnDef.cell, cell.getContext());
 }
